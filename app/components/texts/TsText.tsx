@@ -4,6 +4,7 @@ import styles from '@/app/config/styles'
 
 interface TsTextProps {
   big?: boolean
+  fontSize?: number
   medium?: boolean
   small?: boolean
   style?: object
@@ -13,6 +14,7 @@ interface TsTextProps {
 export default function TsText({
   big,
   children,
+  fontSize,
   medium,
   small,
   style,
@@ -21,7 +23,7 @@ export default function TsText({
     <Text
       style={[
         styles.text,
-        { fontSize: small ? 12 : big ? 22 : medium ? 14 : 16 },
+        { fontSize: small ? 12 : big ? 22 : medium ? 14 : fontSize || 16 },
         style,
       ]}
     >
