@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native'
+import { StyleSheet, TextInputProps, TouchableOpacity } from 'react-native'
 import { ReactNode } from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -7,7 +7,7 @@ import TsText from '../texts/TsText'
 
 type IconType = keyof typeof MaterialIcons.glyphMap
 
-interface Button {
+interface Button extends TextInputProps {
   button?: object
   children: ReactNode | string
   color?: ColorKeys
@@ -18,7 +18,7 @@ interface Button {
   textColor?: string
 }
 
-export default function TrButton({
+export default function TsButton({
   disabled,
   children,
   color = 'primary',

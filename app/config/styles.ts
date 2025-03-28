@@ -5,8 +5,8 @@ import colors from './colors'
 export default {
   colors,
   text: {
-    color: colors.darkgray,
-    fontSize: 14,
+    color: colors.textColor,
+    fontSize: 12,
     fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Courier',
   },
   focusedInput: {

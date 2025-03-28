@@ -18,6 +18,7 @@ export default function TsText({
   medium,
   small,
   style,
+  ...props
 }: TsTextProps) {
   return (
     <Text
@@ -26,6 +27,7 @@ export default function TsText({
         { fontSize: small ? 12 : big ? 22 : medium ? 14 : fontSize || 16 },
         style,
       ]}
+      {...props}
     >
       {children}
     </Text>
