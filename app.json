@@ -32,6 +32,15 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Inter-Black.otf",
+            "./node_modules/@expo-google-fonts/montserrat/Montserrat_900Black"
+          ]
+        }
       ]
     ],
     "experiments": {

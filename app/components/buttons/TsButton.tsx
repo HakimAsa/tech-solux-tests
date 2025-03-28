@@ -63,7 +63,7 @@ export default function TsButton({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 5,
+    borderRadius: 4,
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',

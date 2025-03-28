@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, TextProps, View } from 'react-native'
 import { ReactNode } from 'react'
 import styles from '@/app/config/styles'
 
-interface TsTextProps {
+interface TsTextProps extends TextProps {
   big?: boolean
   fontSize?: number
   medium?: boolean

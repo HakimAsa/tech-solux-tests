@@ -5,9 +5,9 @@ import colors from './colors'
 export default {
   colors,
   text: {
-    color: colors.textColor,
+    color: colors.black,
     fontSize: 12,
-    fontFamily: Platform.OS === 'android' ? 'Roboto' : 'Courier',
+    fontFamily: Platform.OS === 'android' ? 'Montserrat_500Medium' : 'Courier',
   },
   focusedInput: {
     backgroundColor: '#e0f7fa', //todo

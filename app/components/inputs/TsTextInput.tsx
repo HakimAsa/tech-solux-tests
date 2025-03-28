@@ -61,7 +61,14 @@ export default function TsTextInput({
         )}
         <TextInput
           placeholderTextColor={defaultStyles.colors.medium}
-          style={[defaultStyles.text, { alignSelf: 'center' }, styles.input]}
+          style={[
+            defaultStyles.text,
+            {
+              alignSelf: 'center',
+              fontFamily: 'Montserrat_500Medium',
+            },
+            styles.input,
+          ]}
           secureTextEntry={secureTextEntry}
           {...props}
         />
@@ -87,9 +94,9 @@ export default function TsTextInput({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#F3F3F3',
-    borderRadius: 5,
+    borderRadius: 10,
     flexDirection: 'row',
-    marginVertical: 5,
+    marginVertical: 15,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: '#A8A8A9',
