@@ -1,4 +1,10 @@
-import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native'
+import {
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
@@ -7,7 +13,7 @@ import TsText from '../texts/TsText'
 
 type IconType = keyof typeof MaterialCommunityIcons.glyphMap
 
-interface TsTextInputProps {
+interface TsTextInputProps extends TextInputProps {
   icon?: IconType
   iconColor?: string
   label?: string
@@ -18,7 +24,6 @@ interface TsTextInputProps {
   secureTextEntry?: boolean
   style?: object
   textStyle?: object
-  otherProps?: any
 }
 
 export default function TsTextInput({
