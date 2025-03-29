@@ -1,28 +1,14 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
 import MainContainer, { KeyboardAvoidViewContainer } from '@/app/containers'
 import TsText from '@/app/components/texts/TsText'
-import TsTextInput from '@/app/components/inputs/TsTextInput'
 import colors from '@/app/config/colors'
-import TsButton from '@/app/components/buttons/TsButton'
-import { WindowWidth } from '@/app/config/constants'
 import AuthHeader from '@/app/screens/startups/AuthHeader'
 import AuthForm from './AuthForm'
 import AuthButton from './AuthButton'
 
 export default function Login() {
-  const input = {
-    position: 'absolute',
-    top: 182,
-    left: 32,
-    width: 317,
-  }
-  const otherInput = {
-    ...input,
-    top: 0,
-    marginBottom: 86,
-  }
   return (
     <MainContainer style={{ paddingLeft: 0 }}>
       <KeyboardAvoidViewContainer>
