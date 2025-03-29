@@ -3,15 +3,20 @@ import TsButton from '@/app/components/buttons/TsButton'
 
 interface AuthButtonProps {
   title: string
+  top?: number // Default is 399px (bottom of the screen)
   onPress: () => void
 }
 
-export default function AuthButton({ onPress, title }: AuthButtonProps) {
+export default function AuthButton({
+  onPress,
+  title,
+  top = 399,
+}: AuthButtonProps) {
   return (
     <TsButton
       button={{
         position: 'absolute',
-        top: 399,
+        top,
         left: 29,
         bottom: 21,
         width: 317,

@@ -8,6 +8,7 @@ import AuthHeader from '@/app/screens/startups/AuthHeader'
 import AuthForm from './AuthForm'
 import AuthButton from './AuthButton'
 import en from '@/app/config/en'
+import AuthFooter from './AuthFooter'
 
 export default function Login() {
   return (
@@ -21,37 +22,11 @@ export default function Login() {
           title={en.login}
           onPress={() => console.log('login')}
         />
-        <View
-          style={{
-            flexDirection: 'row',
-            top: 567,
-            height: 17,
-            width: 132,
-            alignSelf: 'center',
-          }}
-        >
-          <TsText
-            medium
-            style={{
-              fontFamily: ' Montserrat_400Regular',
-              color: '#575757',
-            }}
-          >
-            {en.createAnAccount}{' '}
-          </TsText>
-          <TouchableOpacity onPress={() => console.log('register')}>
-            <TsText
-              medium
-              style={{
-                fontFamily: 'Montserrat_600SemiBold',
-                color: colors.primary,
-                textDecorationLine: 'underline',
-              }}
-            >
-              {en.signup}
-            </TsText>
-          </TouchableOpacity>
-        </View>
+        <AuthFooter
+          linkText={en.signup}
+          unlinkText={en.createAnAccount}
+          onPress={() => console.log('sign up')}
+        />
       </KeyboardAvoidViewContainer>
     </MainContainer>
   )
