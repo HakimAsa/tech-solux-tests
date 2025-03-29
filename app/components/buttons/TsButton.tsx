@@ -68,9 +68,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     width: '100%',
-    height: 48,
+    height: 55,
     // padding: 15,
-    marginVertical: 10,
+    // marginVertical: 10,
   },
   text: {
     color: colors.white,

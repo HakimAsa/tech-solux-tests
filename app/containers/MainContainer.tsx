@@ -15,8 +15,7 @@ export default function MainContainer({ children, style }: MainContainerProps) {
       style={[
         {
           flex: 1,
-          padding: 20,
-          paddingTop: StatusBarHeight + 5,
+          paddingLeft: 32,
           backgroundColor: colors.white,
         },
         style,
