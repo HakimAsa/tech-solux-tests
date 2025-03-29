@@ -37,17 +37,14 @@ export default function Signup() {
           >
             {en.byClickingThe}{' '}
           </TsText>
-          <TouchableOpacity
-            onPress={() => console.log('go to register screen')}
+
+          <TsText
+            small
+            style={{ color: '#FF4B26', fontFamily: 'Montserrat_400Regular' }}
+            /* By clicking the Register button, you agree to the public offer */
           >
-            <TsText
-              small
-              style={{ color: '#FF4B26', fontFamily: 'Montserrat_400Regular' }}
-              /* By clicking the Register button, you agree to the public offer */
-            >
-              {en.register}{' '}
-            </TsText>
-          </TouchableOpacity>
+            {en.register}{' '}
+          </TsText>
 
           <TsText
             small
