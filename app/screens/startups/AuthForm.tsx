@@ -1,25 +1,34 @@
 import TsTextInput from '@/app/components/inputs/TsTextInput'
 import TsText from '@/app/components/texts/TsText'
 import colors from '@/app/config/colors'
+import en from '@/app/config/en'
 import { View, StyleSheet, TouchableOpacity } from 'react-native'
 
 interface AuthFormProps {
   showForgotPassword?: boolean
+  signUp?: boolean
 }
 
 export default function AuthForm({
   showForgotPassword = false,
+  signUp = false,
 }: AuthFormProps) {
   return (
     <View style={styles.container}>
       <TsTextInput
         icon="account"
-        placeholder="Username or Email"
+        placeholder={en.userNameOrEmail}
       />
       <TsTextInput
-        placeholder="Password"
+        placeholder={en.password}
         icon="lock"
       />
+      {signUp && (
+        <TsTextInput
+          placeholder={en.confirmPassword}
+          icon="lock"
+        />
+      )}
 
       {showForgotPassword && (
         <TouchableOpacity
@@ -30,7 +39,7 @@ export default function AuthForm({
             small
             style={styles.forgotText}
           >
-            Forgot Password?
+            {en.forgotPassword}
           </TsText>
         </TouchableOpacity>
       )}

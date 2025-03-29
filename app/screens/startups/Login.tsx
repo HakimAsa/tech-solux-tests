@@ -7,17 +7,18 @@ import colors from '@/app/config/colors'
 import AuthHeader from '@/app/screens/startups/AuthHeader'
 import AuthForm from './AuthForm'
 import AuthButton from './AuthButton'
+import en from '@/app/config/en'
 
 export default function Login() {
   return (
     <MainContainer style={{ paddingLeft: 0 }}>
       <KeyboardAvoidViewContainer>
-        <AuthHeader title={'Welcome\nBack!'} />
+        <AuthHeader title={en.welcomeBack} />
         {/* Add your login form here */}
         <AuthForm showForgotPassword />
 
         <AuthButton
-          title="Login"
+          title={en.login}
           onPress={() => console.log('login')}
         />
         <View
@@ -36,7 +37,7 @@ export default function Login() {
               color: '#575757',
             }}
           >
-            Create An Account{' '}
+            {en.createAnAccount}{' '}
           </TsText>
           <TouchableOpacity onPress={() => console.log('register')}>
             <TsText
@@ -47,7 +48,7 @@ export default function Login() {
                 textDecorationLine: 'underline',
               }}
             >
-              Sign Up
+              {en.signup}
             </TsText>
           </TouchableOpacity>
         </View>
