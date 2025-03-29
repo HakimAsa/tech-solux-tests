@@ -40,7 +40,7 @@ export default function TsTextInput({
   ...props
 }: TsTextInputProps) {
   return (
-    <View style={{ marginBottom: 5 }}>
+    <View>
       {label ? (
         <TsText
           fontSize={10}

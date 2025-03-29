@@ -1,4 +1,4 @@
-import { View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
 import MainContainer, { KeyboardAvoidViewContainer } from '@/app/containers'
@@ -6,94 +6,65 @@ import TsText from '@/app/components/texts/TsText'
 import TsTextInput from '@/app/components/inputs/TsTextInput'
 import colors from '@/app/config/colors'
 import TsButton from '@/app/components/buttons/TsButton'
-import { StatusBarHeight } from '@/app/config/constants'
+import { WindowWidth } from '@/app/config/constants'
+import AuthHeader from '@/app/screens/startups/AuthHeader'
+import AuthForm from './AuthForm'
+import AuthButton from './AuthButton'
 
 export default function Login() {
+  const input = {
+    position: 'absolute',
+    top: 182,
+    left: 32,
+    width: 317,
+  }
+  const otherInput = {
+    ...input,
+    top: 0,
+    marginBottom: 86,
+  }
   return (
     <MainContainer style={{ paddingLeft: 0 }}>
       <KeyboardAvoidViewContainer>
-        <TsText
-          style={{
-            fontFamily: 'Montserrat_700Bold',
-            lineHeight: 43,
-            position: 'absolute',
-            top: 63,
-            left: 32,
-          }} // Match Figma spacing
-          fontSize={36}
-        >
-          Welcome{'\n'} Back!
-        </TsText>
+        <AuthHeader title={'Welcome\nBack!'} />
         {/* Add your login form here */}
-        <TsTextInput
-          autoCapitalize="none"
-          autoCorrect={false}
-          placeholder="Username or Email"
-          style={{ left: 32, position: 'absolute', top: 182, width: 317 }} // Exact position from the top of the screen
-          icon="account"
-        />
-        <TsTextInput
-          placeholder="Password"
-          autoCapitalize="none"
-          autoCorrect={false}
-          style={{
-            position: 'absolute',
-            top: 268,
-            left: 32,
-            width: 317,
-          }}
-          icon="lock"
-        />
+        <AuthForm showForgotPassword />
 
-        <View style={{ marginTop: 5 }}>
-          <TsText
-            onPress={() => console.log('forgot password')}
-            small
-            style={{
-              color: colors.primary,
-              fontFamily: 'Montserrat_400Regular',
-              top: 332,
-              left: 242,
-              width: 108,
-            }}
-          >
-            Forgot Password?
-          </TsText>
-        </View>
-
-        <TsButton
-          button={{
-            position: 'absolute',
-            top: 399,
-            left: 29,
-            bottom: 21,
-            width: 317,
-          }}
+        <AuthButton
+          title="Login"
           onPress={() => console.log('login')}
-        >
-          Login
-        </TsButton>
-        <TsText
-          medium
+        />
+        <View
           style={{
+            flexDirection: 'row',
             top: 567,
-            textAlign: 'center',
-            color: '#575757',
+            height: 17,
+            width: 132,
+            alignSelf: 'center',
           }}
         >
-          Create an account{' '}
           <TsText
             medium
             style={{
-              fontWeight: 600,
-              color: colors.primary,
-              textDecorationLine: 'underline',
+              fontFamily: ' Montserrat_400Regular',
+              color: '#575757',
             }}
-            onPress={() => console.log('register')}
           >
-            Sign Up
+            Create An Account{' '}
           </TsText>
-        </TsText>
+          <TouchableOpacity onPress={() => console.log('register')}>
+            <TsText
+              medium
+              style={{
+                fontFamily: 'Montserrat_600SemiBold',
+                color: colors.primary,
+                textDecorationLine: 'underline',
+              }}
+            >
+              Sign Up
+            </TsText>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidViewContainer>
     </MainContainer>
   )
