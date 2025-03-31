@@ -28,7 +28,6 @@ export default function Pagination({
   const handlePrev = () => {
     if (index > 0)
       flatListRef.current?.scrollToIndex({
-        // offset: (Math.round(scrollX._value / ScreenWidth) - 1) * ScreenWidth,
         index: index - 1, // ✅ Pas besoin de `_value`
         animated: true,
       })
@@ -37,7 +36,6 @@ export default function Pagination({
   const handleNext = () => {
     if (index < data.length - 1)
       flatListRef.current?.scrollToIndex({
-        // offset: (Math.round(scrollX._value / ScreenWidth) + 1) * ScreenWidth,
         index: index + 1, // ✅ Plus propre
         animated: true,
       })

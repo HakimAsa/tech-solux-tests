@@ -1,8 +1,7 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import colors from '@/app/config/colors'
 import TsText from '../texts/TsText'
-import en from '@/app/config/en'
 
 interface SliderItemProps {
   imageStyle?: object

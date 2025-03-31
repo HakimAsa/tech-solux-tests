@@ -1,22 +1,11 @@
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-  TouchableOpacity,
-} from 'react-native'
+import { FlatList, StyleSheet, View, Animated } from 'react-native'
 import React, { useEffect, useRef, useState } from 'react'
 // import { useNavigation } from '@react-navigation/native'
-// import { MaterialIcons } from '@expo/vector-icons'
 
-import colors from '@/app/config/colors'
-import en from '@/app/config/en'
 import Pagination from './Pagination'
 import SliderItem from './SliderItem'
 import data from '@/app/data/presentation'
 //   import Storage from '@/app/utils/Storage'
-//   import TrButton from './common/buttons/TrButton'
 
 export default function Slider() {
   //   const navigation = useNavigation()
@@ -74,18 +63,14 @@ export default function Slider() {
         snapToAlignment="center"
         showsHorizontalScrollIndicator={false}
         extraData={currentPageIndex} // 🔥 Ajouté pour éviter les bugs d'affichage
-        // keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <SliderItem item={item} />}
         viewabilityConfig={viewabilityConfig.current}
       />
       <View
         style={{
-          // position: 'absolute',
           bottom: 100,
           alignItems: 'center',
           justifyContent: 'center',
-          // padding: 10,
-          // marginBottom: 50,
         }}
       >
         <View style={{ position: 'absolute', bottom: -100 }}>
