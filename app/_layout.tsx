@@ -27,12 +27,13 @@ SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
-    MontserratBlack: Montserrat_900Black, // Alias the font name
-    Montserrat_700Bold,
     Montserrat_300Light,
     Montserrat_400Regular,
     Montserrat_500Medium,
     Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold,
+    MontserratBlack: Montserrat_900Black, // Alias the font name
   })
 
   useEffect(() => {
