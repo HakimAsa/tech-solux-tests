@@ -142,7 +142,6 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    // alignItems: 'center',
     position: 'absolute',
     bottom: 20,
     flexDirection: 'row',
@@ -150,13 +149,6 @@ const styles = StyleSheet.create({
     height: 27,
     justifyContent: 'space-between',
     alignSelf: 'center',
-    // alignItems: 'center',
-    // width: '100%',
-    // marginBottom: 10,
-    // alignSelf: 'center',
-    // alignItems: 'center',
-    // width: '100%',
-    // marginBottom: 10,
   },
   dot: {
     backgroundColor: Colors.white,

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
-import { Stack } from 'expo-router'
 import {
   Montserrat_100Thin,
   Montserrat_200ExtraLight,
@@ -22,6 +21,7 @@ import {
   Montserrat_800ExtraBold_Italic,
   Montserrat_900Black_Italic,
 } from '@expo-google-fonts/montserrat'
+import AuthNavigator from './naviagtion/AuthNavigator'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -45,5 +45,6 @@ export default function RootLayout() {
   if (!fontsLoaded) {
     return null // Prevent rendering until the font is loaded
   }
-  return <Stack />
+
+  return <AuthNavigator />
 }

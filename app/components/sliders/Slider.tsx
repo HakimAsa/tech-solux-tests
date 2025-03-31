@@ -5,9 +5,11 @@ import React, { useEffect, useRef, useState } from 'react'
 import Pagination from './Pagination'
 import SliderItem from './SliderItem'
 import data from '@/app/data/presentation'
-//   import Storage from '@/app/utils/Storage'
+import TsProps from '@/TsProps'
+import Storage from '@/app/utils/Storage'
+import routes from '@/app/naviagtion/routes'
 
-export default function Slider() {
+export default function Slider({ navigation }: TsProps) {
   //   const navigation = useNavigation()
   const [currentPageIndex, setCurrentPageIndex] = useState(0)
   const scrollX = useRef(new Animated.Value(0)).current
@@ -42,13 +44,13 @@ export default function Slider() {
     itemVisiblePercentThreshold: 50,
   })
 
-  const onStart = async () => {
-    //   await Storage.storeData('startTdl', true)
+  const onGetStarted = async () => {
+    await Storage.storeData('startTs', true)
     //   navigation.reset({
     //     index: 0,
     //     routes: [{ name: en.home }], // Prevents back navigation
-    //   }) // Skip this screen if start button on presentation Screen is pressed
-    console.log('starting')
+    //   }) // Skip this screen if start text on presentation Screen is pressed
+    navigation.navigate(routes.LOGIN)
   }
 
   return (
@@ -79,7 +81,7 @@ export default function Slider() {
             scrollX={scrollX}
             index={currentPageIndex}
             flatListRef={flatListRef}
-            onGetStarted={() => console.log('Getstatred')}
+            onGetStarted={onGetStarted}
           />
         </View>
       </View>
