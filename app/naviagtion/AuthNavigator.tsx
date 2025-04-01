@@ -4,6 +4,7 @@ import routes from './routes'
 import Presentation from '../screens/startups/Presentation'
 import Login from '../screens/startups/Login'
 import Signup from '../screens/startups/Signup'
+import GetStarted from '../screens/core/GetStarted'
 
 const Stack = createNativeStackNavigator()
 export default function AuthNavigator() {
@@ -25,6 +26,11 @@ export default function AuthNavigator() {
       <Stack.Screen
         name={routes.SIGNUP}
         component={Signup}
+      />
+      {/* TODO App Nav */}
+      <Stack.Screen
+        name={routes.WELCOME}
+        component={GetStarted}
       />
     </Stack.Navigator>
   )

@@ -9,8 +9,10 @@ import AuthForm from './AuthForm'
 import AuthButton from './AuthButton'
 import en from '@/app/config/en'
 import AuthFooter from './AuthFooter'
+import TsProps from '@/TsProps'
+import routes from '@/app/naviagtion/routes'
 
-export default function Login() {
+export default function Login({ navigation }: TsProps) {
   return (
     <MainContainer style={{ paddingLeft: 0 }}>
       <KeyboardAvoidViewContainer>
@@ -20,7 +22,7 @@ export default function Login() {
 
         <AuthButton
           title={en.login}
-          onPress={() => console.log('login')}
+          onPress={() => navigation.navigate(routes.WELCOME)}
         />
         <AuthFooter
           linkText={en.signup}
