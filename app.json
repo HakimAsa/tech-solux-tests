@@ -37,15 +37,20 @@
         "expo-font",
         {
           "fonts": [
-            "./assets/fonts/Inter-Black.otf",
             "./node_modules/@expo-google-fonts/montserrat/Montserrat_900Black"
           ]
         }
       ],
-      "expo-asset"
+      "expo-asset",
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      }
     }
   }
 }
