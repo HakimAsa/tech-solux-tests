@@ -11,7 +11,11 @@ export default {
   },
   focusedInput: {
     backgroundColor: '#e0f7fa', //todo
-    borderColor: '#00796b', //todo
-    borderBottomWidth: 2,
+    borderColor: colors.primary, //'#00796b', //todo
+    borderWidth: 0,
+    borderTopLeftRadius: 0,
+    borderBottomLeftRadius: 0,
+    borderLeftWidth: 2,
+    borderBottomWidth: 0,
   },
 }

@@ -13,7 +13,7 @@ import TsText from '../texts/TsText'
 
 type IconType = keyof typeof MaterialCommunityIcons.glyphMap
 
-interface TsTextInputProps extends TextInputProps {
+export interface TsTextInputProps extends TextInputProps {
   icon?: IconType
   iconColor?: string
   label?: string
@@ -22,7 +22,7 @@ interface TsTextInputProps extends TextInputProps {
   setPasswordVisible?: (visible: boolean) => void
   isPasswordField?: boolean
   secureTextEntry?: boolean
-  style?: object
+  style?: any
   textStyle?: object
 }
 

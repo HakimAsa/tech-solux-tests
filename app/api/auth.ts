@@ -13,9 +13,12 @@ const {
   RESETPASSWORDOTP,
   VERIFY,
 } = ep
-
-const login = (email: string, password: string) =>
-  httpRequest(sf(AUTH, LOGIN), HM.POST, { email, password })
+interface Login {
+  email?: string
+  username?: string
+  password: string
+}
+const login = (data: Login) => httpRequest(sf(AUTH, LOGIN), HM.POST, data)
 
 const register = (data: object) =>
   httpRequest(sf(AUTH, REGISTER), HM.POST, data)

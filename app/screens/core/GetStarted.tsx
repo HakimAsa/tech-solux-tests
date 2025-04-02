@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   tagline: {
-    fontFamily: 'Montserrat_600Semibold',
+    fontFamily: 'Montserrat_600SemiBold',
     fontSize: 34,
     lineHeight: 34,
     color: colors.white,

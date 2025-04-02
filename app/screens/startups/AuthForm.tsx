@@ -1,3 +1,4 @@
+import TsFormField from '@/app/components/forms/TsFormField'
 import TsTextInput from '@/app/components/inputs/TsTextInput'
 import TsText from '@/app/components/texts/TsText'
 import colors from '@/app/config/colors'
@@ -15,16 +16,19 @@ export default function AuthForm({
 }: AuthFormProps) {
   return (
     <View style={styles.container}>
-      <TsTextInput
+      <TsFormField
         icon="account"
+        name="useridentifier"
         placeholder={en.userNameOrEmail}
       />
-      <TsTextInput
+      <TsFormField
+        name="password"
         placeholder={en.password}
         icon="lock"
       />
       {signUp && (
-        <TsTextInput
+        <TsFormField
+          name="confirmpassword"
           placeholder={en.confirmPassword}
           icon="lock"
         />
@@ -56,12 +60,15 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     position: 'absolute',
-    top: 332 - 182 + 15, // Adjust based on input field
+    top: 332 - 182, // Adjust based on input field
     left: 242 - 32,
+    height: 15,
+    marginVertical: 25,
     width: 108,
   },
   forgotText: {
     color: colors.primary,
     fontFamily: 'Montserrat_400Regular',
+    lineHeight: 12,
   },
 })

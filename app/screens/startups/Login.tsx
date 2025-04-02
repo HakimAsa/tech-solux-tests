@@ -1,33 +1,39 @@
-import { TouchableOpacity, View } from 'react-native'
-import React from 'react'
-
 import MainContainer, { KeyboardAvoidViewContainer } from '@/app/containers'
-import TsText from '@/app/components/texts/TsText'
-import colors from '@/app/config/colors'
 import AuthHeader from '@/app/screens/startups/AuthHeader'
 import AuthForm from './AuthForm'
-import AuthButton from './AuthButton'
 import en from '@/app/config/en'
 import AuthFooter from './AuthFooter'
 import TsProps from '@/TsProps'
 import routes from '@/app/naviagtion/routes'
+import TsForm from '@/app/components/forms'
+import loginInitials from '@/app/initials/loginInitials'
+import SubmitAuthButton from '@/app/components/forms/SubmitAuthButton'
+import loginValidationSchema from '@/app/validations/loginValidation'
 
 export default function Login({ navigation }: TsProps) {
+  const handleSubmit = (values: object) => {
+    console.log('Submitting', values)
+    // Navigate to GetStarted screen
+    navigation.navigate(routes.WELCOME)
+  }
   return (
     <MainContainer style={{ paddingLeft: 0 }}>
       <KeyboardAvoidViewContainer>
         <AuthHeader title={en.welcomeBack} />
+        <TsForm
+          initialValues={loginInitials}
+          onSubmit={handleSubmit}
+          validationSchema={loginValidationSchema}
+        >
+          <AuthForm showForgotPassword />
+          <SubmitAuthButton title={en.login} />
+        </TsForm>
         {/* Add your login form here */}
-        <AuthForm showForgotPassword />
 
-        <AuthButton
-          title={en.login}
-          onPress={() => navigation.navigate(routes.WELCOME)}
-        />
         <AuthFooter
           linkText={en.signup}
           unlinkText={en.createAnAccount}
-          onPress={() => console.log('sign up')}
+          onPress={() => navigation.navigate(routes.SIGNUP)}
         />
       </KeyboardAvoidViewContainer>
     </MainContainer>
