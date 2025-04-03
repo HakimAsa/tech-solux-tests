@@ -8,6 +8,7 @@ import data from '@/app/data/presentation'
 import TsProps from '@/TsProps'
 import Storage from '@/app/utils/Storage'
 import routes from '@/app/naviagtion/routes'
+import { ScreenWidth, WindowWidth } from '@/app/config/constants'
 
 export default function Slider({ navigation }: TsProps) {
   //   const navigation = useNavigation()
@@ -67,6 +68,11 @@ export default function Slider({ navigation }: TsProps) {
         extraData={currentPageIndex} // 🔥 Ajouté pour éviter les bugs d'affichage
         renderItem={({ item }) => <SliderItem item={item} />}
         viewabilityConfig={viewabilityConfig.current}
+        // getItemLayout={(data, index) => ({
+        //   length: WindowWidth,
+        //   offset: WindowWidth * index,
+        //   index,
+        // })}
       />
       <View
         style={{
@@ -80,6 +86,7 @@ export default function Slider({ navigation }: TsProps) {
             data={data}
             scrollX={scrollX}
             index={currentPageIndex}
+            setIndex={setCurrentPageIndex} // 🔥 Passe setIndex à Pagination
             flatListRef={flatListRef}
             onGetStarted={onGetStarted}
           />

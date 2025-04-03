@@ -13,6 +13,7 @@ interface PaginationProps {
   data: any[]
   scrollX: Animated.Value
   index: number // Ajoute bien cette ligne
+  setIndex: (newIndex: number) => void // 🔥 Ajout de setIndex pour mettre à jour l'état
   flatListRef: React.RefObject<any>
   onGetStarted: () => void // 🔥 Ajoute cette prop pour gérer la navigation
 }
@@ -20,25 +21,32 @@ export default function Pagination({
   data,
   scrollX,
   index,
+  setIndex, // 🔥
   flatListRef,
   onGetStarted,
 }: PaginationProps) {
   const position = Animated.divide(scrollX, ScreenWidth)
 
   const handlePrev = () => {
-    if (index > 0)
+    if (index > 0) {
+      const newIndex = index - 1
+      setIndex(newIndex) // 🔥 Mise à jour immédiate de l'index
       flatListRef.current?.scrollToIndex({
-        index: index - 1, // ✅ Pas besoin de `_value`
+        index: newIndex, // ✅ Pas besoin de `_value`
         animated: true,
       })
+    }
   }
 
   const handleNext = () => {
-    if (index < data.length - 1)
+    if (index < data.length - 1) {
+      const newIndex = index + 1
+      setIndex(newIndex) // 🔥 Mise à jour immédiate de l'index
       flatListRef.current?.scrollToIndex({
-        index: index + 1, // ✅ Plus propre
+        index: newIndex, // ✅ Plus propre
         animated: true,
       })
+    }
   }
 
   return (
