@@ -1,12 +1,13 @@
-import { ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, StyleSheet, View } from 'react-native'
 import React from 'react'
 import TsText from '@/app/components/texts/TsText'
 import colors from '@/app/config/colors'
-import AuthButton from '../startups/AuthButton'
 import TsButton from '@/app/components/buttons/TsButton'
-import { getPercentage, WindowHeight } from '@/app/config/constants'
+import { getPercentage } from '@/app/config/constants'
+import TsProps from '@/TsProps'
+import routes from '@/app/naviagtion/routes'
 
-export default function GetStarted() {
+export default function GetStarted({ navigation }: TsProps) {
   return (
     <ImageBackground
       style={styles.container}
@@ -22,7 +23,7 @@ export default function GetStarted() {
           <TsText style={styles.subtagline}>Find it here, buy it now!</TsText>
         </View>
         <TsButton
-          onPress={() => console.log('get started')}
+          onPress={() => navigation.navigate(routes.HOME)}
           button={{
             width: 279,
             top: getPercentage(755),

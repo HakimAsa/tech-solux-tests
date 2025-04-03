@@ -22,6 +22,7 @@ import {
   Montserrat_900Black_Italic,
 } from '@expo-google-fonts/montserrat'
 import AuthNavigator from './naviagtion/AuthNavigator'
+import TabNavigator from './naviagtion/TabNavigator'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -46,5 +47,5 @@ export default function RootLayout() {
     return null // Prevent rendering until the font is loaded
   }
 
-  return <AuthNavigator />
+  return <TabNavigator />
 }
