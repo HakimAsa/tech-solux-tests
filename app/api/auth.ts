@@ -23,7 +23,7 @@ export interface LoginCredentials {
 const login = (data: LoginCredentials): Promise<any> =>
   httpRequest(sf(AUTH, LOGIN), HM.POST, data)
 
-const register = (data: object) =>
+const register = (data: object): Promise<any> =>
   httpRequest(sf(AUTH, REGISTER), HM.POST, data)
 
 const requestForgotPasswordOTP = (data: object) =>

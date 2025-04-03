@@ -7,18 +7,21 @@ interface Submit {
   button?: object
   disabled?: boolean
   title: string
+  top?: number
 }
 
 export default function SubmitAuthButton({
   title,
   disabled = false,
   button,
+  top,
 }: Submit) {
   const { handleSubmit } = useFormikContext()
   return (
     <AuthButton
       disabled={disabled}
       title={title}
+      top={top}
       onPress={handleSubmit}
     />
   )
