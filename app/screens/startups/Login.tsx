@@ -1,3 +1,4 @@
+import authApi, { LoginCredentials } from '@/app/api/auth'
 import MainContainer, { KeyboardAvoidViewContainer } from '@/app/containers'
 import AuthHeader from '@/app/screens/startups/AuthHeader'
 import AuthForm from './AuthForm'
@@ -9,13 +10,31 @@ import TsForm from '@/app/components/forms'
 import loginInitials from '@/app/initials/loginInitials'
 import SubmitAuthButton from '@/app/components/forms/SubmitAuthButton'
 import loginValidationSchema from '@/app/validations/loginValidation'
+import useApi from '@/app/hooks/useApi'
+import useAuth from '@/app/context/auth/useAuth'
+import { ActivityIndicator } from 'react-native'
+import colors from '@/app/config/colors'
+import ErrorMessages from '@/app/components/forms/ErrorMessages'
+import { emailRegex } from '@/app/config/constants'
+import { doSetUserCredentials } from '@/app/utils/helpers'
+import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
 
 export default function Login({ navigation }: TsProps) {
-  const handleSubmit = (values: object) => {
-    console.log('Submitting', values)
-    // Navigate to GetStarted screen
+  const { login } = useAuth()
+
+  const { error, loading, message, request: loginUser } = useApi(authApi.login)
+
+  const handleSubmit = async (values: Record<string, string>) => {
+    // Make the API request
+    const data = doSetUserCredentials(values)
+    console.log('Submitting', data)
+    const res = await loginUser(data as any)
+    if (!res?.ok) return
+    login(res.data as any)
+    // Navigate to GetStarted screen TODO should not be able to come back here using back android
     navigation.navigate(routes.WELCOME)
   }
+  if (loading) return <TsActivityIndicator visible={loading} />
   return (
     <MainContainer style={{ paddingLeft: 0 }}>
       <KeyboardAvoidViewContainer>
@@ -25,6 +44,10 @@ export default function Login({ navigation }: TsProps) {
           onSubmit={handleSubmit}
           validationSchema={loginValidationSchema}
         >
+          <ErrorMessages
+            error={message || 'Something went wrong!'}
+            visible={error}
+          />
           <AuthForm showForgotPassword />
           <SubmitAuthButton title={en.login} />
         </TsForm>

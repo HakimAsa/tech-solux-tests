@@ -1,4 +1,5 @@
 import Constants from 'expo-constants'
+import { emailRegex } from '../config/constants'
 
 type ExpoConfigType = {
   extra?: {
@@ -13,6 +14,14 @@ const convertTimeFormat = function (time: string) {
   const [hours, minutes] = time.split(':')
   // Return the formatted time
   return `${hours}:${minutes}`
+}
+
+const doSetUserCredentials = function (values: Record<string, string>) {
+  const data = { ...values }
+  if (emailRegex.test(data.useridentifier)) data.email = data.useridentifier
+  else data.username = data.useridentifier
+  delete data.useridentifier
+  return data
 }
 
 const getApiUrl = function () {
@@ -37,4 +46,10 @@ const doSetFullUrl = function (...endpoints: string[]) {
 }
 
 export default getApiUrl
-export { convertTimeFormat, doSetForwardslash, doSetFullUrl, validInput }
+export {
+  convertTimeFormat,
+  doSetForwardslash,
+  doSetFullUrl,
+  doSetUserCredentials,
+  validInput,
+}

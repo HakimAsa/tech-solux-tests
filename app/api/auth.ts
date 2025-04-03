@@ -2,6 +2,7 @@ import apiClient, { httpRequest } from './client'
 import ep from '../config/constants'
 import { doSetForwardslash as sf } from '../utils/helpers'
 import HM from '../utils/httpMethods'
+import { ApiResponse } from 'apisauce'
 
 const {
   AUTH,
@@ -13,12 +14,14 @@ const {
   RESETPASSWORDOTP,
   VERIFY,
 } = ep
-interface Login {
+export interface LoginCredentials {
   email?: string
   username?: string
   password: string
 }
-const login = (data: Login) => httpRequest(sf(AUTH, LOGIN), HM.POST, data)
+
+const login = (data: LoginCredentials): Promise<any> =>
+  httpRequest(sf(AUTH, LOGIN), HM.POST, data)
 
 const register = (data: object) =>
   httpRequest(sf(AUTH, REGISTER), HM.POST, data)

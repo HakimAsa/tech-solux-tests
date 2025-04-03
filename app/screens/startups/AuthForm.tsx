@@ -59,11 +59,9 @@ const styles = StyleSheet.create({
     width: 317,
   },
   forgotPassword: {
-    position: 'absolute',
-    top: 332 - 182, // Adjust based on input field
     left: 242 - 32,
     height: 15,
-    marginVertical: 25,
+    bottom: 10,
     width: 108,
   },
   forgotText: {
