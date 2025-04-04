@@ -23,7 +23,7 @@ export default function GetStarted({ navigation }: TsProps) {
           <TsText style={styles.subtagline}>Find it here, buy it now!</TsText>
         </View>
         <TsButton
-          onPress={() => navigation.navigate(routes.HOME)}
+          onPress={() => navigation.navigate('TabNavigator')}
           button={{
             width: 279,
             top: getPercentage(755),

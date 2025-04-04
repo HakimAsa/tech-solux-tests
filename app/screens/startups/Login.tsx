@@ -15,6 +15,7 @@ import useAuth from '@/app/context/auth/useAuth'
 import ErrorMessages from '@/app/components/forms/ErrorMessages'
 import { doSetUserCredentials } from '@/app/utils/helpers'
 import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
+import { CommonActions } from '@react-navigation/native'
 
 export default function Login({ navigation }: TsProps) {
   const { login } = useAuth()
@@ -27,9 +28,15 @@ export default function Login({ navigation }: TsProps) {
     console.log('Submitting', data)
     const res = await loginUser(data as any)
     if (!res?.ok) return
-    login(res.data as any)
+    const { token } = res.data as any
+    login(token as string)
     // Navigate to GetStarted screen TODO should not be able to come back here using back android
-    navigation.navigate(routes.WELCOME)
+    // navigation.dispatch(
+    //   CommonActions.reset({
+    //     index: 0,
+    //     routes: [{ name: 'AppNavigator' }], // Now Welcome is properly handled in MainNavigator
+    //   })
+    // )
   }
   if (loading) return <TsActivityIndicator visible={loading} />
   return (

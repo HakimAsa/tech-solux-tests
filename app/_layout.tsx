@@ -23,10 +23,15 @@ import {
 } from '@expo-google-fonts/montserrat'
 import AuthNavigator from './naviagtion/AuthNavigator'
 import TabNavigator from './naviagtion/TabNavigator'
+import useAuth from './context/auth/useAuth'
+import AppNavigator from './naviagtion/AppNavigator'
+import authStorage from './context/auth/Storage'
 
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
+  const { user } = useAuth()
+  console.log(user)
   const [fontsLoaded] = useFonts({
     Montserrat_300Light,
     Montserrat_400Regular,
@@ -36,6 +41,19 @@ export default function RootLayout() {
     Montserrat_800ExtraBold,
     MontserratBlack: Montserrat_900Black, // Alias the font name
   })
+
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      const token = await authStorage.getToken()
+      setIsAuthenticated(!!token)
+      setIsLoading(false)
+    }
+
+    checkAuthStatus()
+  }, [])
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -47,5 +65,5 @@ export default function RootLayout() {
     return null // Prevent rendering until the font is loaded
   }
 
-  return <TabNavigator />
+  return isAuthenticated ? <AppNavigator /> : <AuthNavigator />
 }

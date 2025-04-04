@@ -27,10 +27,10 @@ export default function AuthNavigator() {
         component={Signup}
       />
       {/* TODO App Nav */}
-      <Stack.Screen
+      {/* <Stack.Screen
         name={routes.WELCOME}
         component={GetStarted}
-      />
+      /> */}
     </Stack.Navigator>
   )
 }

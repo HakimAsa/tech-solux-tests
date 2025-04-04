@@ -2,7 +2,12 @@ import { useState } from 'react'
 
 export type ApiResponse<T> = {
   ok: boolean
-  data?: { data?: T; errorMessage?: string; message?: string }
+  data?: {
+    token: string
+    data?: T
+    errorMessage?: string
+    message?: string
+  }
 }
 
 type ApiFunction<T, Args extends any[]> = (
