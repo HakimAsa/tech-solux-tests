@@ -12,8 +12,9 @@ import SubmitButton from '@/app/components/forms/SubmitButton'
 import LineSeparator from '@/app/components/LineSeparator'
 import profileUpdateValidationSchema from '@/app/validations/profileUpdateValidation'
 import profileUpdateInitials from '@/app/initials/profileUpdateInitials'
+import TsProps from '@/TsProps'
 
-export default function Profile() {
+export default function Profile({ navigation }: TsProps) {
   const updateProfile = async (values: Record<string, any>) => {
     // Update user profile with values.avatar
     console.log('updateProfile', values)
@@ -66,7 +67,10 @@ export default function Profile() {
               style={styles.inputStyle}
               textStyle={styles.textStyle}
             />
-            <Pressable onPress={() => console.log('changed password')}>
+            <Pressable
+              onPress={() => navigation.navigate('Change Password')}
+              style={{ marginVertical: 15, marginBottom: 30 }}
+            >
               <TsText
                 small
                 style={styles.changePasswordText}

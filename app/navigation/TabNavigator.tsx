@@ -6,12 +6,7 @@ import ShoppingCart from '../screens/core/ShoppingCart'
 import Search from '../screens/core/Search'
 import Profile from '../screens/core/Profile'
 import colors from '../config/colors'
-import {
-  Feather,
-  MaterialCommunityIcons,
-  MaterialIcons,
-  SimpleLineIcons,
-} from '@expo/vector-icons'
+import { Feather } from '@expo/vector-icons'
 import ProfileStack from './ProfileStack'
 import { Pressable, View } from 'react-native'
 
@@ -20,7 +15,9 @@ const Tab = createBottomTabNavigator()
 export default function TabNavigator() {
   return (
     <Tab.Navigator
+      initialRouteName={routes.HOME}
       screenOptions={({ route }) => ({
+        headerShadowVisible: false,
         tabBarActiveTintColor: colors.tabIconColor,
         tabBarStyle: { height: 84 },
         tabBarLabelStyle: {
@@ -109,26 +106,30 @@ export default function TabNavigator() {
       <Tab.Screen
         name={routes.PROFILE}
         component={ProfileStack}
-        options={({ navigation }) => ({
-          headerTitleAlign: 'center',
-          headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()}>
-              <Feather
-                name="chevron-left"
-                size={30}
-                color="black"
-              />
-            </Pressable>
-          ),
+        options={({ navigation, route }) => {
+          console.log(route)
+          return {
+            headerTitleAlign: 'center',
 
-          tabBarIcon: ({ color, size }) => (
-            <Feather
-              name="settings"
-              size={size}
-              color={color}
-            />
-          ),
-        })}
+            headerLeft: () => (
+              <Pressable onPress={() => navigation.goBack()}>
+                <Feather
+                  name="chevron-left"
+                  size={30}
+                  color="black"
+                />
+              </Pressable>
+            ),
+
+            tabBarIcon: ({ color, size }) => (
+              <Feather
+                name="settings"
+                size={size}
+                color={color}
+              />
+            ),
+          }
+        }}
       />
     </Tab.Navigator>
   )
