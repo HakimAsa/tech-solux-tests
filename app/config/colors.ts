@@ -8,6 +8,7 @@ const colors = {
   mediumgray: '#999999',
   medium: '#6e6969',
   primary: '#F83758', //background: rgba(248, 55, 88, 1);
+  separator: '#C4C4C4',
   tabIconColor: '#EB3030',
   textColor: '#676767',
   white: '#ffffff',

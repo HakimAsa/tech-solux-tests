@@ -1,8 +1,5 @@
 import * as Yup from 'yup'
-import { emailRegex } from '../config/constants'
-
-const passwordRegex =
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#+\-*/_!%*?&(),;\[\]])[A-Za-z\d@$#+\-*/_!%*?&(),;\[\]]{8,}$/
+import { emailRegex, passwordRegex } from '../config/constants'
 
 const signupValidationSchema = Yup.object().shape({
   confirmpassword: Yup.string()
@@ -29,7 +26,7 @@ const signupValidationSchema = Yup.object().shape({
     .required('Please enter either an email or a username'),
 
   password: Yup.string()
-    .matches(passwordRegex, 'au moins 8 caracteres [A-Z,a-z,0-9,symbols]')
+    .matches(passwordRegex, 'At least 8 characters [A-Z,a-z,0-9,symbols]')
     .required()
     .min(8),
 })

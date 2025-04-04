@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
+import { PlusJakartaSans_500Medium } from '@expo-google-fonts/plus-jakarta-sans/500Medium'
 import {
   Montserrat_100Thin,
   Montserrat_200ExtraLight,
@@ -45,6 +46,7 @@ export default function RootLayout() {
     Montserrat_700Bold,
     Montserrat_800ExtraBold,
     MontserratBlack: Montserrat_900Black, // Alias the font name
+    PlusJakartaSans_500Medium,
   })
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)

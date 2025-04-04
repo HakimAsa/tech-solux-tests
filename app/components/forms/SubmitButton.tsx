@@ -3,8 +3,8 @@ import { useFormikContext } from 'formik'
 import TsButton from '../buttons/TsButton'
 
 interface Submit {
-  button: object
-  disabled: boolean
+  button?: object
+  disabled?: boolean
   title: string
 }
 

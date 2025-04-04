@@ -13,7 +13,7 @@ import {
   SimpleLineIcons,
 } from '@expo/vector-icons'
 import ProfileStack from './ProfileStack'
-import { Pressable } from 'react-native'
+import { Pressable, View } from 'react-native'
 
 const Tab = createBottomTabNavigator()
 
@@ -28,10 +28,7 @@ export default function TabNavigator() {
           fontFamily: 'Roboto',
           fontWeight: route.name === routes.HOME ? 500 : 400,
         },
-        // tabBarInactiveTintColor: colors.tabIconColorActive,
-        // tabBarIndicatorStyle: {
-        //   backgroundColor: colors.tabIconColorActive,
-        // },
+        tabBarInactiveTintColor: colors.black,
       })}
     >
       {/* Add your screens here */}
@@ -64,12 +61,25 @@ export default function TabNavigator() {
       <Tab.Screen
         name={routes.SHOPPING_CART}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Feather
-              name="shopping-cart"
-              size={size}
-              color={color}
-            />
+          tabBarIcon: ({ color, size, focused }) => (
+            <View
+              style={{
+                width: 56,
+                height: 56,
+                borderRadius: 28,
+                backgroundColor: focused ? '#EB3030' : '#FFFFFF',
+                justifyContent: 'center',
+                alignItems: 'center',
+                overflow: 'hidden',
+                elevation: focused ? 0 : 1,
+              }}
+            >
+              <Feather
+                name="shopping-cart"
+                size={size}
+                color={focused ? colors.white : color}
+              />
+            </View>
           ),
           tabBarLabelStyle: {
             display: 'none',
@@ -105,7 +115,7 @@ export default function TabNavigator() {
             <Pressable onPress={() => navigation.goBack()}>
               <Feather
                 name="chevron-left"
-                size={24}
+                size={30}
                 color="black"
               />
             </Pressable>

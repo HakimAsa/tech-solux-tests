@@ -44,7 +44,7 @@ export default function TsTextInput({
       {label ? (
         <TsText
           fontSize={10}
-          style={[textStyle, { marginLeft: 0, fontWeight: 700 }]}
+          style={[{ marginLeft: 0, fontWeight: 700 }, textStyle]}
           {...props}
         >
           {label}
@@ -68,6 +68,7 @@ export default function TsTextInput({
               fontFamily: 'Montserrat_500Medium',
             },
             styles.input,
+            style,
           ]}
           secureTextEntry={secureTextEntry}
           {...props}
