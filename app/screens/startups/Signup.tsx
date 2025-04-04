@@ -17,7 +17,7 @@ import ErrorMessages from '@/app/components/forms/ErrorMessages'
 import useApi from '@/app/hooks/useApi'
 import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
 import SubmitAuthButton from '@/app/components/forms/SubmitAuthButton'
-import routes from '@/app/naviagtion/routes'
+import routes from '@/app/navigation/routes'
 
 export default function Signup({ navigation }: TsProps) {
   const {

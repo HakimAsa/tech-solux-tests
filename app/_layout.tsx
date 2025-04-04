@@ -21,11 +21,16 @@ import {
   Montserrat_800ExtraBold_Italic,
   Montserrat_900Black_Italic,
 } from '@expo-google-fonts/montserrat'
-import AuthNavigator from './naviagtion/AuthNavigator'
-import TabNavigator from './naviagtion/TabNavigator'
+import AuthNavigator from './navigation/AuthNavigator'
+import TabNavigator from './navigation/TabNavigator'
 import useAuth from './context/auth/useAuth'
-import AppNavigator from './naviagtion/AppNavigator'
+import AppNavigator from './navigation/AppNavigator'
 import authStorage from './context/auth/Storage'
+import navigationTheme from './navigation/navigationTheme'
+import {
+  NavigationContainer,
+  NavigationIndependentTree,
+} from '@react-navigation/native'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -65,5 +70,5 @@ export default function RootLayout() {
     return null // Prevent rendering until the font is loaded
   }
 
-  return isAuthenticated ? <AppNavigator /> : <AuthNavigator />
+  return <>{isAuthenticated ? <AppNavigator /> : <AuthNavigator />}</>
 }

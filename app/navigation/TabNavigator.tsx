@@ -12,6 +12,8 @@ import {
   MaterialIcons,
   SimpleLineIcons,
 } from '@expo/vector-icons'
+import ProfileStack from './ProfileStack'
+import { Pressable } from 'react-native'
 
 const Tab = createBottomTabNavigator()
 
@@ -96,8 +98,19 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name={routes.PROFILE}
-        component={Profile}
-        options={{
+        component={ProfileStack}
+        options={({ navigation }) => ({
+          headerTitleAlign: 'center',
+          headerLeft: () => (
+            <Pressable onPress={() => navigation.goBack()}>
+              <Feather
+                name="chevron-left"
+                size={24}
+                color="black"
+              />
+            </Pressable>
+          ),
+
           tabBarIcon: ({ color, size }) => (
             <Feather
               name="settings"
@@ -105,7 +118,7 @@ export default function TabNavigator() {
               color={color}
             />
           ),
-        }}
+        })}
       />
     </Tab.Navigator>
   )

@@ -2,7 +2,7 @@ import {
   NavigationContainer,
   NavigationIndependentTree,
 } from '@react-navigation/native'
-import navigationTheme from './naviagtion/navigationTheme'
+import navigationTheme from './navigation/navigationTheme'
 
 export default function Index() {
   return (

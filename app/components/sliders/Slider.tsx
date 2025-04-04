@@ -7,7 +7,7 @@ import SliderItem from './SliderItem'
 import data from '@/app/data/presentation'
 import TsProps from '@/TsProps'
 import Storage from '@/app/utils/Storage'
-import routes from '@/app/naviagtion/routes'
+import routes from '@/app/navigation/routes'
 import { ScreenWidth, WindowWidth } from '@/app/config/constants'
 
 export default function Slider({ navigation }: TsProps) {

@@ -5,7 +5,7 @@ import colors from '@/app/config/colors'
 import TsButton from '@/app/components/buttons/TsButton'
 import { getPercentage } from '@/app/config/constants'
 import TsProps from '@/TsProps'
-import routes from '@/app/naviagtion/routes'
+import routes from '@/app/navigation/routes'
 
 export default function GetStarted({ navigation }: TsProps) {
   return (
