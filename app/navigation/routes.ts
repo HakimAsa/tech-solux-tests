@@ -1,4 +1,5 @@
 export default Object.freeze({
+  CHANGEPASSWORD: 'Change Password',
   HOME: 'Home',
   LOGIN: 'Login',
   PRESENTATION: 'Presentation',

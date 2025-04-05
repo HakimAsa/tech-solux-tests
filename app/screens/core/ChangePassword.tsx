@@ -1,11 +1,19 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
 
-export default function ChangePassword() {
+import BaseScreen from '@/app/components/BaseScreen'
+import BasicHeader from '@/app/components/headers/BasicHeader'
+import routes from '@/app/navigation/routes'
+import TsProps from '@/TsProps'
+
+export default function ChangePassword({ navigation }: TsProps) {
   return (
-    <View>
-      <Text>ChangePassword</Text>
-    </View>
+    <BaseScreen>
+      <BasicHeader
+        title={routes.CHANGEPASSWORD}
+        onPress={() => navigation.goBack()}
+      />
+    </BaseScreen>
   )
 }
 

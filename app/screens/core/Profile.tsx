@@ -13,6 +13,8 @@ import LineSeparator from '@/app/components/LineSeparator'
 import profileUpdateValidationSchema from '@/app/validations/profileUpdateValidation'
 import profileUpdateInitials from '@/app/initials/profileUpdateInitials'
 import TsProps from '@/TsProps'
+import BasicHeader from '@/app/components/headers/BasicHeader'
+import routes from '@/app/navigation/routes'
 
 export default function Profile({ navigation }: TsProps) {
   const updateProfile = async (values: Record<string, any>) => {
@@ -21,6 +23,10 @@ export default function Profile({ navigation }: TsProps) {
   }
   return (
     <BaseScreen>
+      <BasicHeader
+        title={routes.PROFILE}
+        onPress={() => navigation.goBack()}
+      />
       <MainContainer style={{ padding: 24, paddingLeft: 24 }}>
         <ScrollableMainContainer>
           <TsForm
