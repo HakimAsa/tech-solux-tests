@@ -74,5 +74,11 @@ export default function RootLayout() {
     return null // Prevent rendering until the font is loaded
   }
 
-  return <>{isAuthenticated ? <AppNavigator /> : <AuthNavigator />}</>
+  return (
+    <NavigationIndependentTree>
+      <NavigationContainer theme={navigationTheme}>
+        {isAuthenticated ? <AppNavigator /> : <AuthNavigator />}
+      </NavigationContainer>
+    </NavigationIndependentTree>
+  )
 }

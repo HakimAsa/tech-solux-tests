@@ -1,12 +1,12 @@
 // components/BaseScreen.js
 
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ViewProps } from 'react-native'
 import colors from '../config/colors'
 
 interface BaseScreenProps {
   children: React.ReactNode
-  style?: object
+  style?: ViewProps['style']
 }
 
 export default function BaseScreen({ children, style }: BaseScreenProps) {
@@ -16,7 +16,8 @@ export default function BaseScreen({ children, style }: BaseScreenProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white, // force it to be white
+    backgroundColor: '#FDFDFD',
+    //colors.white, // force it to be white
     // padding: 16, // optional
   },
 })

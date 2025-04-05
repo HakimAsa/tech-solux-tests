@@ -12,9 +12,9 @@ export default function ScrollableMainContainer({
   return (
     <KeyboardAvoidViewContainer>
       <ScrollView
-        style={[{ flex: 1 }, style]}
+        style={{ flex: 1 }}
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={contentContainerStyle}
+        contentContainerStyle={[{ flexGrow: 1 }, contentContainerStyle, style]}
         {...otherProps}
       >
         {children}

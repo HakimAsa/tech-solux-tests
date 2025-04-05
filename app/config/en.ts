@@ -28,6 +28,7 @@ const en = {
   proceed: 'Proceed',
   register: 'Register',
   save: 'Save',
+  searchAnyProduct: 'Search any Product...',
   signup: 'Sign Up',
   state: 'State',
   stylish: 'Stylish',
