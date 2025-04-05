@@ -77,11 +77,11 @@ export default function RootLayout() {
     <NavigationIndependentTree>
       <NavigationContainer theme={navigationTheme}>
         {isAuthenticated ? (
-          <AppNavigator />
-        ) : (
           <SearchProvider>
-            <AuthNavigator />
+            <AppNavigator />
           </SearchProvider>
+        ) : (
+          <AuthNavigator />
         )}
       </NavigationContainer>
     </NavigationIndependentTree>

@@ -11,17 +11,21 @@ import {
 import colors from '../config/colors'
 import defaultStyles from '@/app/config/styles'
 import en from '../config/en'
+import { useSearchContext } from '../context/SearchContext'
 
 export interface TsTextInputProps extends TextInputProps {
+  products: any[]
   width?: string
   style?: any
 }
 
 export default function SearchBar({
+  products,
   width = '100%',
   style,
   ...props
 }: TsTextInputProps) {
+  const { searchTerm, searchProducts } = useSearchContext()
   return (
     <View style={[styles.container, { width }, style]}>
       <MaterialIcons
@@ -43,6 +47,10 @@ export default function SearchBar({
         ]}
         placeholder={en.searchAnyProduct}
         placeholderTextColor="#BBBBBB"
+        returnKeyType="search"
+        autoFocus={true}
+        value={searchTerm}
+        onChangeText={(text) => searchProducts(text, products)}
         {...props}
       />
 

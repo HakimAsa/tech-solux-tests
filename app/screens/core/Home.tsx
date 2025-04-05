@@ -5,31 +5,42 @@ import BaseScreen from '@/app/components/BaseScreen'
 import LogoHeader from '@/app/components/headers/LogoHeader'
 import MainContainer, { ScrollableMainContainer } from '@/app/containers'
 import SearchBar from '@/app/components/SearchBar'
+import products from '@/app/data/products'
+import { useSearchContext } from '@/app/context/SearchContext'
+import { FlatList } from 'react-native'
 
 export default function Home() {
+  console.log(products)
+  const { searchResults, searchTerm } = useSearchContext()
+  const dataToShow = searchTerm ? searchResults : products
   return (
-    <ScrollableMainContainer
-      contentContainerStyle={{
-        flexGrow: 1,
-        // borderColor: 'green',
-        borderRightWidth: 5,
-      }}
-    >
-      <BaseScreen>
-        <LogoHeader />
-        <MainContainer
-          style={{
-            paddingLeft: 16,
-            padding: 16,
-            backgroundColor: '#FDFDFD',
-            flex: 0,
-          }}
-        >
-          {/* Your home screen components here */}
-          <SearchBar />
-        </MainContainer>
-      </BaseScreen>
-    </ScrollableMainContainer>
+    <BaseScreen>
+      <FlatList
+        data={dataToShow}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <Text>{item.name}</Text>}
+        ListHeaderComponent={
+          <>
+            <LogoHeader />
+            <MainContainer
+              style={{
+                paddingLeft: 16,
+                padding: 16,
+                backgroundColor: '#FDFDFD',
+                flex: 1,
+              }}
+            >
+              <SearchBar products={products} />
+              {/* Any other non-list sections can go here */}
+            </MainContainer>
+          </>
+        }
+        contentContainerStyle={{
+          paddingBottom: 32,
+          paddingTop: 8,
+        }}
+      />
+    </BaseScreen>
   )
 }
 
