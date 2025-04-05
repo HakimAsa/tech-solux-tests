@@ -1,8 +1,14 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ViewProps } from 'react-native'
 import { ReactNode } from 'react'
 
-export default function RowContainer({ children }: { children: ReactNode }) {
-  return <View style={styles.container}>{children}</View>
+export default function RowContainer({
+  children,
+  style,
+}: {
+  children: ReactNode
+  style?: ViewProps['style']
+}) {
+  return <View style={[styles.container, style]}>{children}</View>
 }
 
 const styles = StyleSheet.create({

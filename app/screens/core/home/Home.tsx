@@ -9,6 +9,7 @@ import products from '@/app/data/products'
 import { useSearchContext } from '@/app/context/SearchContext'
 import { FlatList } from 'react-native'
 import FilterSortBanner from '@/app/components/FilterSortBanner'
+import DayOfDealBanner from './DayOfDealBanner'
 
 export default function Home() {
   const { searchResults, searchTerm } = useSearchContext()
@@ -33,6 +34,7 @@ export default function Home() {
               <SearchBar products={products} />
               {/* Any other non-list sections can go here */}
               <FilterSortBanner />
+              <DayOfDealBanner />
             </MainContainer>
           </>
         }

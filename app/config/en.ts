@@ -16,7 +16,9 @@ const en = {
   createAnAccountLineBreak: 'Create an\nAccount',
   confirmPassword: 'ConfirmPassword',
   country: 'Country',
+  dealOfTheDay: 'Deal of the Day',
   emailAddress: 'Email Address',
+  filter: 'Filter',
   forgotPassword: 'Forgot Password?',
   getYourOrder: 'Get Your Order',
   iAlreadyHaveAnAccount: 'I Already Have an Account',
@@ -31,11 +33,13 @@ const en = {
   save: 'Save',
   searchAnyProduct: 'Search any Product...',
   signup: 'Sign Up',
+  sort: 'Sort',
   state: 'State',
   stylish: 'Stylish',
   toThePublicOffer: 'to the public offer',
   username: 'Username',
   userNameOrEmail: 'Username or Email',
+  viewAll: 'View All',
   welcomeBack: 'Welcome\nBack!',
 } as const
 

@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import routes from './routes'
-import Home from '../screens/core/Home'
+import Home from '../screens/core/home/Home'
 import Whishlist from '../screens/core/Whishlist'
 import ShoppingCart from '../screens/core/ShoppingCart'
 import Search from '../screens/core/Search'
