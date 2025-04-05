@@ -32,6 +32,7 @@ import {
   NavigationContainer,
   NavigationIndependentTree,
 } from '@react-navigation/native'
+import SearchProvider from './context/SearchContext'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -75,7 +76,13 @@ export default function RootLayout() {
   return (
     <NavigationIndependentTree>
       <NavigationContainer theme={navigationTheme}>
-        {isAuthenticated ? <AppNavigator /> : <AuthNavigator />}
+        {isAuthenticated ? (
+          <AppNavigator />
+        ) : (
+          <SearchProvider>
+            <AuthNavigator />
+          </SearchProvider>
+        )}
       </NavigationContainer>
     </NavigationIndependentTree>
   )
