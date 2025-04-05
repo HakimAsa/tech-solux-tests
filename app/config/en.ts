@@ -1,5 +1,6 @@
 const en = {
   address: 'Address',
+  allFeatured: 'All Featured',
   bankAccountDetails: 'Bank Account Details',
   bankAccountHolderName: "Bank Account Holder's Name",
   bankAccountNumber: 'Bank Account Number',

@@ -8,9 +8,9 @@ import SearchBar from '@/app/components/SearchBar'
 import products from '@/app/data/products'
 import { useSearchContext } from '@/app/context/SearchContext'
 import { FlatList } from 'react-native'
+import FilterSortBanner from '@/app/components/FilterSortBanner'
 
 export default function Home() {
-  console.log(products)
   const { searchResults, searchTerm } = useSearchContext()
   const dataToShow = searchTerm ? searchResults : products
   return (
@@ -32,6 +32,7 @@ export default function Home() {
             >
               <SearchBar products={products} />
               {/* Any other non-list sections can go here */}
+              <FilterSortBanner />
             </MainContainer>
           </>
         }

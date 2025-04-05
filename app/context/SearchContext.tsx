@@ -32,7 +32,6 @@ export default function SearchProvider({ children }: { children: ReactNode }) {
 
 export const useSearchContext = () => {
   const context = useContext(SearchContext)
-  console.log('useSearch called, context =', context) // DEBUG
 
   if (!context) {
     throw new Error('SearchContext not properly initialized')
