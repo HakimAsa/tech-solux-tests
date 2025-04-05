@@ -24,7 +24,6 @@ import {
   Montserrat_900Black_Italic,
 } from '@expo-google-fonts/montserrat'
 import AuthNavigator from './navigation/AuthNavigator'
-import TabNavigator from './navigation/TabNavigator'
 import useAuth from './context/auth/useAuth'
 import AppNavigator from './navigation/AppNavigator'
 import authStorage from './context/auth/Storage'
@@ -38,7 +37,6 @@ SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
   const { user } = useAuth()
-  console.log(user)
   const [fontsLoaded] = useFonts({
     LibreCaslonText_700Bold,
     Montserrat_300Light,

@@ -81,12 +81,6 @@ export default function TabNavigator() {
           ),
           tabBarLabelStyle: {
             display: 'none',
-
-            // justifyContent: 'center',
-            // alignItems: 'center',
-            // position: 'absolute',
-            // left: 20,
-            // bottom: 20,
           },
         }}
         component={ShoppingCart}
@@ -107,21 +101,9 @@ export default function TabNavigator() {
       <Tab.Screen
         name={routes.PROFILE}
         component={ProfileStack}
-        options={({ navigation, route }) => {
-          console.log(route)
+        options={() => {
           return {
             headerTitleAlign: 'center',
-
-            headerLeft: () => (
-              <Pressable onPress={() => navigation.goBack()}>
-                <Feather
-                  name="chevron-left"
-                  size={30}
-                  color="black"
-                />
-              </Pressable>
-            ),
-
             tabBarIcon: ({ color, size }) => (
               <Feather
                 name="settings"

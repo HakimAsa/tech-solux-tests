@@ -25,7 +25,7 @@ export default function Login({ navigation }: TsProps) {
   const handleSubmit = async (values: Record<string, string>) => {
     // Make the API request
     const data = doSetUserCredentials(values)
-    console.log('Submitting', data)
+
     const res = await loginUser(data as any)
     if (!res?.ok) return
     const { token } = res.data as any
