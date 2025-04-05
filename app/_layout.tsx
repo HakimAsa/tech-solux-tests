@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { PlusJakartaSans_500Medium } from '@expo-google-fonts/plus-jakarta-sans/500Medium'
+import { LibreCaslonText_700Bold } from '@expo-google-fonts/libre-caslon-text/700Bold'
 import {
   Montserrat_100Thin,
   Montserrat_200ExtraLight,
@@ -39,6 +40,7 @@ export default function RootLayout() {
   const { user } = useAuth()
   console.log(user)
   const [fontsLoaded] = useFonts({
+    LibreCaslonText_700Bold,
     Montserrat_300Light,
     Montserrat_400Regular,
     Montserrat_500Medium,

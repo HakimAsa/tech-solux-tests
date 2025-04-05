@@ -18,6 +18,7 @@ export default function TabNavigator() {
       initialRouteName={routes.HOME}
       screenOptions={({ route }) => ({
         headerShadowVisible: false,
+        headerShown: false,
         tabBarActiveTintColor: colors.tabIconColor,
         tabBarStyle: { height: 84 },
         tabBarLabelStyle: {

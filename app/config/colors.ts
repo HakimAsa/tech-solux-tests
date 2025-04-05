@@ -11,7 +11,7 @@ const colors = {
   separator: '#C4C4C4',
   tabIconColor: '#EB3030',
   textColor: '#676767',
-  white: '#ffffff',
+  white: '#FFFFFF',
 } as const
 
 export default colors

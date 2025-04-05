@@ -30,6 +30,7 @@ const en = {
   save: 'Save',
   signup: 'Sign Up',
   state: 'State',
+  stylish: 'Stylish',
   toThePublicOffer: 'to the public offer',
   username: 'Username',
   userNameOrEmail: 'Username or Email',
