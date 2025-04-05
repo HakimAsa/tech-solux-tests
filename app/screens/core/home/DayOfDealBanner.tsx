@@ -4,6 +4,7 @@ import RowContainer from '@/app/containers/RowContainer'
 import TsText from '@/app/components/texts/TsText'
 import colors from '@/app/config/colors'
 import en from '@/app/config/en'
+import RemainingTime from './RemainingTime'
 
 export default function DayOfDealBanner() {
   return (
@@ -17,14 +18,7 @@ export default function DayOfDealBanner() {
             style={{ width: 16, height: 16 }}
             source={require('@/assets/images/counter.png')}
           />
-
-          <TsText
-            small
-            style={{ color: colors.white, lineHeight: 16, left: 5 }}
-          >
-            {/* add it dynamically later */}
-            22h 55min 20s remaining
-          </TsText>
+          <RemainingTime />
         </RowContainer>
       </View>
       <Pressable
