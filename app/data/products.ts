@@ -1,38 +1,41 @@
 export default [
   {
     id: '1',
-    name: 'Product 1',
+    name: 'Woman Printed Kurta',
     price: 19.99,
-    image: 'product1.jpg',
+    size: 10,
+    discount: 0.4,
+    image: require('@/assets/images/womenprintedkurta.png'),
     rating: {
       count: 5,
-      value: 4.5,
+      average: 4.5,
     },
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae erat non felis tristique finibus non eu turpis. Donec viverra, turpis ac finibus vulputate, mauris ipsum placerat neque, id ultricies ipsum dolor vel dolor.',
+    description: 'Neque porro quisquam est qui dolorem ipsum quia',
   },
   {
     id: '2',
-    name: 'Product 2',
+    name: 'HRX by Hrithik Roshan',
     price: 29.99,
+    size: 12,
+    discount: 0.5,
+    image: require('@/assets/images/hrxby.png'),
     rating: {
       count: 3,
-      value: 3.7,
+      average: 3.7,
     },
-    image: 'product2.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae erat non felis tristique finibus non eu turpis. Donec viverra, turpis ac finibus vulputate, mauris ipsum placerat neque, id ultricies ipsum dolor vel dolor.',
+    description: 'Neque porro quisquam est qui dolorem ipsum quia',
   },
   {
     id: '3',
-    name: 'Product 3',
+    name: 'Black Winter...',
     price: 39.99,
     rating: {
       count: 2,
-      value: 2.8,
+      average: 2.8,
     },
-    image: 'product3.jpg',
-    description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae erat non felis tristique finibus non eu turpis. Donec viverra, turpis ac finibus vulputate, mauris ipsum placerat neque, id ultricies ipsum dolor vel dolor.',
+    size: 14,
+    discount: 0,
+    image: require('@/assets/images/blackwinter.png'),
+    description: 'Autumn And Winter Casual cotton-padded jacket...',
   },
 ]

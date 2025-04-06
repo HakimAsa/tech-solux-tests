@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, View, Animated } from 'react-native'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 // import { useNavigation } from '@react-navigation/native'
 
 import Pagination from './Pagination'
@@ -8,7 +8,6 @@ import data from '@/app/data/presentation'
 import TsProps from '@/TsProps'
 import Storage from '@/app/utils/Storage'
 import routes from '@/app/navigation/routes'
-import { ScreenWidth, WindowWidth } from '@/app/config/constants'
 
 export default function Slider({ navigation }: TsProps) {
   //   const navigation = useNavigation()
