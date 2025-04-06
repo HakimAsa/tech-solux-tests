@@ -1,4 +1,4 @@
-import DayOfDealBanner from './DayOfDealBanner'
+import DayOfDealBanner from './DealOfTheDayBanner'
 import en from '@/app/config/en'
 
 export default function TrendingProductsBanner() {

@@ -97,10 +97,10 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   dot: {
-    height: 9,
-    width: 9,
+    height: 8,
+    width: 8,
     backgroundColor: '#DEDBDB',
-    borderRadius: 4.5,
+    borderRadius: 4,
   },
   activeDot: {
     backgroundColor: '#FFA3B3',

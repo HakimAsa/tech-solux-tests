@@ -3,16 +3,17 @@ import React from 'react'
 
 import BaseScreen from '@/app/components/BaseScreen'
 import LogoHeader from '@/app/components/headers/LogoHeader'
-import MainContainer, { ScrollableMainContainer } from '@/app/containers'
+import MainContainer from '@/app/containers'
 import SearchBar from '@/app/components/SearchBar'
 import products from '@/app/data/products'
 import { useSearchContext } from '@/app/context/SearchContext'
 import { FlatList } from 'react-native'
 import FilterSortBanner from '@/app/components/FilterSortBanner'
-import DayOfDealBanner from './DayOfDealBanner'
+import DealOfTheDayBanner from './DealOfTheDayBanner'
 import Category from './Category'
 import TrendingProductsBanner from './TrendingProductsBanner'
 import ShopNow from './ShopNow'
+import DealOfTheDayProduct from './DealOfTheDayProduct'
 
 export default function Home() {
   const { searchResults, searchTerm } = useSearchContext()
@@ -39,7 +40,8 @@ export default function Home() {
               <FilterSortBanner />
               <Category />
               <ShopNow />
-              <DayOfDealBanner />
+              <DealOfTheDayBanner />
+              <DealOfTheDayProduct />
               <TrendingProductsBanner />
             </MainContainer>
           </>

@@ -8,7 +8,7 @@ import RemainingTime from './RemainingTime'
 
 type Mode = 'time' | 'calendar' | null | false
 
-export default function DayOfDealBanner({
+export default function DealOfTheDayBanner({
   color = '#4392F9',
   mode = 'time',
   title = en.dealOfTheDay,
