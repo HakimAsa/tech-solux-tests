@@ -12,6 +12,7 @@ import FilterSortBanner from '@/app/components/FilterSortBanner'
 import DayOfDealBanner from './DayOfDealBanner'
 import Category from './Category'
 import TrendingProductsBanner from './TrendingProductsBanner'
+import ShopNow from './ShopNow'
 
 export default function Home() {
   const { searchResults, searchTerm } = useSearchContext()
@@ -37,6 +38,7 @@ export default function Home() {
               {/* Any other non-list sections can go here */}
               <FilterSortBanner />
               <Category />
+              <ShopNow />
               <DayOfDealBanner />
               <TrendingProductsBanner />
             </MainContainer>
