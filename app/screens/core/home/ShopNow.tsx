@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 15, // 15px from image
     alignSelf: 'center',
-    gap: 2,
+    gap: 4,
   },
   dot: {
     height: 9,
