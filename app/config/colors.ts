@@ -1,5 +1,6 @@
 const colors = {
   black: '#000000',
+  darkbag: '#21003D',
   darkgray: '#0c0c0c',
   gray: '#cccccc',
   inputBorderColer: 'rgba(248, 55, 88, 0.5)',
