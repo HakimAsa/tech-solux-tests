@@ -1,17 +1,15 @@
-import { ScreenWidth, WindowWidth } from '@/app/config/constants'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import {
   View,
   StyleSheet,
   FlatList,
   Image,
-  Dimensions,
   ViewToken,
   Pressable,
   Alert,
 } from 'react-native'
 
-const { width } = Dimensions.get('window')
+import { WindowWidth } from '@/app/config/constants'
 
 const images = [
   require('@/assets/images/shopnow.png'),
@@ -80,32 +78,29 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 15,
     alignItems: 'center',
-    height: 189,
   },
   image: {
     width: '100%',
     height: '100%',
   },
   imageContainer: {
-    width: width,
+    width: WindowWidth,
     paddingHorizontal: 16,
     justifyContent: 'center',
     alignItems: 'center',
     height: 189,
   },
   pagination: {
-    position: 'absolute',
-    bottom: -20,
     flexDirection: 'row',
+    marginTop: 15, // 15px from image
     alignSelf: 'center',
-    elevation: 5,
+    gap: 2,
   },
   dot: {
     height: 9,
     width: 9,
     backgroundColor: '#DEDBDB',
-    borderRadius: 4,
-    marginHorizontal: 5,
+    borderRadius: 4.5,
   },
   activeDot: {
     backgroundColor: '#FFA3B3',
