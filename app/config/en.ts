@@ -37,6 +37,7 @@ const en = {
   state: 'State',
   stylish: 'Stylish',
   toThePublicOffer: 'to the public offer',
+  trendingProduct: 'Trending Products',
   username: 'Username',
   userNameOrEmail: 'Username or Email',
   viewAll: 'View All',

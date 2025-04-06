@@ -6,20 +6,32 @@ import colors from '@/app/config/colors'
 import en from '@/app/config/en'
 import RemainingTime from './RemainingTime'
 
-export default function DayOfDealBanner() {
+type Mode = 'time' | 'calendar' | null | false
+
+export default function DayOfDealBanner({
+  color = '#4392F9',
+  mode = 'time',
+  title = en.dealOfTheDay,
+}: {
+  color?: string
+  mode?: Mode
+  title?: string
+}) {
   return (
-    <RowContainer style={styles.container}>
+    <RowContainer style={[styles.container, { backgroundColor: color }]}>
       <View style={{ gap: 4 }}>
-        <TsText style={{ color: colors.white, lineHeight: 20 }}>
-          {en.dealOfTheDay}
-        </TsText>
-        <RowContainer>
+        <TsText style={{ color: colors.white, lineHeight: 20 }}>{title}</TsText>
+        <View style={{ flexDirection: 'row', gap: 2 }}>
           <Image
             style={{ width: 16, height: 16 }}
-            source={require('@/assets/images/counter.png')}
+            source={
+              mode === 'calendar'
+                ? require('@/assets/images/calendar.png')
+                : require('@/assets/images/counter.png')
+            }
           />
-          <RemainingTime />
-        </RowContainer>
+          <RemainingTime mode={mode as any} />
+        </View>
       </View>
       <Pressable
         style={styles.viewAll}
@@ -51,7 +63,6 @@ export default function DayOfDealBanner() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#4392F9',
     height: 60,
     borderRadius: 8,
     alignItems: 'center',

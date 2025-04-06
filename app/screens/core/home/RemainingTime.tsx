@@ -3,7 +3,11 @@ import React, { useEffect, useState } from 'react'
 import TsText from '@/app/components/texts/TsText'
 import colors from '@/app/config/colors'
 
-export default function RemainingTime() {
+export default function RemainingTime({
+  mode,
+}: {
+  mode?: 'calendar' | 'time'
+}) {
   const [timeLeft, setTimeLeft] = useState('')
 
   const calculateRemainingTime = () => {
@@ -47,11 +51,10 @@ export default function RemainingTime() {
       style={{
         color: colors.white,
         lineHeight: 16,
-        left: 5,
         fontFamily: 'Montserrat_400Regular',
       }}
     >
-      {timeLeft}
+      {mode === 'calendar' ? 'Last Date 29/02/22' : timeLeft}
     </TsText>
   )
 }
