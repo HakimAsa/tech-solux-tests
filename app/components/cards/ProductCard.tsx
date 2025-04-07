@@ -22,8 +22,8 @@ interface ProductProps {
       average: number
       count: number
     }
-    description: string
-    name: string
+    description?: string
+    name?: string
     image: ImageSourcePropType
   }
   small?: boolean // Match Figma size
@@ -31,19 +31,25 @@ interface ProductProps {
   big?: boolean // Match Figma size
   nameFontSize?: number // Match Figma size
   descriptionFontSize?: number // Match Figma size
+  width?: number
+  height?: number
+  imageHeight?: number // Match Figma size
 }
 
 export default function ProductCard({
-  item,
-  small,
-  medium,
   big,
-  nameFontSize,
   descriptionFontSize,
+  height = 241,
+  imageHeight = 124,
+  item,
+  medium,
+  nameFontSize,
+  small,
+  width = 170,
 }: ProductProps) {
   return (
-    <View style={styles.container}>
-      <View style={styles.imageWrapper}>
+    <View style={[styles.container, { width, height }]}>
+      <View style={{ width, height: imageHeight }}>
         <Image
           resizeMode="cover"
           source={item.image}
@@ -107,8 +113,6 @@ const styles = StyleSheet.create({
     lineHeight: 16,
   },
   container: {
-    width: 170,
-    height: 241,
     gap: 5,
     elevation: 1,
     backgroundColor: colors.white,
@@ -126,10 +130,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-  },
-  imageWrapper: {
-    width: 170,
-    height: 124,
   },
   off: {
     color: colors.lightRed,
