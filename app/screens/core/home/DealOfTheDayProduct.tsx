@@ -5,24 +5,11 @@ import products from '@/app/data/products'
 import ProductCard from '@/app/components/cards/ProductCard'
 import RadialGradientChevron from './RadialGradientChevron'
 
+const dealOfDaysProducts = products.filter((product) => product.discount > 0)
+
 export default function DealOfTheDayProduct() {
-  const [index, setIndex] = useState(0)
   const flatListRef = useRef<FlatList>(null)
 
-  // const scrollRight = () => {
-  //   if (index < products.length - 1) {
-  //     const newIndex = index + 1
-  //     setIndex(newIndex)
-  //     flatListRef.current?.scrollToIndex({
-  //       index: newIndex,
-  //       animated: true,
-  //     })
-  //   }
-  //   // flatListRef?.current?.scrollToOffset({
-  //   //   offset: 200, // change as needed (scrolls 200px to the right)
-  //   //   animated: true,
-  //   // })
-  // }
   const ITEM_WIDTH = 170
   const SPACING = 10
   const scrollX = useRef(0)
@@ -36,11 +23,12 @@ export default function DealOfTheDayProduct() {
 
     flatListRef.current?.scrollToOffset({ offset: nextOffset, animated: true })
   }
+
   return (
     <View style={styles.container}>
       <FlatList
         ref={flatListRef}
-        data={products}
+        data={dealOfDaysProducts}
         renderItem={({ item }) => (
           <ProductCard
             item={item}

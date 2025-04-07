@@ -43,8 +43,8 @@ export default [
     name: 'IWC Watch',
     price: 650,
     rating: {
-      count: 0,
-      average: 0,
+      count: 2,
+      average: 2.8,
     },
     size: 14,
     discount: 60,
