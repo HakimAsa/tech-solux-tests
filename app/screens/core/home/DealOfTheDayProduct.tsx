@@ -1,18 +1,40 @@
 import { FlatList, Image, Pressable, StyleSheet, View } from 'react-native'
-import React, { useRef } from 'react'
+import { useRef, useState } from 'react'
 import colors from '@/app/config/colors'
 import products from '@/app/data/products'
 import ProductCard from '@/app/components/cards/ProductCard'
 import RadialGradientChevron from './RadialGradientChevron'
 
 export default function DealOfTheDayProduct() {
+  const [index, setIndex] = useState(0)
   const flatListRef = useRef<FlatList>(null)
 
+  // const scrollRight = () => {
+  //   if (index < products.length - 1) {
+  //     const newIndex = index + 1
+  //     setIndex(newIndex)
+  //     flatListRef.current?.scrollToIndex({
+  //       index: newIndex,
+  //       animated: true,
+  //     })
+  //   }
+  //   // flatListRef?.current?.scrollToOffset({
+  //   //   offset: 200, // change as needed (scrolls 200px to the right)
+  //   //   animated: true,
+  //   // })
+  // }
+  const ITEM_WIDTH = 170
+  const SPACING = 10
+  const scrollX = useRef(0)
+
   const scrollRight = () => {
-    flatListRef?.current?.scrollToOffset({
-      offset: 200, // change as needed (scrolls 200px to the right)
-      animated: true,
-    })
+    const maxOffset = (products.length - 1) * (ITEM_WIDTH + SPACING)
+    const nextOffset = Math.min(
+      scrollX.current + ITEM_WIDTH + SPACING,
+      maxOffset
+    )
+
+    flatListRef.current?.scrollToOffset({ offset: nextOffset, animated: true })
   }
   return (
     <View style={styles.container}>
@@ -26,6 +48,9 @@ export default function DealOfTheDayProduct() {
             descriptionFontSize={10}
           />
         )}
+        onScroll={(e) => {
+          scrollX.current = e.nativeEvent.contentOffset.x
+        }}
         horizontal
         showsHorizontalScrollIndicator={false}
         keyExtractor={(item) => item.id.toString()}

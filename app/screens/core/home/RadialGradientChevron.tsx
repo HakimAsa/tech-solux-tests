@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Pressable, StyleSheet, Image } from 'react-native'
 import Svg, { Defs, RadialGradient, Rect, Stop } from 'react-native-svg'
-import { Ionicons } from '@expo/vector-icons'
 
 export default function RadialShadowChevron({
   onPress,
