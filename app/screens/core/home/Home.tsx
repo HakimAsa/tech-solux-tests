@@ -14,8 +14,10 @@ import Category from './Category'
 import TrendingProductsBanner from './TrendingProductsBanner'
 import ShopNow from './ShopNow'
 import DealOfTheDayProduct from './DealOfTheDayProduct'
+import TsProps from '@/TsProps'
+import routes from '@/app/navigation/routes'
 
-export default function Home() {
+export default function Home({ navigation }: TsProps) {
   const { searchResults, searchTerm } = useSearchContext()
   const dataToShow = searchTerm ? searchResults : products
 
@@ -25,6 +27,9 @@ export default function Home() {
   const onTrendingProductPress = () => {
     Alert.alert('TRENDING PRODUCT', 'View them All')
   }
+  const onAvatarPress = () => {
+    navigation.navigate(routes.PROFILE)
+  }
   return (
     <BaseScreen>
       <FlatList
@@ -33,7 +38,7 @@ export default function Home() {
         renderItem={({ item }) => <Text>{item.name}</Text>}
         ListHeaderComponent={
           <>
-            <LogoHeader />
+            <LogoHeader onAvatarPress={onAvatarPress} />
             <MainContainer
               style={{
                 paddingLeft: 16,

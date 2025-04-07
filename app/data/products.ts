@@ -7,7 +7,7 @@ export default [
     discount: 40,
     image: require('@/assets/images/womenprintedkurta.png'),
     rating: {
-      count: 5,
+      count: 56890,
       average: 4.5,
     },
     description: 'Neque porro quisquam est qui dolorem ipsum quia',
@@ -20,8 +20,8 @@ export default [
     discount: 50,
     image: require('@/assets/images/hrxby.png'),
     rating: {
-      count: 3,
-      average: 3.7,
+      count: 344567,
+      average: 4.7,
     },
     description: 'Neque porro quisquam est qui dolorem ipsum quia',
   },
@@ -37,5 +37,18 @@ export default [
     discount: 0,
     image: require('@/assets/images/blackwinter.png'),
     description: 'Autumn And Winter Casual cotton-padded jacket...',
+  },
+  {
+    id: '4',
+    name: 'IWC Watch',
+    price: 650,
+    rating: {
+      count: 0,
+      average: 0,
+    },
+    size: 14,
+    discount: 60,
+    image: require('@/assets/images/iwcwatch.png'),
+    description: `IWC Schaffhausen 2021 Pilot's Watch "SIHH 2019" 44mm`,
   },
 ]

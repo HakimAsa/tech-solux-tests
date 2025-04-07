@@ -11,6 +11,7 @@ import TsText from '../texts/TsText'
 import colors from '@/app/config/colors'
 import { BasicRowContainer } from '@/app/containers'
 import { calculateListPrice } from '@/app/utils/helpers'
+import Star from '../Star'
 
 interface ProductProps {
   item: {
@@ -93,6 +94,10 @@ export default function ProductCard({
           </BasicRowContainer>
         ) : null}
       </View>
+      <Star
+        rating={item.rating?.average}
+        totalReview={item.rating?.count}
+      />
     </View>
   )
 }
@@ -127,7 +132,7 @@ const styles = StyleSheet.create({
     height: 124,
   },
   off: {
-    color: colors.ligjtRed,
+    color: colors.lightRed,
     fontFamily: 'Montserrat_400Regular',
   },
   // Add your own styles here if needed  //

@@ -10,12 +10,22 @@ import React from 'react'
 import TsText from '../texts/TsText'
 import en from '@/app/config/en'
 
-export default function LogoHeader() {
+interface LogoHeaderProps {
+  onAvatarPress?: () => void
+  onLogoPress?: () => void
+  onMenuPress?: () => void
+}
+
+export default function LogoHeader({
+  onAvatarPress,
+  onLogoPress,
+  onMenuPress,
+}: LogoHeaderProps) {
   return (
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.menuContainer}
-        onPress={() => alert('humburger')}
+        onPress={onMenuPress}
       >
         <Image
           style={styles.menuImage}
@@ -25,7 +35,7 @@ export default function LogoHeader() {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.logoContainer}
-        onPress={() => alert('logo')}
+        onPress={onLogoPress}
       >
         <Image
           style={styles.logo}
@@ -35,7 +45,7 @@ export default function LogoHeader() {
         />
         <TsText style={styles.stylish}>{en.stylish}</TsText>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => alert('avatar')}>
+      <TouchableOpacity onPress={onAvatarPress}>
         <Image
           style={{
             width: 40,
