@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 import BaseScreen from '@/app/components/BaseScreen'
@@ -18,6 +18,13 @@ import DealOfTheDayProduct from './DealOfTheDayProduct'
 export default function Home() {
   const { searchResults, searchTerm } = useSearchContext()
   const dataToShow = searchTerm ? searchResults : products
+
+  const onDealOfDayPress = () => {
+    Alert.alert('DEAL OF THE DAY', 'View them All')
+  }
+  const onTrendingProductPress = () => {
+    Alert.alert('TRENDING PRODUCT', 'View them All')
+  }
   return (
     <BaseScreen>
       <FlatList
@@ -40,9 +47,9 @@ export default function Home() {
               <FilterSortBanner />
               <Category />
               <ShopNow />
-              <DealOfTheDayBanner />
+              <DealOfTheDayBanner onPress={onDealOfDayPress} />
               <DealOfTheDayProduct />
-              <TrendingProductsBanner />
+              <TrendingProductsBanner onPress={onTrendingProductPress} />
             </MainContainer>
           </>
         }

@@ -5,10 +5,12 @@ import TsText from '@/app/components/texts/TsText'
 import colors from '@/app/config/colors'
 import en from '@/app/config/en'
 import RemainingTime from './RemainingTime'
+import { BasicRowContainer } from '@/app/containers'
 
 type Mode = 'time' | 'calendar' | null | false
 
 export default function DealOfTheDayBanner({
+  onPress,
   color = '#4392F9',
   mode = 'time',
   title = en.dealOfTheDay,
@@ -16,6 +18,7 @@ export default function DealOfTheDayBanner({
   color?: string
   mode?: Mode
   title?: string
+  onPress?: () => void
 }) {
   return (
     <RowContainer style={[styles.container, { backgroundColor: color }]}>
@@ -35,10 +38,13 @@ export default function DealOfTheDayBanner({
       </View>
       <Pressable
         style={styles.viewAll}
-        onPress={() => alert('View all')}
+        onPress={onPress}
       >
         <RowContainer>
-          <View style={{ height: 16, alignItems: 'center' }}>
+          <BasicRowContainer
+            style={{ height: 16, alignItems: 'center' }}
+            gap={2}
+          >
             <TsText
               small
               style={{
@@ -48,9 +54,9 @@ export default function DealOfTheDayBanner({
                 alignSelf: 'center',
               }}
             >
-              {en.viewAll + ' '}
+              {en.viewAll}
             </TsText>
-          </View>
+          </BasicRowContainer>
           <Image
             source={require('@/assets/images/leftarrow.png')}
             style={{ width: 16, height: 16 }}
