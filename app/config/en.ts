@@ -1,3 +1,5 @@
+import SpecialOffer from '../screens/core/home/SpecialOffer'
+
 const en = {
   address: 'Address',
   allFeatured: 'All Featured',
@@ -34,6 +36,8 @@ const en = {
   searchAnyProduct: 'Search any Product...',
   signup: 'Sign Up',
   sort: 'Sort',
+  specialOffers: 'Special Offers',
+  specialOffersText: `We make sure you get the\noffer you need at best prices`,
   state: 'State',
   stylish: 'Stylish',
   toThePublicOffer: 'to the public offer',

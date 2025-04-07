@@ -55,6 +55,7 @@ export default function DealOfTheDayProduct() {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 15,
+    marginBottom: 0,
   },
   chevron: {
     width: 40,
