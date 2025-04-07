@@ -40,28 +40,27 @@ export default function DealOfTheDayBanner({
         style={styles.viewAll}
         onPress={onPress}
       >
-        <RowContainer>
-          <BasicRowContainer
-            style={{ height: 16, alignItems: 'center' }}
-            gap={2}
+        <BasicRowContainer
+          style={{ height: 16, alignItems: 'center' }}
+          gap={2}
+        >
+          <TsText
+            small
+            style={{
+              color: colors.white,
+              fontFamily: 'Montserrat_600SemiBold',
+              lineHeight: 16,
+              alignSelf: 'center',
+            }}
           >
-            <TsText
-              small
-              style={{
-                color: colors.white,
-                fontFamily: 'Montserrat_600SemiBold',
-                lineHeight: 16,
-                alignSelf: 'center',
-              }}
-            >
-              {en.viewAll}
-            </TsText>
-          </BasicRowContainer>
+            {en.viewAll}
+          </TsText>
+
           <Image
             source={require('@/assets/images/leftarrow.png')}
             style={{ width: 16, height: 16 }}
           />
-        </RowContainer>
+        </BasicRowContainer>
       </Pressable>
     </RowContainer>
   )
