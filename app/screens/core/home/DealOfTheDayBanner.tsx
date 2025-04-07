@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 8,
     marginVertical: 15,
+    marginBottom: 0,
   },
   viewAll: {
     width: 89,

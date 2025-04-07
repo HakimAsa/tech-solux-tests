@@ -49,6 +49,36 @@ export default [
     size: 14,
     discount: 60,
     image: require('@/assets/images/iwcwatch.png'),
+    istrending: true,
     description: `IWC Schaffhausen 2021 Pilot's Watch "SIHH 2019" 44mm`,
+  },
+  {
+    id: '5',
+    name: 'White Sneaker',
+    price: 650,
+    rating: {
+      count: 2,
+      average: 2.8,
+    },
+    size: 14,
+    discount: 70,
+    istrending: true,
+    image: require('@/assets/images/labbinwhitesneaker.png'),
+    description: `Labbin White Sneakers For Men and Female`,
+  },
+
+  {
+    id: '6',
+    name: "Mamon Women's Handbag",
+    price: 750,
+    rating: {
+      count: 2,
+      average: 2.8,
+    },
+    size: 14,
+    discount: 60,
+    image: require('@/assets/images/mamonwomenhandbag.png'),
+    istrending: true,
+    description: `Mammon Women's Handbag (Set of 3, Beige)`,
   },
 ]

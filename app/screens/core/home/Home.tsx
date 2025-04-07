@@ -17,6 +17,7 @@ import DealOfTheDayProduct from './DealOfTheDayProduct'
 import TsProps from '@/TsProps'
 import routes from '@/app/navigation/routes'
 import SpecialOffer from './SpecialOffer'
+import TrendingProduct from './TrendingProduct'
 
 export default function Home({ navigation }: TsProps) {
   const { searchResults, searchTerm } = useSearchContext()
@@ -57,6 +58,7 @@ export default function Home({ navigation }: TsProps) {
               <DealOfTheDayProduct />
               <SpecialOffer />
               <TrendingProductsBanner onPress={onTrendingProductPress} />
+              <TrendingProduct />
             </MainContainer>
           </>
         }

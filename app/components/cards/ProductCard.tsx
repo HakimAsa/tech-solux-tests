@@ -34,6 +34,8 @@ interface ProductProps {
   width?: number
   height?: number
   imageHeight?: number // Match Figma size
+  showName?: boolean
+  showStar?: boolean
 }
 
 export default function ProductCard({
@@ -46,6 +48,8 @@ export default function ProductCard({
   nameFontSize,
   small,
   width = 170,
+  showName = true,
+  showStar = true,
 }: ProductProps) {
   return (
     <View style={[styles.container, { width, height }]}>
@@ -57,16 +61,18 @@ export default function ProductCard({
         />
       </View>
       <View style={{ padding: 4 }}>
-        <TsText
-          fontSize={nameFontSize}
-          small={small}
-          medium={medium}
-          numberOfLines={1}
-          big={big}
-          style={[styles.commonTextStyle]}
-        >
-          {item.name}
-        </TsText>
+        {showName && (
+          <TsText
+            fontSize={nameFontSize}
+            small={small}
+            medium={medium}
+            numberOfLines={1}
+            big={big}
+            style={[styles.commonTextStyle]}
+          >
+            {item.name}
+          </TsText>
+        )}
         <TsText
           fontSize={descriptionFontSize}
           small={small}
@@ -100,10 +106,12 @@ export default function ProductCard({
           </BasicRowContainer>
         ) : null}
       </View>
-      <Star
-        rating={item.rating?.average}
-        totalReview={item.rating?.count}
-      />
+      {showStar && (
+        <Star
+          rating={item.rating?.average}
+          totalReview={item.rating?.count}
+        />
+      )}
     </View>
   )
 }
@@ -118,6 +126,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     borderRadius: 4,
     marginVertical: 15,
+    marginTop: 0,
   },
   description: {
     fontFamily: 'Montserrat_400Regular',
@@ -130,6 +139,7 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
+    borderRadius: 4,
   },
   off: {
     color: colors.lightRed,

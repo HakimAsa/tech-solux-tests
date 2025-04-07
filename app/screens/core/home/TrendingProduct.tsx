@@ -1,13 +1,15 @@
-import { FlatList, StyleSheet, View } from 'react-native'
-import { useRef } from 'react'
+import { FlatList, Image, Pressable, StyleSheet, View } from 'react-native'
+import { useRef, useState } from 'react'
 import colors from '@/app/config/colors'
 import products from '@/app/data/products'
 import ProductCard from '@/app/components/cards/ProductCard'
 import RadialGradientChevron from './RadialGradientChevron'
 
-const dealOfDaysProducts = products.filter((product) => product.discount > 0)
+const dealOfDaysProducts = products.filter(
+  (product) => product.discount > 0 && product.istrending
+)
 
-export default function DealOfTheDayProduct() {
+export default function TrendingProduct() {
   const flatListRef = useRef<FlatList>(null)
 
   const ITEM_WIDTH = 170
@@ -31,6 +33,11 @@ export default function DealOfTheDayProduct() {
         data={dealOfDaysProducts}
         renderItem={({ item }) => (
           <ProductCard
+            showName={false}
+            showStar={false}
+            width={142}
+            height={186}
+            imageHeight={100}
             item={item}
             nameFontSize={12}
             descriptionFontSize={10}
