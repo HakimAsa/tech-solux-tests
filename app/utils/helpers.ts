@@ -45,8 +45,17 @@ const doSetFullUrl = function (...endpoints: string[]) {
   return getApiUrl() + doSetForwardslash(...endpoints)
 }
 
+const calculateListPrice = function (
+  sellingPrice: number,
+  discountPercent: number
+) {
+  const discount = (discountPercent - 0.01) / 100
+  return parseInt(`${sellingPrice / (1 - discount)}`, 10)
+}
+
 export default getApiUrl
 export {
+  calculateListPrice,
   convertTimeFormat,
   doSetForwardslash,
   doSetFullUrl,

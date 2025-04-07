@@ -2,9 +2,9 @@ export default [
   {
     id: '1',
     name: 'Woman Printed Kurta',
-    price: 19.99,
+    price: 1500,
     size: 10,
-    discount: 0.4,
+    discount: 40,
     image: require('@/assets/images/womenprintedkurta.png'),
     rating: {
       count: 5,
@@ -15,9 +15,9 @@ export default [
   {
     id: '2',
     name: 'HRX by Hrithik Roshan',
-    price: 29.99,
+    price: 2499,
     size: 12,
-    discount: 0.5,
+    discount: 50,
     image: require('@/assets/images/hrxby.png'),
     rating: {
       count: 3,
@@ -28,7 +28,7 @@ export default [
   {
     id: '3',
     name: 'Black Winter...',
-    price: 39.99,
+    price: 499,
     rating: {
       count: 2,
       average: 2.8,

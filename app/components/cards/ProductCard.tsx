@@ -8,6 +8,9 @@ import {
 import React from 'react'
 
 import TsText from '../texts/TsText'
+import colors from '@/app/config/colors'
+import { BasicRowContainer } from '@/app/containers'
+import { calculateListPrice } from '@/app/utils/helpers'
 
 interface ProductProps {
   item: {
@@ -71,8 +74,24 @@ export default function ProductCard({
           small
           style={[styles.commonTextStyle]}
         >
-          {'$' + item.price}
+          ₹{item.price}
         </TsText>
+        {item.discount && item.discount > 0 ? (
+          <BasicRowContainer gap={10}>
+            <TsText
+              small
+              style={[styles.commonTextStyle, styles.discount]}
+            >
+              ₹{calculateListPrice(item.price, item.discount)}
+            </TsText>
+            <TsText
+              fontSize={10}
+              style={[styles.commonTextStyle, styles.off]}
+            >
+              {item.discount}%Off
+            </TsText>
+          </BasicRowContainer>
+        ) : null}
       </View>
     </View>
   )
@@ -86,9 +105,18 @@ const styles = StyleSheet.create({
     width: 170,
     height: 241,
     gap: 5,
+    elevation: 1,
+    backgroundColor: colors.white,
+    borderRadius: 4,
+    marginVertical: 15,
   },
   description: {
     fontFamily: 'Montserrat_400Regular',
+  },
+  discount: {
+    color: colors.shadeBlack,
+    fontFamily: 'Montserrat_300Light',
+    textDecorationLine: 'line-through',
   },
   image: {
     width: '100%',
@@ -98,4 +126,9 @@ const styles = StyleSheet.create({
     width: 170,
     height: 124,
   },
+  off: {
+    color: colors.ligjtRed,
+    fontFamily: 'Montserrat_400Regular',
+  },
+  // Add your own styles here if needed  //
 })
