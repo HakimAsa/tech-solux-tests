@@ -16,7 +16,7 @@ export default function MainContainer({ children, style }: MainContainerProps) {
         {
           flex: 1,
           paddingLeft: 32,
-          backgroundColor: colors.white,
+          backgroundColor: colors.background,
         },
         style,
       ]}

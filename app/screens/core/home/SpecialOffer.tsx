@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
   },
   container: {
     backgroundColor: colors.white,
-    elevation: 1,
     height: 84,
     paddingLeft: 4,
     borderRadius: 6,
+    marginVertical: 15,
     alignItems: 'center',
   },
   image: {

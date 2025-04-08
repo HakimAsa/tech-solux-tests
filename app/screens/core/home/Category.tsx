@@ -40,7 +40,6 @@ export default function Category() {
       showsHorizontalScrollIndicator={false}
       keyExtractor={(item) => item.id.toString()}
       contentContainerStyle={{
-        elevation: 1,
         backgroundColor: colors.white,
         marginVertical: 15,
       }}

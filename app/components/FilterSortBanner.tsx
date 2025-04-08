@@ -49,7 +49,6 @@ const styles = StyleSheet.create({
   filter: {
     backgroundColor: colors.white,
     borderRadius: 6,
-    elevation: 1,
     height: 24,
     width: 64,
     padding: 4,
@@ -62,7 +61,6 @@ const styles = StyleSheet.create({
   sort: {
     backgroundColor: colors.white,
     borderRadius: 6,
-    elevation: 1,
     marginRight: 10,
     height: 24,
     width: 61,

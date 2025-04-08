@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     width: 343,
     height: 270,
     borderRadius: 8,
-    elevation: 1,
     marginTop: 5,
   },
   details: {

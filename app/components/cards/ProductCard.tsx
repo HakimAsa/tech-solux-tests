@@ -121,12 +121,11 @@ const styles = StyleSheet.create({
     lineHeight: 16,
   },
   container: {
-    gap: 5,
-    elevation: 1,
     backgroundColor: colors.white,
     borderRadius: 4,
-    marginVertical: 15,
+    gap: 5,
     marginTop: 0,
+    marginVertical: 15,
   },
   description: {
     fontFamily: 'Montserrat_400Regular',

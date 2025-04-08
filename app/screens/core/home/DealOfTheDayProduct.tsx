@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     // padding: 5,
   },
   listContent: {
-    elevation: 1,
-    backgroundColor: colors.white,
+    // elevation: 1,
+    // backgroundColor: colors.white,
     gap: 10,
   },
   // rightChevron: {

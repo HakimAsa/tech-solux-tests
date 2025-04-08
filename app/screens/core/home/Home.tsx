@@ -46,7 +46,6 @@ export default function Home({ navigation }: TsProps) {
               style={{
                 paddingLeft: 16,
                 padding: 16,
-                backgroundColor: '#FDFDFD',
                 flex: 1,
               }}
             >

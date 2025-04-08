@@ -16,7 +16,7 @@ export default function BaseScreen({ children, style }: BaseScreenProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FDFDFD',
+    backgroundColor: colors.background, //'#FDFDFD',
     //colors.white, // force it to be white
     // padding: 16, // optional
   },
