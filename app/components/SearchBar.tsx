@@ -1,4 +1,8 @@
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from '@expo/vector-icons'
 
 import {
   StyleSheet,
@@ -17,15 +21,31 @@ export interface TsTextInputProps extends TextInputProps {
   products: any[]
   width?: string
   style?: any
+  goToSearch?: () => void
 }
 
 export default function SearchBar({
   products,
   width = '100%',
   style,
+  goToSearch,
   ...props
 }: TsTextInputProps) {
-  const { searchTerm, searchProducts } = useSearchContext()
+  const { searchTerm, setSearchTerm, searchProducts } = useSearchContext()
+
+  const handleChange = (text: string) => {
+    setSearchTerm(text)
+    searchProducts(text, products)
+
+    if (text.trim().length > 0) {
+      goToSearch && goToSearch() // 🔥 navigate to dedicated search screen
+    }
+  }
+
+  const handleClear = () => {
+    setSearchTerm('')
+  }
+
   return (
     <View style={[styles.container, { width }, style]}>
       <MaterialIcons
@@ -50,20 +70,33 @@ export default function SearchBar({
         returnKeyType="search"
         autoFocus={true}
         value={searchTerm}
-        onChangeText={(text) => searchProducts(text, products)}
+        onChangeText={handleChange}
         {...props}
       />
 
-      <TouchableOpacity
-        style={styles.iconContainer}
-        onPress={() => console.log('search')}
-      >
-        <MaterialCommunityIcons
-          name="microphone-outline"
-          size={20}
-          color="#BBBBBB"
-        />
-      </TouchableOpacity>
+      {searchTerm.length > 0 ? (
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={handleClear}
+        >
+          <Ionicons
+            name="close-circle"
+            size={20}
+            color={colors.lightgray}
+          />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.iconContainer}
+          onPress={() => console.log('Mic clicked')}
+        >
+          <MaterialCommunityIcons
+            name="microphone-outline"
+            size={20}
+            color="#BBBBBB"
+          />
+        </TouchableOpacity>
+      )}
     </View>
   )
 }

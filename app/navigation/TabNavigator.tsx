@@ -9,6 +9,7 @@ import colors from '../config/colors'
 import { Feather } from '@expo/vector-icons'
 import ProfileStack from './ProfileStack'
 import { Pressable, View } from 'react-native'
+import HomeStack from './HomeStack'
 
 const Tab = createBottomTabNavigator()
 
@@ -32,7 +33,7 @@ export default function TabNavigator() {
       {/* Add your screens here */}
       <Tab.Screen
         name={routes.HOME}
-        component={Home}
+        component={HomeStack}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Feather

@@ -1,5 +1,5 @@
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 
 import BaseScreen from '@/app/components/BaseScreen'
 import LogoHeader from '@/app/components/headers/LogoHeader'
@@ -21,10 +21,17 @@ import TrendingProduct from './TrendingProduct'
 import HotSummerSale from './HotSummerSale'
 import Sponsor from './Sponsor'
 import SpecialOfferCard from './SpecialOfferCard'
+import TsText from '@/app/components/texts/TsText'
+
+const RenderProduct = React.memo(({ item }: { item: any }) => {
+  return <Text>{item.name}</Text>
+})
 
 export default function Home({ navigation }: TsProps) {
-  const { searchResults, searchTerm } = useSearchContext()
-  const dataToShow = searchTerm ? searchResults : products
+  const { searchResults, searchTerm, setAllProducts } = useSearchContext()
+  const isSearching = !!searchTerm
+  const dataToShow = isSearching ? searchResults : products
+  // const dataToShow = searchTerm ? searchResults : products
 
   const onDealOfDayPress = () => {
     Alert.alert('DEAL OF THE DAY', 'View them All')
@@ -35,12 +42,29 @@ export default function Home({ navigation }: TsProps) {
   const onAvatarPress = () => {
     navigation.navigate(routes.PROFILE)
   }
+
+  const goToSearch = () => {
+    navigation.navigate(routes.SEARCH, { searchTerm })
+  }
+  // const renderItem = ({ item }: { item: any }) => {
+  //   return <RenderProduct item={item} /> }
+  const renderItem = useCallback(
+    ({ item }: { item: { id: number; name: string } }) => (
+      <RenderProduct item={item} />
+    ),
+    []
+  )
+
+  useEffect(() => {
+    setAllProducts(products) // ✅ store them globally once
+  }, [])
   return (
     <BaseScreen>
       <FlatList
         data={dataToShow}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => <Text>{item.name}</Text>}
+        renderItem={isSearching ? renderItem : () => null} // Provide a default renderItem when not searching
+        // renderItem={({ item }) => <RenderProduct item={item} />}
         ListHeaderComponent={
           <View>
             <LogoHeader onAvatarPress={onAvatarPress} />
@@ -51,7 +75,10 @@ export default function Home({ navigation }: TsProps) {
                 flex: 1,
               }}
             >
-              <SearchBar products={products} />
+              <SearchBar
+                products={products}
+                goToSearch={goToSearch}
+              />
               {/* Any other non-list sections can go here */}
               <FilterSortBanner />
               <Category />
