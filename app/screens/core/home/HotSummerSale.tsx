@@ -4,6 +4,7 @@ import colors from '@/app/config/colors'
 import { BasicRowContainer, RowContainer } from '@/app/containers'
 import TsText from '@/app/components/texts/TsText'
 import en from '@/app/config/en'
+import ViewAll from '@/app/components/ViewAll'
 
 export default function HotSummerSale({ onPress }: { onPress?: () => void }) {
   return (
@@ -20,34 +21,7 @@ export default function HotSummerSale({ onPress }: { onPress?: () => void }) {
           <TsText style={styles.newArrival}>New Arrivals</TsText>
           <TsText style={styles.summer}>Summer’ 25 Collections</TsText>
         </View>
-        <Pressable
-          style={styles.viewAll}
-          onPress={
-            onPress || (() => Alert.alert('HOT SUMMER SALE', 'View all'))
-          }
-        >
-          <BasicRowContainer
-            style={{ height: 16, alignItems: 'center' }}
-            gap={2}
-          >
-            <TsText
-              small
-              style={{
-                color: colors.white,
-                fontFamily: 'Montserrat_600SemiBold',
-                lineHeight: 16,
-                alignSelf: 'center',
-              }}
-            >
-              {en.viewAll}
-            </TsText>
-
-            <Image
-              source={require('@/assets/images/leftarrow.png')}
-              style={{ width: 16, height: 16 }}
-            />
-          </BasicRowContainer>
-        </Pressable>
+        <ViewAll />
       </RowContainer>
     </View>
   )
@@ -59,7 +33,6 @@ const styles = StyleSheet.create({
     width: 343,
     height: 270,
     borderRadius: 8,
-    marginTop: 5,
   },
   details: {
     top: -35,
@@ -84,15 +57,5 @@ const styles = StyleSheet.create({
   summer: {
     fontFamily: 'Montserrat_400Regular',
     lineHeight: 20,
-  },
-  viewAll: {
-    width: 89,
-    height: 28,
-    backgroundColor: colors.primary,
-    borderRadius: 4,
-    padding: 10,
-    top: 15,
-    paddingTop: 6,
-    paddingBottom: 6,
   },
 })

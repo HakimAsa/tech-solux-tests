@@ -77,6 +77,8 @@ export default function ShopNow() {
 const styles = StyleSheet.create({
   container: {
     marginVertical: 15,
+    marginTop: 0,
+
     alignItems: 'center',
   },
   image: {

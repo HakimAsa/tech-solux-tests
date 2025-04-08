@@ -20,6 +20,7 @@ import SpecialOffer from './SpecialOffer'
 import TrendingProduct from './TrendingProduct'
 import HotSummerSale from './HotSummerSale'
 import Sponsor from './Sponsor'
+import SpecialOfferCard from './SpecialOfferCard'
 
 export default function Home({ navigation }: TsProps) {
   const { searchResults, searchTerm } = useSearchContext()
@@ -41,7 +42,7 @@ export default function Home({ navigation }: TsProps) {
         keyExtractor={(item) => item.id.toString()}
         renderItem={({ item }) => <Text>{item.name}</Text>}
         ListHeaderComponent={
-          <>
+          <View>
             <LogoHeader onAvatarPress={onAvatarPress} />
             <MainContainer
               style={{
@@ -58,20 +59,22 @@ export default function Home({ navigation }: TsProps) {
               <DealOfTheDayBanner onPress={onDealOfDayPress} />
               <DealOfTheDayProduct />
               <SpecialOffer />
+              <SpecialOfferCard />
               <TrendingProductsBanner onPress={onTrendingProductPress} />
               <TrendingProduct />
               <HotSummerSale />
               <Sponsor />
             </MainContainer>
-          </>
+          </View>
         }
         contentContainerStyle={{
           paddingBottom: 32,
           paddingTop: 8,
         }}
+        // ListHeaderComponentStyle={{
+        //   marginVertical: 15,
+        // }}
       />
     </BaseScreen>
   )
 }
-
-const styles = StyleSheet.create({})

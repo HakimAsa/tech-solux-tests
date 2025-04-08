@@ -74,6 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     flexDirection: 'row',
     marginVertical: 15,
+    marginTop: 0,
     alignItems: 'center',
   },
   icon: {

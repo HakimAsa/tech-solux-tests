@@ -1,11 +1,5 @@
-import {
-  Image,
-  ImageSourcePropType,
-  Pressable,
-  StyleSheet,
-  View,
-} from 'react-native'
-import React from 'react'
+import { Image, ImageSourcePropType, StyleSheet, View } from 'react-native'
+import { memo } from 'react'
 
 import TsText from '../texts/TsText'
 import colors from '@/app/config/colors'
@@ -39,7 +33,7 @@ interface ProductProps {
   showStar?: boolean
 }
 
-export default function ProductCard({
+export default memo(function ProductCard({
   big,
   descriptionFontSize,
   height = 241,
@@ -116,7 +110,7 @@ export default function ProductCard({
       )}
     </View>
   )
-}
+})
 
 const styles = StyleSheet.create({
   commonTextStyle: {
