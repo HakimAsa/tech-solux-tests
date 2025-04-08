@@ -22,12 +22,14 @@ export default function Profile({ navigation }: TsProps) {
     console.log('updateProfile', values)
   }
   return (
-    <BaseScreen>
+    <BaseScreen style={{ backgroundColor: colors.white }}>
       <BasicHeader
         title={routes.PROFILE}
         onPress={() => navigation.goBack()}
       />
-      <MainContainer style={{ padding: 24, paddingLeft: 24 }}>
+      <MainContainer
+        style={{ padding: 24, paddingLeft: 24, backgroundColor: colors.white }}
+      >
         <ScrollableMainContainer>
           <TsForm
             initialValues={profileUpdateInitials}
