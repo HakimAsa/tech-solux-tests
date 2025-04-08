@@ -34,6 +34,7 @@ interface ProductProps {
   width?: number
   height?: number
   imageHeight?: number // Match Figma size
+  showDiscount?: boolean
   showName?: boolean
   showStar?: boolean
 }
@@ -48,6 +49,7 @@ export default function ProductCard({
   nameFontSize,
   small,
   width = 170,
+  showDiscount = true,
   showName = true,
   showStar = true,
 }: ProductProps) {
@@ -89,7 +91,7 @@ export default function ProductCard({
         >
           ₹{item.price}
         </TsText>
-        {item.discount && item.discount > 0 ? (
+        {showDiscount && item.discount && item.discount > 0 ? (
           <BasicRowContainer gap={10}>
             <TsText
               small

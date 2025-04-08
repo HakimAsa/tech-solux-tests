@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { PlusJakartaSans_500Medium } from '@expo-google-fonts/plus-jakarta-sans/500Medium'
@@ -33,6 +34,7 @@ import {
   NavigationIndependentTree,
 } from '@react-navigation/native'
 import SearchProvider from './context/SearchContext'
+import colors from './config/colors'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -74,16 +76,22 @@ export default function RootLayout() {
   }
 
   return (
-    <NavigationIndependentTree>
-      <NavigationContainer theme={navigationTheme}>
-        {isAuthenticated ? (
-          <SearchProvider>
-            <AppNavigator />
-          </SearchProvider>
-        ) : (
-          <AuthNavigator />
-        )}
-      </NavigationContainer>
-    </NavigationIndependentTree>
+    <>
+      <StatusBar
+        style="light"
+        backgroundColor={colors.background}
+      />
+      <NavigationIndependentTree>
+        <NavigationContainer theme={navigationTheme}>
+          {isAuthenticated ? (
+            <SearchProvider>
+              <AppNavigator />
+            </SearchProvider>
+          ) : (
+            <AuthNavigator />
+          )}
+        </NavigationContainer>
+      </NavigationIndependentTree>
+    </>
   )
 }

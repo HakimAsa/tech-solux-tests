@@ -19,6 +19,7 @@ import routes from '@/app/navigation/routes'
 import SpecialOffer from './SpecialOffer'
 import TrendingProduct from './TrendingProduct'
 import HotSummerSale from './HotSummerSale'
+import Sponsor from './Sponsor'
 
 export default function Home({ navigation }: TsProps) {
   const { searchResults, searchTerm } = useSearchContext()
@@ -60,6 +61,7 @@ export default function Home({ navigation }: TsProps) {
               <TrendingProductsBanner onPress={onTrendingProductPress} />
               <TrendingProduct />
               <HotSummerSale />
+              <Sponsor />
             </MainContainer>
           </>
         }
