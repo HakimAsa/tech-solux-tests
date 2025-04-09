@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function ShoppingCart() {
+export default function BuyNow() {
   return (
     <View>
-      <Text>ShoppingCart</Text>
+      <Text>BuyNow</Text>
     </View>
   )
 }

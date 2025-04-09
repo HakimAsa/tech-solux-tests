@@ -20,7 +20,7 @@ export default function HomeStack() {
 
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name="My Home"
+          name={routes.HOME}
           component={Home}
         />
         <Stack.Screen

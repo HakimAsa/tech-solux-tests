@@ -13,6 +13,7 @@ import TsText from '@/app/components/texts/TsText'
 import routes from '@/app/navigation/routes'
 import TsProps from '@/TsProps'
 import ProductCard from '@/app/components/cards/ProductCard'
+import { ScreenWidth } from '@/app/config/constants'
 
 const RenderProduct = React.memo(({ item }: { item: any }) => {
   return <Text>{item.name}</Text>
@@ -31,14 +32,6 @@ export default function Whishlist({ navigation }: TsProps) {
   const goToSearch = () => {
     navigation.navigate(routes.SEARCH, { searchTerm })
   }
-  // const renderItem = ({ item }: { item: any }) => {
-  //   return <RenderProduct item={item} /> }
-  const renderItem = useCallback(
-    ({ item }: { item: { id: number; name: string } }) => (
-      <RenderProduct item={item} />
-    ),
-    []
-  )
 
   useEffect(() => {
     setAllProducts(products) // ✅ store them globally once
@@ -61,7 +54,7 @@ export default function Whishlist({ navigation }: TsProps) {
                 item={item}
                 // imageHeight={110}
                 lineHeight={20}
-                width={160}
+                width={ScreenWidth * 0.45 - 2.5}
                 height={260}
                 descriptionFontSize={10}
               />
@@ -83,18 +76,11 @@ export default function Whishlist({ navigation }: TsProps) {
           }
           contentContainerStyle={{
             paddingBottom: 15,
-
-            // paddingHorizontal: 16, // ✅ Global horizontal padding here
           }}
           columnWrapperStyle={{
-            justifyContent: 'space-between', // ✅ Makes 2 cards spread out
-            gap: 10,
+            justifyContent: 'space-between',
           }}
           numColumns={2}
-          // columnWrapperStyle={{
-          //   justifyContent: 'space-between', // 👈 space out the two columns
-          //   gap: 10,
-          // }}
         />
       </MainContainer>
     </BaseScreen>

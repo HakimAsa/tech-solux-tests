@@ -25,7 +25,10 @@ export default function Profile({ navigation }: TsProps) {
     <BaseScreen style={{ backgroundColor: colors.white }}>
       <BasicHeader
         title={routes.PROFILE}
-        onPress={() => navigation.goBack()}
+        onPress={() => {
+          if (navigation.canGoBack()) navigation.goBack()
+          else navigation.navigate(routes.HOME)
+        }}
       />
       <MainContainer
         style={{ padding: 24, paddingLeft: 24, backgroundColor: colors.white }}

@@ -5,22 +5,9 @@ import routes from './routes'
 import Profile from '../screens/core/Profile'
 
 const Stack = createNativeStackNavigator()
-
-export default function AppNavigator() {
+export default function GlobalStack() {
   return (
-    <Stack.Navigator
-      screenOptions={() => ({
-        headerShown: false,
-      })}
-    >
-      <Stack.Screen
-        name={routes.WELCOME}
-        component={GetStarted}
-      />
-      <Stack.Screen
-        name="TabNavigator"
-        component={TabNavigator}
-      />
+    <Stack.Navigator>
       <Stack.Screen
         name={routes.PROFILE}
         component={Profile}

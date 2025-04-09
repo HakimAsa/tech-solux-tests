@@ -1,9 +1,12 @@
 export default Object.freeze({
+  BUYNOW: 'Buy Now',
+  CART: 'Cart',
   CHANGEPASSWORD: 'Change Password',
   HOME: 'Home',
   LOGIN: 'Login',
   PRESENTATION: 'Presentation',
   PRODUCT: 'Product',
+  PRODUCT_DETAILS: 'Product Details',
   PROFILE: 'Profile',
   REGISTER: 'Register',
   SEARCH: 'Search',

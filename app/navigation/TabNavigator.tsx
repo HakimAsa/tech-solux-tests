@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import routes from './routes'
 import Home from '../screens/core/home/Home'
 import Whishlist from '../screens/core/Whishlist'
-import ShoppingCart from '../screens/core/ShoppingCart'
+import ProductDetails from '../screens/core/product/ProductDetails'
 import Search from '../screens/core/Search'
 import Profile from '../screens/core/Profile'
 import colors from '../config/colors'
@@ -11,6 +11,7 @@ import ProfileStack from './ProfileStack'
 import { Pressable, View } from 'react-native'
 import HomeStack from './HomeStack'
 import WhishlistStack from './WhishlistStack'
+import ProductStack from './ProductStack'
 
 const Tab = createBottomTabNavigator()
 
@@ -33,7 +34,7 @@ export default function TabNavigator() {
     >
       {/* Add your screens here */}
       <Tab.Screen
-        name={routes.HOME}
+        name="HomeTab"
         component={HomeStack}
         options={{
           tabBarIcon: ({ color, size }) => (
@@ -46,7 +47,7 @@ export default function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name={routes.WHISHLIST}
+        name="WishlistTab"
         component={WhishlistStack}
         options={() => ({
           tabBarIcon: ({ color, size }) => (
@@ -59,7 +60,7 @@ export default function TabNavigator() {
         })}
       />
       <Tab.Screen
-        name={routes.SHOPPING_CART}
+        name={routes.PRODUCT_DETAILS}
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <View
@@ -85,7 +86,7 @@ export default function TabNavigator() {
             display: 'none',
           },
         }}
-        component={ShoppingCart}
+        component={ProductStack}
       />
       <Tab.Screen
         name={routes.SEARCH}
