@@ -46,14 +46,6 @@ export default function Home({ navigation }: TsProps) {
   const goToSearch = () => {
     navigation.navigate(routes.SEARCH, { searchTerm })
   }
-  // const renderItem = ({ item }: { item: any }) => {
-  //   return <RenderProduct item={item} /> }
-  const renderItem = useCallback(
-    ({ item }: { item: { id: number; name: string } }) => (
-      <RenderProduct item={item} />
-    ),
-    []
-  )
 
   useEffect(() => {
     setAllProducts(products) // ✅ store them globally once
@@ -63,8 +55,7 @@ export default function Home({ navigation }: TsProps) {
       <FlatList
         data={dataToShow}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={isSearching ? renderItem : () => null} // Provide a default renderItem when not searching
-        // renderItem={({ item }) => <RenderProduct item={item} />}
+        renderItem={() => null} // null since navigating to Search Screen. Searched Products should not be displayed in home screen
         ListHeaderComponent={
           <View>
             <LogoHeader onAvatarPress={onAvatarPress} />
