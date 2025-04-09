@@ -1,9 +1,8 @@
-import { StyleSheet, FlatList, View } from 'react-native'
+import { FlatList } from 'react-native'
 import React from 'react'
 
 import TsText from '@/app/components/texts/TsText'
 import { useSearchContext } from '@/app/context/SearchContext'
-// import ProductCard from '@/app/components/ProductCard'
 import SearchBar from '@/app/components/SearchBar'
 import BaseScreen from '@/app/components/BaseScreen'
 import ProductCard from '@/app/components/cards/ProductCard'
@@ -13,6 +12,7 @@ import BasicHeader from '@/app/components/headers/BasicHeader'
 import TsProps from '@/TsProps'
 export default function Search({ navigation }: TsProps) {
   const { searchResults, searchTerm } = useSearchContext()
+
   const imageSizeDelta = 117 // base on figma design
 
   return (
@@ -64,5 +64,3 @@ export default function Search({ navigation }: TsProps) {
     </BaseScreen>
   )
 }
-
-const styles = StyleSheet.create({})

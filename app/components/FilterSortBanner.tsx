@@ -5,10 +5,14 @@ import TsText from './texts/TsText'
 import en from '../config/en'
 import colors from '../config/colors'
 
-export default function FilterSortBanner() {
+export default function FilterSortBanner({
+  title = en.allFeatured,
+}: {
+  title?: string
+}) {
   return (
     <RowContainer>
-      <TsText style={styles.text}>{en.allFeatured}</TsText>
+      <TsText style={styles.text}>{title}</TsText>
       <RowContainer>
         <Pressable
           style={styles.sort}

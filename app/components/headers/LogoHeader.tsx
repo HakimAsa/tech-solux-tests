@@ -5,6 +5,7 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   View,
+  ViewProps,
 } from 'react-native'
 import React from 'react'
 import TsText from '../texts/TsText'
@@ -14,15 +15,17 @@ interface LogoHeaderProps {
   onAvatarPress?: () => void
   onLogoPress?: () => void
   onMenuPress?: () => void
+  style?: ViewProps['style']
 }
 
 export default function LogoHeader({
   onAvatarPress,
   onLogoPress,
   onMenuPress,
+  style,
 }: LogoHeaderProps) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <TouchableOpacity
         style={styles.menuContainer}
         onPress={onMenuPress}

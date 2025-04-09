@@ -31,6 +31,8 @@ interface ProductProps {
   showDiscount?: boolean
   showName?: boolean
   showStar?: boolean
+  elevation?: number
+  lineHeight?: number
 }
 
 export default memo(function ProductCard({
@@ -46,12 +48,14 @@ export default memo(function ProductCard({
   showDiscount = true,
   showName = true,
   showStar = true,
+  elevation,
+  lineHeight,
 }: ProductProps) {
   return (
-    <View style={[styles.container, { width, height }]}>
-      <View style={{ width, height: imageHeight }}>
+    <View style={[styles.container, { width, height, elevation }]}>
+      <View style={{ width, height: imageHeight, overflow: 'hidden' }}>
         <Image
-          resizeMode="cover"
+          resizeMode="contain"
           source={item.image}
           style={styles.image}
         />
@@ -64,7 +68,7 @@ export default memo(function ProductCard({
             medium={medium}
             numberOfLines={1}
             big={big}
-            style={[styles.commonTextStyle]}
+            style={[styles.commonTextStyle, { lineHeight: lineHeight || 16 }]}
           >
             {item.name}
           </TsText>

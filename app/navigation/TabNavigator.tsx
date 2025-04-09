@@ -10,13 +10,14 @@ import { Feather } from '@expo/vector-icons'
 import ProfileStack from './ProfileStack'
 import { Pressable, View } from 'react-native'
 import HomeStack from './HomeStack'
+import WhishlistStack from './WhishlistStack'
 
 const Tab = createBottomTabNavigator()
 
 export default function TabNavigator() {
   return (
     <Tab.Navigator
-      initialRouteName={routes.HOME}
+      // initialRouteName={routes.HOME}
       screenOptions={({ route }) => ({
         headerShadowVisible: false,
         headerShown: false,
@@ -46,7 +47,7 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name={routes.WHISHLIST}
-        component={Whishlist}
+        component={WhishlistStack}
         options={() => ({
           tabBarIcon: ({ color, size }) => (
             <Feather

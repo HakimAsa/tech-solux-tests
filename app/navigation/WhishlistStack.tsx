@@ -1,16 +1,14 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import routes from './routes'
 import Profile from '../screens/core/Profile'
-import Settings from '../screens/core/Settings'
-import ChangePassword from '../screens/core/ChangePassword'
 import { StatusBar } from 'expo-status-bar'
 import colors from '../config/colors'
 import Home from '../screens/core/home/Home'
 import Search from '../screens/core/Search'
+import Whishlist from '../screens/core/Whishlist'
 
 const Stack = createNativeStackNavigator()
 
-export default function HomeStack() {
+export default function WhishlistStack() {
   return (
     <>
       <StatusBar
@@ -20,15 +18,19 @@ export default function HomeStack() {
 
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name="My Home"
-          component={Home}
+          name="My Whishlist"
+          component={Whishlist}
         />
         <Stack.Screen
-          name="My Search"
+          name="SearchFromWhishlist"
           component={Search}
         />
         <Stack.Screen
-          name="HomeFromProfile"
+          name="HomeFromWhislist"
+          component={Home}
+        />
+        <Stack.Screen
+          name="ProfileFromWhislist"
           component={Profile}
         />
         {/* continue with needed screens later */}
