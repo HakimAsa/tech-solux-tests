@@ -9,7 +9,11 @@ const dealOfDaysProducts = products.filter(
   (product) => product.discount > 0 && product.istrending
 )
 
-export default function TrendingProduct() {
+export default function TrendingProduct({
+  onTrendingItemPress,
+}: {
+  onTrendingItemPress?: (item: any) => void
+}) {
   const flatListRef = useRef<FlatList>(null)
 
   const ITEM_WIDTH = 170
@@ -41,6 +45,7 @@ export default function TrendingProduct() {
             item={item}
             nameFontSize={12}
             descriptionFontSize={10}
+            onPress={() => onTrendingItemPress?.(item)}
           />
         )}
         onScroll={(e) => {

@@ -88,7 +88,11 @@ export default function Home({ navigation }: TsProps) {
               <SpecialOffer />
               <SpecialOfferCard />
               <TrendingProductsBanner onPress={onTrendingProductPress} />
-              <TrendingProduct />
+              <TrendingProduct
+                onTrendingItemPress={(item) =>
+                  navigation.navigate(routes.PRODUCT_DETAILS, { item })
+                }
+              />
               <HotSummerSale />
               <Sponsor />
             </MainContainer>
