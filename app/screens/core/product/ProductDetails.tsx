@@ -6,6 +6,8 @@ import BasicHeader from '@/app/components/headers/BasicHeader'
 import TsProps from '@/TsProps'
 import ImageSlider from '@/app/components/sliders/ImageSlider'
 import colors from '@/app/config/colors'
+import Size from './Size'
+import Star from '@/app/components/Star'
 
 const images = [
   require('@/assets/images/nikesneakermixed.png'),
@@ -41,6 +43,8 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           activeDotSize={10}
           showRightChevron
         />
+        <Size productSize={item?.size} />
+        <Star starSize={18} />
         <Text>{item?.name}</Text>
       </MainContainer>
     </BaseScreen>

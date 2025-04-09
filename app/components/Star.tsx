@@ -7,33 +7,38 @@ import colors from '../config/colors'
 interface StarRatingProps {
   rating?: number
   totalReview?: number // Match Figma spacing
+  starSize?: number // Match Figma spacing
 }
 
-export default function Star({ rating, totalReview }: StarRatingProps) {
+export default function Star({
+  rating,
+  totalReview,
+  starSize,
+}: StarRatingProps) {
   const filledStars = rating ? Math.floor(rating) : 0
   const totalStars = 5
   return (
     <>
-      {totalReview ? (
-        <BasicRowContainer
-          gap={5}
-          style={{
-            paddingLeft: 4,
-            marginBottom: 4,
-          }}
-        >
-          {[...Array(totalStars)].map((_, index) => (
-            <Image
-              key={index.toString()}
-              source={
-                index < filledStars
-                  ? require('@/assets/images/starfilled.png')
-                  : require('@/assets/images/star.png')
-              }
-              style={{ width: 14, height: 14 }}
-            />
-          ))}
+      <BasicRowContainer
+        gap={5}
+        style={{
+          paddingLeft: 4,
+          marginBottom: 4,
+        }}
+      >
+        {[...Array(totalStars)].map((_, index) => (
+          <Image
+            key={index.toString()}
+            source={
+              index < filledStars
+                ? require('@/assets/images/starfilled.png')
+                : require('@/assets/images/star.png')
+            }
+            style={{ width: starSize || 14, height: starSize || 14 }}
+          />
+        ))}
 
+        {totalReview ? (
           <TsText
             fontSize={10}
             style={{
@@ -43,8 +48,8 @@ export default function Star({ rating, totalReview }: StarRatingProps) {
           >
             {totalReview}
           </TsText>
-        </BasicRowContainer>
-      ) : null}
+        ) : null}
+      </BasicRowContainer>
     </>
   )
 }
