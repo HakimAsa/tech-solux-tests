@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import colors from '@/app/config/colors'
 import products from '@/app/data/products'
 import ProductCard from '@/app/components/cards/ProductCard'
-import RadialGradientChevron from './RadialGradientChevron'
+import RadialGradientChevron from './RadialShadowChevron'
 
 const dealOfDaysProducts = products.filter((product) => product.discount > 0)
 

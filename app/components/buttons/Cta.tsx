@@ -1,16 +1,18 @@
 import { Alert, Image, Pressable, StyleSheet, ViewProps } from 'react-native'
 
-import TsText from './texts/TsText'
-import en from '../config/en'
-import colors from '../config/colors'
-import { BasicRowContainer } from '../containers'
+import TsText from '../texts/TsText'
+import en from '../../config/en'
+import colors from '../../config/colors'
+import { BasicRowContainer } from '../../containers'
 
-export default function ViewAll({
+export default function Cta({
   onPress,
   style,
+  text = en.viewAll,
 }: {
   onPress?: () => void
   style?: ViewProps['style']
+  text?: string
 }) {
   return (
     <Pressable
@@ -30,7 +32,7 @@ export default function ViewAll({
             alignSelf: 'center',
           }}
         >
-          {en.viewAll}
+          {text}
         </TsText>
 
         <Image

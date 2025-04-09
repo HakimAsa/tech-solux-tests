@@ -1,10 +1,9 @@
-import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import React from 'react'
 import colors from '@/app/config/colors'
-import { BasicRowContainer, RowContainer } from '@/app/containers'
+import { RowContainer } from '@/app/containers'
 import TsText from '@/app/components/texts/TsText'
-import en from '@/app/config/en'
-import ViewAll from '@/app/components/ViewAll'
+import Cta from '@/app/components/buttons/Cta'
 
 export default function HotSummerSale({ onPress }: { onPress?: () => void }) {
   return (
@@ -21,7 +20,7 @@ export default function HotSummerSale({ onPress }: { onPress?: () => void }) {
           <TsText style={styles.newArrival}>New Arrivals</TsText>
           <TsText style={styles.summer}>Summer’ 25 Collections</TsText>
         </View>
-        <ViewAll />
+        <Cta />
       </RowContainer>
     </View>
   )

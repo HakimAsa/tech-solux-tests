@@ -4,7 +4,7 @@ import colors from '@/app/config/colors'
 import Pipe from '@/app/components/Pipe'
 import { BasicRowContainer } from '@/app/containers'
 import TsText from '@/app/components/texts/TsText'
-import ViewAll from '@/app/components/ViewAll'
+import Cta from '@/app/components/buttons/Cta'
 
 export default function SpecialOfferCard() {
   return (
@@ -26,7 +26,7 @@ export default function SpecialOfferCard() {
           <TsText style={styles.subTitle}>
             Stand a chance to get rewarded
           </TsText>
-          <ViewAll
+          <Cta
             onPress={() => Alert.alert('SPECIAL OFFER', 'View All')}
             style={{ position: 'absolute', right: 0, top: 54 }}
           />

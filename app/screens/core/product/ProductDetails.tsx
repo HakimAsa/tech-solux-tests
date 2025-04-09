@@ -4,6 +4,16 @@ import BaseScreen from '@/app/components/BaseScreen'
 import MainContainer from '@/app/containers'
 import BasicHeader from '@/app/components/headers/BasicHeader'
 import TsProps from '@/TsProps'
+import ImageSlider from '@/app/components/sliders/ImageSlider'
+import colors from '@/app/config/colors'
+
+const images = [
+  require('@/assets/images/nikesneakermixed.png'),
+  require('@/assets/images/nikesneakermixed.png'),
+  require('@/assets/images/nikesneakermixed.png'),
+  require('@/assets/images/nikesneakermixed.png'),
+  require('@/assets/images/nikesneakermixed.png'),
+]
 
 export default function ProductDetails({ navigation, route }: TsProps) {
   const { item } = route?.params || {}
@@ -25,6 +35,12 @@ export default function ProductDetails({ navigation, route }: TsProps) {
         }}
       />
       <MainContainer style={{ paddingLeft: 16, padding: 16, paddingBottom: 0 }}>
+        <ImageSlider
+          imageList={images}
+          dotColor={colors.primary}
+          activeDotSize={10}
+          showRightChevron
+        />
         <Text>{item?.name}</Text>
       </MainContainer>
     </BaseScreen>
