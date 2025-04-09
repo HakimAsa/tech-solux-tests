@@ -12,6 +12,7 @@ import RadialShadowChevron from '@/app/screens/core/home/RadialShadowChevron'
 import TsText from '../texts/TsText'
 import colors from '@/app/config/colors'
 import Cta from '../buttons/Cta'
+import { ScreenWidth } from '@/app/config/constants'
 
 const images = [
   require('@/assets/images/shopnow.png'),
@@ -126,9 +127,11 @@ export default function ImageSlider({
         onViewableItemsChanged={onViewRef.current}
         viewabilityConfig={viewConfigRef.current}
         renderItem={renderItem}
-        // contentContainerStyle={{
-        //   paddingHorizontal: 16,
-        // }}
+        contentContainerStyle={
+          {
+            // paddingHorizontal: -16,
+          }
+        }
       />
 
       {/* Pagination Dots */}
@@ -164,7 +167,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   imageContainer: {
-    width: 343,
+    width: ScreenWidth - 32,
     justifyContent: 'center',
     alignItems: 'center',
     overflow: 'hidden',

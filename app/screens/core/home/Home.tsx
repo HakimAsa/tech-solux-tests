@@ -47,6 +47,11 @@ export default function Home({ navigation }: TsProps) {
     navigation.navigate(routes.SEARCH, { searchTerm })
   }
 
+  // renderItem function is used to render each item in the FlatList for founction purity
+  const renderItem = useCallback(() => {
+    return null
+  }, []) // useCallback to memoize the renderItem function
+
   useEffect(() => {
     setAllProducts(products) // ✅ store them globally once
   }, [])
@@ -55,7 +60,7 @@ export default function Home({ navigation }: TsProps) {
       <FlatList
         data={dataToShow}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={() => null} // null since navigating to Search Screen. Searched Products should not be displayed in home screen
+        renderItem={renderItem} // null since navigating to Search Screen. Searched Products should not be displayed in home screen
         ListHeaderComponent={
           <View>
             <LogoHeader onAvatarPress={onAvatarPress} />

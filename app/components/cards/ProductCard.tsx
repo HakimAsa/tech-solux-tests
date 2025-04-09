@@ -12,6 +12,7 @@ import colors from '@/app/config/colors'
 import { BasicRowContainer } from '@/app/containers'
 import { calculateListPrice } from '@/app/utils/helpers'
 import Star from '../Star'
+import { currencySymbolRupee } from '@/app/config/constants'
 
 interface ProductProps {
   item: {
@@ -96,7 +97,8 @@ export default memo(function ProductCard({
             small
             style={[styles.commonTextStyle]}
           >
-            ₹{item.price}
+            {currencySymbolRupee}
+            {item.price}
           </TsText>
           {showDiscount && item.discount && item.discount > 0 ? (
             <BasicRowContainer gap={10}>
@@ -104,7 +106,8 @@ export default memo(function ProductCard({
                 small
                 style={[styles.commonTextStyle, styles.discount]}
               >
-                ₹{calculateListPrice(item.price, item.discount)}
+                {currencySymbolRupee}
+                {calculateListPrice(item.price, item.discount)}
               </TsText>
               <TsText
                 fontSize={10}

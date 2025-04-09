@@ -12,6 +12,7 @@ const colors = {
   mediumgray: '#999999',
   medium: '#6e6969',
   primary: '#F83758', //background: rgba(248, 55, 88, 1);
+  secondary: '#FA7189',
   separator: '#C4C4C4',
   shadeBlack: '#BBBBBB',
   tabIconColor: '#EB3030',

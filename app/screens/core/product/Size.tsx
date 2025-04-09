@@ -31,7 +31,7 @@ export default function Size({ productSize }: { productSize: number }) {
               setSize(item)
             }}
           >
-            {item}UK
+            {item} UK
           </TsText>
         ))}
       </View>
@@ -51,11 +51,12 @@ const styles = StyleSheet.create({
   sizeContainer: {
     flexDirection: 'row',
     // justifyContent: 'space-between',
+
     alignItems: 'center',
     gap: 8,
   },
   size: {
-    width: 50,
+    // width: 50,
     height: 32,
     borderRadius: 4,
     fontFamily: 'Montserrat_600SemiBold',

@@ -13,6 +13,14 @@ export const emailRegex = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/
 export const passwordRegex =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#+\-*/_!%*?&(),;\[\]])[A-Za-z\d@$#+\-*/_!%*?&(),;\[\]]{8,}$/
 
+// currencies symbol
+export const currencySymbol = '₦'
+export const currencySymbolDollar = '$'
+export const currencySymbolPound = '£'
+export const currencySymbolEuro = '€'
+export const currencySymbolYen = '¥'
+export const currencySymbolRupee = '₹'
+
 // screen and window dimensions
 export const ScreenWidth = Dimensions.get('screen').width
 export const ScreenHeight = Dimensions.get('screen').height
