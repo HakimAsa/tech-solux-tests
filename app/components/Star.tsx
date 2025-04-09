@@ -47,6 +47,8 @@ export default function Star({
               {
                 fontFamily: 'Montserrat_400Regular',
                 color: colors.lightblackgray,
+
+                top: 2,
               },
               totalReviewStyle,
             ]}

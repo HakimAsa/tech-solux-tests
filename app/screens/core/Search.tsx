@@ -10,6 +10,7 @@ import MainContainer from '@/app/containers'
 import { ScreenWidth } from '@/app/config/constants'
 import BasicHeader from '@/app/components/headers/BasicHeader'
 import TsProps from '@/TsProps'
+import routes from '@/app/navigation/routes'
 export default function Search({ navigation }: TsProps) {
   const { searchResults, searchTerm } = useSearchContext()
 
@@ -50,6 +51,9 @@ export default function Search({ navigation }: TsProps) {
                 width={ScreenWidth}
                 height={ScreenWidth}
                 imageHeight={ScreenWidth - imageSizeDelta}
+                onPress={() =>
+                  navigation.navigate(routes.PRODUCT_DETAILS, { item })
+                }
               />
             )}
             contentContainerStyle={{ paddingHorizontal: 0 }} // Add padding around the grid}}
