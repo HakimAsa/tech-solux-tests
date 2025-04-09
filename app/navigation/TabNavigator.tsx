@@ -37,6 +37,7 @@ export default function TabNavigator() {
         name="HomeTab"
         component={HomeStack}
         options={{
+          tabBarLabel: routes.HOME,
           tabBarIcon: ({ color, size }) => (
             <Feather
               name="home"
@@ -50,6 +51,7 @@ export default function TabNavigator() {
         name="WishlistTab"
         component={WhishlistStack}
         options={() => ({
+          tabBarLabel: routes.WHISHLIST,
           tabBarIcon: ({ color, size }) => (
             <Feather
               name="heart"
@@ -60,7 +62,7 @@ export default function TabNavigator() {
         })}
       />
       <Tab.Screen
-        name={routes.PRODUCT_DETAILS}
+        name="ProductTab"
         options={{
           tabBarIcon: ({ color, size, focused }) => (
             <View
@@ -73,6 +75,7 @@ export default function TabNavigator() {
                 alignItems: 'center',
                 overflow: 'hidden',
                 elevation: focused ? 0 : 1,
+                alignContent: 'center',
               }}
             >
               <Feather
@@ -89,9 +92,10 @@ export default function TabNavigator() {
         component={ProductStack}
       />
       <Tab.Screen
-        name={routes.SEARCH}
+        name="SearchTab"
         component={Search}
         options={{
+          tabBarLabel: routes.SEARCH,
           tabBarIcon: ({ color, size }) => (
             <Feather
               name="search"
@@ -102,11 +106,12 @@ export default function TabNavigator() {
         }}
       />
       <Tab.Screen
-        name={routes.PROFILE}
+        name="ProfileTab"
         component={ProfileStack}
         options={() => {
           return {
             headerTitleAlign: 'center',
+            tabBarLabel: routes.PROFILE,
             tabBarIcon: ({ color, size }) => (
               <Feather
                 name="settings"

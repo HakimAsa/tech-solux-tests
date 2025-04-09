@@ -57,6 +57,9 @@ export default function Whishlist({ navigation }: TsProps) {
                 width={ScreenWidth * 0.45 - 2.5}
                 height={260}
                 descriptionFontSize={10}
+                onPress={() =>
+                  navigation.navigate(routes.PRODUCT_DETAILS, { item })
+                }
               />
             </View>
           )}

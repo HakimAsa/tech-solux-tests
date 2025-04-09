@@ -9,21 +9,25 @@ export default function BasicHeader({
   title,
   iconName,
   rightIconStyle,
+  leftIconStyle,
+  style,
   showTitle = true,
   showRight = false,
 }: {
   onPress: () => void
   title?: string
+  leftIconStyle?: number
   rightIconStyle?: ViewProps['style']
   showTitle?: boolean
   showRight?: boolean
   iconName?: keyof typeof Feather.glyphMap
+  style?: ViewProps['style']
 }) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <Pressable
         onPress={onPress}
-        style={styles.icon}
+        style={[styles.icon, { left: leftIconStyle || 0 }]}
       >
         <Feather
           name="chevron-left"

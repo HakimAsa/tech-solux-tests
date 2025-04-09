@@ -5,10 +5,12 @@ import MainContainer from '@/app/containers'
 import BasicHeader from '@/app/components/headers/BasicHeader'
 import TsProps from '@/TsProps'
 
-export default function ProductDetails({ navigation }: TsProps) {
+export default function ProductDetails({ navigation, route }: TsProps) {
+  const { item } = route?.params || {}
   return (
     <BaseScreen>
       <BasicHeader
+        leftIconStyle={-16}
         showRight
         showTitle={false}
         onPress={() => navigation.goBack()}
@@ -23,7 +25,7 @@ export default function ProductDetails({ navigation }: TsProps) {
         }}
       />
       <MainContainer style={{ paddingLeft: 16, padding: 16, paddingBottom: 0 }}>
-        <Text>ShoppingCart</Text>
+        <Text>{item?.name}</Text>
       </MainContainer>
     </BaseScreen>
   )

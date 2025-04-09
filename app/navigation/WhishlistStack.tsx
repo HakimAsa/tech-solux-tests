@@ -6,6 +6,7 @@ import Home from '../screens/core/home/Home'
 import Search from '../screens/core/Search'
 import Whishlist from '../screens/core/Whishlist'
 import routes from './routes'
+import ProductDetails from '../screens/core/product/ProductDetails'
 
 const Stack = createNativeStackNavigator()
 
@@ -23,7 +24,7 @@ export default function WhishlistStack() {
           component={Whishlist}
         />
         <Stack.Screen
-          name="SearchFromWhishlist"
+          name={routes.SEARCH}
           component={Search}
         />
         <Stack.Screen
@@ -31,8 +32,12 @@ export default function WhishlistStack() {
           component={Home}
         />
         <Stack.Screen
-          name="ProfileFromWhislist"
+          name={routes.PROFILE}
           component={Profile}
+        />
+        <Stack.Screen
+          name={routes.PRODUCT_DETAILS}
+          component={ProductDetails}
         />
         {/* continue with needed screens later */}
       </Stack.Navigator>

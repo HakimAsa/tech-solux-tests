@@ -7,6 +7,7 @@ import { StatusBar } from 'expo-status-bar'
 import colors from '../config/colors'
 import Home from '../screens/core/home/Home'
 import Search from '../screens/core/Search'
+import ProductDetails from '../screens/core/product/ProductDetails'
 
 const Stack = createNativeStackNavigator()
 
@@ -24,12 +25,16 @@ export default function HomeStack() {
           component={Home}
         />
         <Stack.Screen
-          name="My Search"
+          name={routes.SEARCH}
           component={Search}
         />
         <Stack.Screen
           name="HomeFromProfile"
           component={Profile}
+        />
+        <Stack.Screen
+          name={routes.PRODUCT_DETAILS}
+          component={ProductDetails}
         />
         {/* continue with needed screens later */}
       </Stack.Navigator>

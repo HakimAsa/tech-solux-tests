@@ -21,7 +21,7 @@ export default function ProductStack() {
 
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name={routes.PRODUCT}
+          name={routes.PRODUCT_DETAILS}
           component={ProductDetails}
         />
         <Stack.Screen

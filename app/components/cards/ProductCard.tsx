@@ -1,4 +1,10 @@
-import { Image, ImageSourcePropType, StyleSheet, View } from 'react-native'
+import {
+  Image,
+  ImageSourcePropType,
+  Pressable,
+  StyleSheet,
+  View,
+} from 'react-native'
 import { memo } from 'react'
 
 import TsText from '../texts/TsText'
@@ -20,6 +26,7 @@ interface ProductProps {
     name?: string
     image: ImageSourcePropType
   }
+  onPress?: () => void
   small?: boolean // Match Figma size
   medium?: boolean // Match Figma size
   big?: boolean // Match Figma size
@@ -44,75 +51,78 @@ export default memo(function ProductCard({
   medium,
   nameFontSize,
   small,
+  elevation,
+  lineHeight,
+  onPress,
   width = 170,
   showDiscount = true,
   showName = true,
   showStar = true,
-  elevation,
-  lineHeight,
 }: ProductProps) {
   return (
-    <View style={[styles.container, { width, height, elevation }]}>
-      <View style={{ width, height: imageHeight, overflow: 'hidden' }}>
-        <Image
-          resizeMode="contain"
-          source={item.image}
-          style={styles.image}
-        />
-      </View>
-      <View style={{ padding: 4 }}>
-        {showName && (
+    <Pressable onPress={onPress}>
+      <View style={[styles.container, { width, height, elevation }]}>
+        <View style={{ width, height: imageHeight, overflow: 'hidden' }}>
+          <Image
+            resizeMode="contain"
+            source={item.image}
+            style={styles.image}
+          />
+        </View>
+        <View style={{ padding: 4 }}>
+          {showName && (
+            <TsText
+              fontSize={nameFontSize}
+              small={small}
+              medium={medium}
+              numberOfLines={1}
+              big={big}
+              style={[styles.commonTextStyle, { lineHeight: lineHeight || 16 }]}
+            >
+              {item.name}
+            </TsText>
+          )}
           <TsText
-            fontSize={nameFontSize}
+            fontSize={descriptionFontSize}
             small={small}
             medium={medium}
-            numberOfLines={1}
+            numberOfLines={2}
             big={big}
-            style={[styles.commonTextStyle, { lineHeight: lineHeight || 16 }]}
+            style={[styles.description, styles.commonTextStyle]}
           >
-            {item.name}
+            {item.description}
           </TsText>
+          <TsText
+            small
+            style={[styles.commonTextStyle]}
+          >
+            ₹{item.price}
+          </TsText>
+          {showDiscount && item.discount && item.discount > 0 ? (
+            <BasicRowContainer gap={10}>
+              <TsText
+                small
+                style={[styles.commonTextStyle, styles.discount]}
+              >
+                ₹{calculateListPrice(item.price, item.discount)}
+              </TsText>
+              <TsText
+                fontSize={10}
+                style={[styles.commonTextStyle, styles.off]}
+              >
+                {item.discount}%Off
+              </TsText>
+            </BasicRowContainer>
+          ) : null}
+        </View>
+        {showStar && (
+          <Star
+            rating={item.rating?.average}
+            totalReview={item.rating?.count}
+          />
         )}
-        <TsText
-          fontSize={descriptionFontSize}
-          small={small}
-          medium={medium}
-          numberOfLines={2}
-          big={big}
-          style={[styles.description, styles.commonTextStyle]}
-        >
-          {item.description}
-        </TsText>
-        <TsText
-          small
-          style={[styles.commonTextStyle]}
-        >
-          ₹{item.price}
-        </TsText>
-        {showDiscount && item.discount && item.discount > 0 ? (
-          <BasicRowContainer gap={10}>
-            <TsText
-              small
-              style={[styles.commonTextStyle, styles.discount]}
-            >
-              ₹{calculateListPrice(item.price, item.discount)}
-            </TsText>
-            <TsText
-              fontSize={10}
-              style={[styles.commonTextStyle, styles.off]}
-            >
-              {item.discount}%Off
-            </TsText>
-          </BasicRowContainer>
-        ) : null}
       </View>
-      {showStar && (
-        <Star
-          rating={item.rating?.average}
-          totalReview={item.rating?.count}
-        />
-      )}
-    </View>
+    </Pressable>
   )
 })
 

@@ -6,7 +6,7 @@ export default {
   colors: {
     ...DefaultTheme.colors,
     primary: colors.primary,
-    background: colors.white,
+    background: colors.background,
     // text: "#212121",
     // border: "#BDBDBD",
     // accent: "#FFC107",

@@ -75,7 +75,11 @@ export default function Home({ navigation }: TsProps) {
               <Category />
               <ShopNow />
               <DealOfTheDayBanner onPress={onDealOfDayPress} />
-              <DealOfTheDayProduct />
+              <DealOfTheDayProduct
+                onDealOfDayItemPress={(item) =>
+                  navigation.navigate(routes.PRODUCT_DETAILS, { item })
+                }
+              />
               <SpecialOffer />
               <SpecialOfferCard />
               <TrendingProductsBanner onPress={onTrendingProductPress} />

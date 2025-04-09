@@ -7,7 +7,11 @@ import RadialGradientChevron from './RadialGradientChevron'
 
 const dealOfDaysProducts = products.filter((product) => product.discount > 0)
 
-export default function DealOfTheDayProduct() {
+export default function DealOfTheDayProduct({
+  onDealOfDayItemPress,
+}: {
+  onDealOfDayItemPress?: (item: any) => void
+}) {
   const flatListRef = useRef<FlatList>(null)
 
   const ITEM_WIDTH = 170
@@ -34,6 +38,7 @@ export default function DealOfTheDayProduct() {
             item={item}
             nameFontSize={12}
             descriptionFontSize={10}
+            onPress={() => onDealOfDayItemPress?.(item)}
           />
         )}
         onScroll={(e) => {
