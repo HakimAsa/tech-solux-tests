@@ -15,6 +15,7 @@ const colors = {
   secondary: '#FA7189',
   separator: '#C4C4C4',
   shadeBlack: '#BBBBBB',
+  shadeBlackGray3: '#828282',
   tabIconColor: '#EB3030',
   textColor: '#676767',
   white: '#FFFFFF',

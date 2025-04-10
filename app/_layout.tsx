@@ -24,6 +24,8 @@ import {
   Montserrat_800ExtraBold_Italic,
   Montserrat_900Black_Italic,
 } from '@expo-google-fonts/montserrat'
+import { Poppins_600SemiBold } from '@expo-google-fonts/poppins/600SemiBold'
+
 import AuthNavigator from './navigation/AuthNavigator'
 import useAuth from './context/auth/useAuth'
 import AppNavigator from './navigation/AppNavigator'
@@ -50,6 +52,7 @@ export default function RootLayout() {
     Montserrat_800ExtraBold,
     MontserratBlack: Montserrat_900Black, // Alias the font name
     PlusJakartaSans_500Medium,
+    Poppins_600SemiBold,
   })
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)

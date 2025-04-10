@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import BaseScreen from '@/app/components/BaseScreen'
 import MainContainer, { BasicRowContainer } from '@/app/containers'
@@ -12,6 +12,9 @@ import TsText from '@/app/components/texts/TsText'
 import { calculateListPrice } from '@/app/utils/helpers'
 import { currencySymbolRupee } from '@/app/config/constants'
 import MoreText from '@/app/components/MoreText'
+import TsText20 from '@/app/components/texts/TsText20'
+import DetailBtn from './DetailBtn'
+import { Feather } from '@expo/vector-icons'
 
 const images = [
   require('@/assets/images/nikesneakermixed.png'),
@@ -49,6 +52,20 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           showRightChevron
         />
         <Size productSize={item?.size} />
+        <TsText20
+          style={{ fontFamily: 'Montserrat_600SemiBold', marginBottom: 8 }}
+          title={item?.name || 'Nike Sneaker'}
+        />
+        <TsText
+          style={{
+            fontFamily: 'Montserrat_400Regular',
+            lineHeight: 16,
+            color: colors.black,
+            marginBottom: 8,
+          }}
+        >
+          Vision Alta Men’s Shoes Size (All Colours)
+        </TsText>
         <Star
           starSize={18}
           totalReview={0}
@@ -92,16 +109,70 @@ export default function ProductDetails({ navigation, route }: TsProps) {
         </BasicRowContainer>
         <TsText medium>Product Details</TsText>
         <MoreText text='Perhaps the most iconic sneaker of all-time, this original "Chicago"? colorway is the cornerstone to any sneaker collection. Made famous in 1985 by Michael Jordan, the shoe has stood the test of time, becoming the most famous colorway of the Air Jordan 1. This 2015 release saw the day' />
-        {/* <TsText
-          small
-          style={styles.longText}
+        <BasicRowContainer gap={8}>
+          <DetailBtn
+            iconName="map-marker-radius-outline"
+            text="Nearest Store"
+          />
+          <DetailBtn
+            iconName="lock-outline"
+            text="VIP"
+          />
+          <DetailBtn
+            iconName="rotate-3d-variant"
+            text="Return policy"
+          />
+        </BasicRowContainer>
+        {/* call to action section */}
+        <BasicRowContainer
+          gap={10}
+          style={{ height: 36, marginVertical: 8 }}
         >
-          Perhaps the most iconic sneaker of all-time, this original "Chicago"?
-          colorway is the cornerstone to any sneaker collection. Made famous in
-          1985 by Michael Jordan, the shoe has stood the test of time, becoming
-          the most famous colorway of the Air Jordan 1. This 2015 release saw
-          the ...More
-        </TsText> */}
+          <TsText>Go to Cart</TsText>
+          <TsText>Buy Now</TsText>
+          <Pressable>
+            <Feather
+              name="heart"
+              color={colors.black}
+              size={35}
+            />
+          </Pressable>
+        </BasicRowContainer>
+
+        {/* nearest section */}
+        <View
+          style={{
+            marginVertical: 8,
+            backgroundColor: '#FFCCD5',
+            borderRadius: 5,
+            height: 60,
+            justifyContent: 'center',
+          }}
+        >
+          <TsText
+            style={{
+              fontFamily: 'Montsserrat_600SemiBold',
+              lineHeight: 16,
+              paddingLeft: 39,
+            }}
+            medium
+          >
+            Delivery in
+          </TsText>
+          <TsText
+            style={{
+              fontFamily: 'Poppins_600SemiBold',
+              fontSize: 21,
+              lineHeight: 25,
+              paddingLeft: 40,
+              marginTop: 4,
+              color: '#010101',
+            }}
+          >
+            1 within Hour
+          </TsText>
+        </View>
+
         <TsText>{item?.name || 'good'}</TsText>
       </MainContainer>
     </>
