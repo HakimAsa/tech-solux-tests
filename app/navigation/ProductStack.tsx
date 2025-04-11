@@ -8,6 +8,7 @@ import colors from '../config/colors'
 import ProductDetails from '../screens/core/product/ProductDetails'
 import Cart from '../screens/core/product/gottocart/Cart'
 import BuyNow from '../screens/core/product/buynow/BuyNow'
+import Checkout from '../screens/core/product/Checkout'
 
 const Stack = createNativeStackNavigator()
 
@@ -23,6 +24,10 @@ export default function ProductStack() {
         <Stack.Screen
           name={routes.PRODUCT_DETAILS}
           component={ProductDetails}
+        />
+        <Stack.Screen
+          name={routes.CHECKOUT}
+          component={Checkout}
         />
       </Stack.Navigator>
     </>

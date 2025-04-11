@@ -44,6 +44,7 @@ export default function RootLayout() {
   const { user } = useAuth()
   const [fontsLoaded] = useFonts({
     LibreCaslonText_700Bold,
+    Montserrat_100Thin_Italic,
     Montserrat_300Light,
     Montserrat_400Regular,
     Montserrat_500Medium,

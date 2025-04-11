@@ -13,7 +13,9 @@ export default function OrderPaymentDetails({
 }) {
   return (
     <View style={styles.container}>
-      <Text>OrderPaymentDetails</Text>
+      <TsText style={{ letterSpacing: -0.7, fontSize: 17 }}>
+        Order Payment Details
+      </TsText>
       <View style={styles.details}>
         <OrderAmount
           labelStyle={styles.text}

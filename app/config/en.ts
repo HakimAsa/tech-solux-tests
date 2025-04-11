@@ -10,6 +10,7 @@ const en = {
   businessAddressDetails: 'Business Address Details',
   buyNow: 'Buy Now',
   byClickingThe: 'By clicking the',
+  checkout: 'Checkout',
   cart: 'Cart',
   changePassword: 'Change Password',
   chooseProducts: 'Choose Products',

@@ -3,6 +3,7 @@ import { TextProps } from 'react-native'
 import TsText from '@/app/components/texts/TsText'
 import { currencySymbolRupee } from '@/app/config/constants'
 import { RowContainer } from '@/app/containers'
+import { formatNumberWithCurrency } from '@/app/utils/helpers'
 
 export default function OrderAmount({
   amountStyle,
@@ -19,8 +20,7 @@ export default function OrderAmount({
     <RowContainer>
       <TsText style={[labelStyle]}>{label}</TsText>
       <TsText style={[{ fontFamily: 'Montserrat_600SemiBold' }, amountStyle]}>
-        {currencySymbolRupee}
-        {amount.toFixed(2)}
+        {formatNumberWithCurrency(amount, currencySymbolRupee)}
       </TsText>
     </RowContainer>
   )

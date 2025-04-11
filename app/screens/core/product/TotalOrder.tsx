@@ -1,9 +1,5 @@
-import { StyleSheet, Text, TextProps, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, View } from 'react-native'
 import OrderAmount from './OrderAmount'
-import { BasicRowContainer, RowContainer } from '@/app/containers'
-import TsPressable from '@/app/components/texts/TsPressable'
-import TsText from '@/app/components/texts/TsText'
 
 export default function TotalOrder({ amount = 0 }: { amount?: number }) {
   return (

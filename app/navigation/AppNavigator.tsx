@@ -6,21 +6,9 @@ import Profile from '../screens/core/Profile'
 import Cart from '../screens/core/product/gottocart/Cart'
 import BuyNow from '../screens/core/product/buynow/BuyNow'
 
-import {
-  getFocusedRouteNameFromRoute,
-  useNavigationState,
-} from '@react-navigation/native'
-import { View } from 'react-native'
-function getTabBarStyle(route: any) {
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Home'
-  // Dynamically hide the tab bar for specific screens
-  return {
-    display:
-      routeName === routes.BUYNOW || routeName === routes.CART
-        ? 'none'
-        : 'flex',
-  }
-}
+import { useNavigationState } from '@react-navigation/native'
+import Checkout from '../screens/core/product/Checkout'
+
 const Stack = createNativeStackNavigator()
 
 export default function AppNavigator() {
@@ -36,8 +24,7 @@ export default function AppNavigator() {
       />
       <Stack.Screen
         name="TabNavigator"
-        children={({ route }) => {
-          console.log(route)
+        children={() => {
           const state = useNavigationState((state) => state)
           const currentRouteName = state.routes[state.index]?.name
           // Determine if the tab bar should be hidden
@@ -63,6 +50,10 @@ export default function AppNavigator() {
           headerShown: false,
           presentation: 'modal', // Optional: Use modal presentation for BuyNow
         }}
+      />
+      <Stack.Screen
+        name={routes.CHECKOUT}
+        component={Checkout}
       />
     </Stack.Navigator>
   )

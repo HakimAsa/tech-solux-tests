@@ -15,7 +15,7 @@ export default function EmiAvailable({
         medium
         style={[styles.showText, showTextStyle]}
       >
-        Emi Available
+        EMI Available
       </TsText>
       <TsPressable
         styleText={{ fontFamily: 'Montserrat_600SemiBold' }}

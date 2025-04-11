@@ -53,6 +53,14 @@ const calculateListPrice = function (
   return parseInt(`${sellingPrice / (1 - discount)}`, 10)
 }
 
+function formatNumberWithCurrency(number: number, currency?: string): string {
+  const formattedNumber = new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 2, // Ensures two decimal places
+    maximumFractionDigits: 2, // Ensures no more than two decimal places
+  }).format(number)
+  return currency ? `${currency} ${formattedNumber}` : formattedNumber // Formats the number with commas
+}
+
 export default getApiUrl
 export {
   calculateListPrice,
@@ -60,5 +68,6 @@ export {
   doSetForwardslash,
   doSetFullUrl,
   doSetUserCredentials,
+  formatNumberWithCurrency,
   validInput,
 }

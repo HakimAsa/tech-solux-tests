@@ -1,4 +1,9 @@
-import { StyleSheet, TextInputProps, TouchableOpacity } from 'react-native'
+import {
+  StyleSheet,
+  TextInputProps,
+  TextProps,
+  TouchableOpacity,
+} from 'react-native'
 import { ReactNode } from 'react'
 import { MaterialIcons } from '@expo/vector-icons'
 
@@ -16,6 +21,7 @@ interface Button extends TextInputProps {
   icon?: IconType
   onPress(params: any): void
   textColor?: string
+  style?: TextProps['style']
 }
 
 export default function TsButton({
@@ -27,6 +33,7 @@ export default function TsButton({
   icon,
   onPress,
   button,
+  style,
 }: Button) {
   return (
     <TouchableOpacity
@@ -48,6 +55,7 @@ export default function TsButton({
             color: disabled ? colors.lightgray : textColor || colors.white,
             fontSize,
           },
+          style,
         ]}
       >
         {children}

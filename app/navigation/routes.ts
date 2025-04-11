@@ -2,6 +2,7 @@ export default Object.freeze({
   BUYNOW: 'Buy Now',
   CART: 'Cart',
   CHANGEPASSWORD: 'Change Password',
+  CHECKOUT: 'Checkout',
   HOME: 'Home',
   LOGIN: 'Login',
   PRESENTATION: 'Presentation',
