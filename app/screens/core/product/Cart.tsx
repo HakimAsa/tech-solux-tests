@@ -2,15 +2,15 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 import TsProps from '@/TsProps'
+import BaseScreen from '@/app/components/BaseScreen'
 
 export default function Cart({ route }: TsProps) {
-  console.log('Route Params', route.params)
   const { item } = route?.params || {}
-  // console.log('cart item', JSON.stringify(item))
+
   return (
-    <View style={{ flex: 1, justifyContent: 'center' }}>
+    <BaseScreen>
       <Text>{item?.name ?? 'Cart'}</Text>
-    </View>
+    </BaseScreen>
   )
 }
 
