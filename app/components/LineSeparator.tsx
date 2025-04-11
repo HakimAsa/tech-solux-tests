@@ -1,8 +1,12 @@
 import { StyleSheet, View } from 'react-native'
 import colors from '../config/colors'
 
-export default function LineSeparator() {
-  return <View style={styles.separator} />
+export default function LineSeparator({
+  color = colors.separator,
+}: {
+  color?: string
+}) {
+  return <View style={[styles.separator, { backgroundColor: color }]} />
 }
 
 const styles = StyleSheet.create({
@@ -10,6 +14,5 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 1, //todo
     marginVertical: 15,
-    backgroundColor: colors.separator,
   },
 })

@@ -6,6 +6,7 @@ import { Feather } from '@expo/vector-icons'
 
 export default function BasicHeader({
   onPress,
+  onRightIconPress,
   title,
   iconName,
   rightIconStyle,
@@ -15,6 +16,7 @@ export default function BasicHeader({
   showRight = false,
 }: {
   onPress: () => void
+  onRightIconPress?: () => void
   title?: string
   leftIconStyle?: number
   rightIconStyle?: ViewProps['style']
@@ -39,7 +41,7 @@ export default function BasicHeader({
 
       {showRight && (
         <Pressable
-          onPress={onPress}
+          onPress={onRightIconPress}
           style={[styles.righIcon, rightIconStyle]}
         >
           <Feather

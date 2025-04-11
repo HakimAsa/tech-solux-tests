@@ -1,7 +1,7 @@
 import { Pressable } from 'react-native'
 
 import en from '@/app/config/en'
-import ProductCta from './ProductCta'
+import ProductCta from '../ProductCta'
 
 export default function BuyNowBtn({ onPress }: { onPress: () => void }) {
   return (

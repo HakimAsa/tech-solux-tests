@@ -12,10 +12,15 @@ import { Pressable, View } from 'react-native'
 import HomeStack from './HomeStack'
 import WhishlistStack from './WhishlistStack'
 import ProductStack from './ProductStack'
+import BuyNow from '../screens/core/product/buynow/BuyNow'
 
 const Tab = createBottomTabNavigator()
 
-export default function TabNavigator() {
+export default function TabNavigator({
+  shouldHideTabBar,
+}: {
+  shouldHideTabBar: boolean
+}) {
   return (
     <Tab.Navigator
       // initialRouteName={routes.HOME}
@@ -23,7 +28,10 @@ export default function TabNavigator() {
         headerShadowVisible: false,
         headerShown: false,
         tabBarActiveTintColor: colors.tabIconColor,
-        tabBarStyle: { height: 84 },
+        tabBarStyle: {
+          height: shouldHideTabBar ? 0 : 84, // Hide the tab bar by setting height to 0
+          display: shouldHideTabBar ? 'none' : 'flex', // Ensure it's not rendered
+        },
         tabBarLabelStyle: {
           fontSize: 12,
           fontFamily: 'Roboto',
@@ -122,6 +130,13 @@ export default function TabNavigator() {
           }
         }}
       />
+      {/* <Tab.Screen
+        name={routes.BUYNOW}
+        component={BuyNow}
+        options={{
+          tabBarStyle: { display: 'none' }, // Hide the tab bar for this screen
+        }}
+      /> */}
     </Tab.Navigator>
   )
 }

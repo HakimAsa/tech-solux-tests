@@ -8,8 +8,8 @@ import colors from '../config/colors'
 import Home from '../screens/core/home/Home'
 import Search from '../screens/core/Search'
 import ProductDetails from '../screens/core/product/ProductDetails'
-import Cart from '../screens/core/product/Cart'
-import BuyNow from '../screens/core/product/BuyNow'
+import Cart from '../screens/core/product/gottocart/Cart'
+import BuyNow from '../screens/core/product/buynow/BuyNow'
 
 const Stack = createNativeStackNavigator()
 

@@ -17,8 +17,8 @@ import { currencySymbolRupee, ScreenWidth } from '@/app/config/constants'
 import MoreText from '@/app/components/MoreText'
 import TsText20 from '@/app/components/texts/TsText20'
 import DetailBtn from './DetailBtn'
-import GoToCartBtn from './GoToCartBtn'
-import BuyNowBtn from './BuyNowBtn'
+import GoToCartBtn from './gottocart/GoToCartBtn'
+import BuyNowBtn from './buynow/BuyNowBtn'
 import SvgIcon from '@/app/components/icons/SvgIcon'
 import FilterSortBanner from '@/app/components/FilterSortBanner'
 import routes from '@/app/navigation/routes'
@@ -249,9 +249,10 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           <BasicRowContainer
             gap={10}
             style={{
-              width: ScreenWidth / 2,
+              width: 148,
               height: 48,
               borderRadius: 8,
+              flex: 1,
               alignItems: 'center',
               left: -8,
               backgroundColor: colors.white,
@@ -275,12 +276,13 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           <BasicRowContainer
             gap={10}
             style={{
-              width: ScreenWidth / 2 - 20,
+              width: 148,
+              flex: 1,
               height: 48,
               borderRadius: 8,
               backgroundColor: colors.white,
               alignItems: 'center',
-              left: -4,
+              right: -4,
             }}
           >
             <SvgIcon
