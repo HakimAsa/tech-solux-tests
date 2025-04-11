@@ -1,12 +1,5 @@
-import {
-  Alert,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native'
-import React from 'react'
+import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native'
+import { useState, useRef } from 'react'
 import BaseScreen from '@/app/components/BaseScreen'
 import MainContainer, {
   BasicRowContainer,
@@ -24,12 +17,13 @@ import { currencySymbolRupee, ScreenWidth } from '@/app/config/constants'
 import MoreText from '@/app/components/MoreText'
 import TsText20 from '@/app/components/texts/TsText20'
 import DetailBtn from './DetailBtn'
-import { Feather } from '@expo/vector-icons'
 import GoToCartBtn from './GoToCartBtn'
 import BuyNowBtn from './BuyNowBtn'
 import SvgIcon from '@/app/components/icons/SvgIcon'
 import FilterSortBanner from '@/app/components/FilterSortBanner'
 import routes from '@/app/navigation/routes'
+import products from '@/app/data/products'
+import ProductCard from '@/app/components/cards/ProductCard'
 
 const PATH =
   'M24.3333 1C19 1 16 5.445 16 7.66667C16 5.445 13 1 7.66667 1C2.33333 1 1 5.445 1 7.66667C1 19.3333 16 27.6667 16 27.6667C16 27.6667 31 19.3333 31 7.66667C31 5.445 29.6667 1 24.3333 1Z'
@@ -47,10 +41,51 @@ const images = [
 ]
 
 export default function ProductDetails({ navigation, route }: TsProps) {
+  const [isLiked, setIsLiked] = useState(false)
   const { item } = route?.params || {}
   const goToCart = (item: any) => {
     navigation.navigate(routes.CART, { item })
   }
+  const buyNow = (item: any) => {
+    navigation.navigate(routes.BUYNOW, { item })
+  }
+
+  const debounceTimeout = useRef<NodeJS.Timeout | null>(null)
+
+  const saveToWishlist = async (product: any) => {
+    // Toggle the like state immediately for UI feedback
+    setIsLiked((prev) => !prev)
+
+    // Clear any existing debounce timeout
+    if (debounceTimeout.current) {
+      clearTimeout(debounceTimeout.current)
+    }
+
+    // Set a new debounce timeout
+    debounceTimeout.current = setTimeout(async () => {
+      // try {
+      //   const response = await fetch('https://your-api.com/wishlist', {
+      //     method: 'POST',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //     body: JSON.stringify({
+      //       userId: user.id, // Replace with the actual user ID
+      //       productId: product.id,
+      //       liked: !isLiked, // Send the new like state
+      //     }),
+      //   });
+      //   if (!response.ok) {
+      //     const errorData = await response.json();
+      //     Alert.alert('Error', errorData.message || 'Failed to update wishlist.');
+      //   }
+      // } catch (error) {
+      //   console.error('Error saving to wishlist:', error);
+      //   Alert.alert('Error', 'An error occurred while updating the wishlist.');
+      // }
+    }, 500) // Delay of 500ms
+  }
+
   const renderItem = () => null
   const ListHeaderItem = () => (
     <>
@@ -154,7 +189,7 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           style={{ height: 40, marginVertical: 8 }}
         >
           <GoToCartBtn onPress={() => goToCart(item)} />
-          <BuyNowBtn />
+          <BuyNowBtn onPress={() => buyNow(item)} />
           <Pressable
             style={{
               justifyContent: 'center',
@@ -162,13 +197,14 @@ export default function ProductDetails({ navigation, route }: TsProps) {
               alignContent: 'center',
               borderRadius: 2,
             }}
-            onPress={() => Alert.alert('Saved to Wishlisht')}
+            onPress={() => saveToWishlist(item)}
           >
             <SvgIcon
               path={PATH}
               width={32}
               height={29}
-              stroke={colors.black}
+              stroke={isLiked ? colors.primary : colors.black}
+              color={isLiked ? colors.primary : colors.white}
               strokeWidth={2}
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -276,8 +312,17 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           title="282+ Items"
           textStyle={{ fontFamily: 'Montserrat_600SemiBold' }}
         />
-
-        <TsText>{item?.name || 'good'}</TsText>
+        {/* Similar Products */}
+        <View style={{ marginTop: 8, marginBottom: 0 }}>
+          <FlatList
+            data={products}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            renderItem={({ item }) => <ProductCard item={item} />}
+            keyExtractor={(item) => item.id.toString()}
+            contentContainerStyle={{ paddingBottom: 8, gap: 10 }}
+          />
+        </View>
       </MainContainer>
     </>
   )
@@ -287,6 +332,7 @@ export default function ProductDetails({ navigation, route }: TsProps) {
         data={[]}
         renderItem={renderItem}
         ListHeaderComponent={ListHeaderItem}
+        contentContainerStyle={{ paddingBottom: 0 }}
       />
     </BaseScreen>
   )

@@ -38,14 +38,7 @@ export default function HomeStack() {
           name={routes.PRODUCT_DETAILS}
           component={ProductDetails}
         />
-        <Stack.Screen
-          name={routes.CART}
-          component={Cart}
-        />
-        <Stack.Screen
-          name={routes.BUYNOW}
-          component={BuyNow}
-        />
+
         {/* continue with needed screens later */}
       </Stack.Navigator>
     </>
