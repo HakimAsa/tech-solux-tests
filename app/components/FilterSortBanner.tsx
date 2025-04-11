@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import { Image, Pressable, StyleSheet, TextProps } from 'react-native'
 import React from 'react'
 import RowContainer from '../containers/RowContainer'
 import TsText from './texts/TsText'
@@ -6,13 +6,15 @@ import en from '../config/en'
 import colors from '../config/colors'
 
 export default function FilterSortBanner({
+  textStyle,
   title = en.allFeatured,
 }: {
+  textStyle?: TextProps['style']
   title?: string
 }) {
   return (
     <RowContainer>
-      <TsText style={styles.text}>{title}</TsText>
+      <TsText style={[styles.text, textStyle]}>{title}</TsText>
       <RowContainer>
         <Pressable
           style={styles.sort}
@@ -82,7 +84,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 18,
-    color: colors.black,
     lineHeight: 22,
   },
 })
