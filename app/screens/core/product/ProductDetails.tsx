@@ -29,6 +29,7 @@ import GoToCartBtn from './GoToCartBtn'
 import BuyNowBtn from './BuyNowBtn'
 import SvgIcon from '@/app/components/icons/SvgIcon'
 import FilterSortBanner from '@/app/components/FilterSortBanner'
+import routes from '@/app/navigation/routes'
 
 const PATH =
   'M24.3333 1C19 1 16 5.445 16 7.66667C16 5.445 13 1 7.66667 1C2.33333 1 1 5.445 1 7.66667C1 19.3333 16 27.6667 16 27.6667C16 27.6667 31 19.3333 31 7.66667C31 5.445 29.6667 1 24.3333 1Z'
@@ -47,6 +48,9 @@ const images = [
 
 export default function ProductDetails({ navigation, route }: TsProps) {
   const { item } = route?.params || {}
+  const goToCart = (item: any) => {
+    navigation.navigate(routes.CART, { item })
+  }
   const renderItem = () => null
   const ListHeaderItem = () => (
     <>
@@ -149,7 +153,7 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           gap={10}
           style={{ height: 40, marginVertical: 8 }}
         >
-          <GoToCartBtn />
+          <GoToCartBtn onPress={() => goToCart(item)} />
           <BuyNowBtn />
           <Pressable
             style={{

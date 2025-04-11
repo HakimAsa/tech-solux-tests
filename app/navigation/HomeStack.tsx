@@ -8,6 +8,8 @@ import colors from '../config/colors'
 import Home from '../screens/core/home/Home'
 import Search from '../screens/core/Search'
 import ProductDetails from '../screens/core/product/ProductDetails'
+import Cart from '../screens/core/product/Cart'
+import BuyNow from '../screens/core/product/BuyNow'
 
 const Stack = createNativeStackNavigator()
 
@@ -35,6 +37,14 @@ export default function HomeStack() {
         <Stack.Screen
           name={routes.PRODUCT_DETAILS}
           component={ProductDetails}
+        />
+        <Stack.Screen
+          name={routes.CART}
+          component={Cart}
+        />
+        <Stack.Screen
+          name={routes.BUYNOW}
+          component={BuyNow}
         />
         {/* continue with needed screens later */}
       </Stack.Navigator>
