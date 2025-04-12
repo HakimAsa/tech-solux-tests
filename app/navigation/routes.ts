@@ -3,6 +3,7 @@ export default Object.freeze({
   CART: 'Cart',
   CHANGEPASSWORD: 'Change Password',
   CHECKOUT: 'Checkout',
+  CONFIRMATION: 'Confirmation',
   HOME: 'Home',
   LOGIN: 'Login',
   PRESENTATION: 'Presentation',

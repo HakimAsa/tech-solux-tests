@@ -13,7 +13,7 @@ import HomeStack from './HomeStack'
 import WhishlistStack from './WhishlistStack'
 import ProductStack from './ProductStack'
 import BuyNow from '../screens/core/product/buynow/BuyNow'
-import Checkout from '../screens/core/product/Checkout'
+import Checkout from '../screens/core/product/checkout/Checkout'
 
 const Tab = createBottomTabNavigator()
 
@@ -24,7 +24,6 @@ export default function TabNavigator({
 }) {
   return (
     <Tab.Navigator
-      // initialRouteName={routes.HOME}
       screenOptions={({ route }) => ({
         headerShadowVisible: false,
         headerShown: false,

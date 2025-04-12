@@ -10,6 +10,7 @@ import Search from '../screens/core/Search'
 import ProductDetails from '../screens/core/product/ProductDetails'
 import Cart from '../screens/core/product/gottocart/Cart'
 import BuyNow from '../screens/core/product/buynow/BuyNow'
+import Confirmation from '../screens/core/product/checkout/Confirmation'
 
 const Stack = createNativeStackNavigator()
 

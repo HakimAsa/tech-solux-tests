@@ -7,7 +7,8 @@ import Cart from '../screens/core/product/gottocart/Cart'
 import BuyNow from '../screens/core/product/buynow/BuyNow'
 
 import { useNavigationState } from '@react-navigation/native'
-import Checkout from '../screens/core/product/Checkout'
+import Checkout from '../screens/core/product/checkout/Checkout'
+import Confirmation from '../screens/core/product/checkout/Confirmation'
 
 const Stack = createNativeStackNavigator()
 
@@ -35,6 +36,10 @@ export default function AppNavigator() {
           return <TabNavigator shouldHideTabBar={shouldHideTabBar} />
         }}
       />
+      {/* <Stack.Screen
+        name={routes.HOME}
+        component={Hom} // Add Home directly to AppNavigator
+      /> */}
       <Stack.Screen
         name={routes.PROFILE}
         component={Profile}
@@ -54,6 +59,10 @@ export default function AppNavigator() {
       <Stack.Screen
         name={routes.CHECKOUT}
         component={Checkout}
+      />
+      <Stack.Screen
+        name={routes.CONFIRMATION}
+        component={Confirmation}
       />
     </Stack.Navigator>
   )

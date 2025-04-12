@@ -8,7 +8,8 @@ import colors from '../config/colors'
 import ProductDetails from '../screens/core/product/ProductDetails'
 import Cart from '../screens/core/product/gottocart/Cart'
 import BuyNow from '../screens/core/product/buynow/BuyNow'
-import Checkout from '../screens/core/product/Checkout'
+import Checkout from '../screens/core/product/checkout/Checkout'
+import Confirmation from '../screens/core/product/checkout/Confirmation'
 
 const Stack = createNativeStackNavigator()
 
@@ -28,6 +29,10 @@ export default function ProductStack() {
         <Stack.Screen
           name={routes.CHECKOUT}
           component={Checkout}
+        />
+        <Stack.Screen
+          name={routes.CONFIRMATION}
+          component={Confirmation}
         />
       </Stack.Navigator>
     </>

@@ -14,6 +14,7 @@ const en = {
   cart: 'Cart',
   changePassword: 'Change Password',
   checkout: 'Checkout',
+  continue: 'Continue',
   chooseProducts: 'Choose Products',
   city: 'City',
   createAccount: 'Create Account',
