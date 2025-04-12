@@ -76,8 +76,8 @@ export default function BuyNow({ navigation, route }: TsProps) {
                   </RowContainer>
 
                   <BasicRowContainer gap={5}>
-                    <TsText style={styles.delivery}> Delivery by</TsText>
-                    <TsText style={styles.date}> 2XXX</TsText>
+                    <TsText style={styles.delivery}>Delivery by</TsText>
+                    <TsText style={styles.date}>2XXX</TsText>
                   </BasicRowContainer>
                 </View>
               </BasicRowContainer>
@@ -111,7 +111,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     lineHeight: 13,
     letterSpacing: -0.3,
-    left: -5, //gap value
   },
   shortDescription: {
     fontFamily: 'Montserrat_400Regular',

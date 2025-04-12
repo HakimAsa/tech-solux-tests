@@ -8,11 +8,13 @@ import { formatNumberWithCurrency } from '@/app/utils/helpers'
 export default function OrderAmount({
   amountStyle,
   labelStyle,
+  currency = currencySymbolRupee,
   label = 'Order Amounts',
   amount = 0,
 }: {
-  label?: string
   amount?: number
+  currency?: string
+  label?: string
   labelStyle?: TextProps['style']
   amountStyle?: TextProps['style']
 }) {
@@ -20,7 +22,7 @@ export default function OrderAmount({
     <RowContainer>
       <TsText style={[labelStyle]}>{label}</TsText>
       <TsText style={[{ fontFamily: 'Montserrat_600SemiBold' }, amountStyle]}>
-        {formatNumberWithCurrency(amount, currencySymbolRupee)}
+        {formatNumberWithCurrency(amount, currency)}
       </TsText>
     </RowContainer>
   )

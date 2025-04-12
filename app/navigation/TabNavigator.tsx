@@ -13,6 +13,7 @@ import HomeStack from './HomeStack'
 import WhishlistStack from './WhishlistStack'
 import ProductStack from './ProductStack'
 import BuyNow from '../screens/core/product/buynow/BuyNow'
+import Checkout from '../screens/core/product/Checkout'
 
 const Tab = createBottomTabNavigator()
 
@@ -131,10 +132,10 @@ export default function TabNavigator({
         }}
       />
       {/* <Tab.Screen
-        name={routes.BUYNOW}
-        component={BuyNow}
+        name={routes.CHECKOUT}
+        component={Checkout}
         options={{
-          tabBarStyle: { display: 'none' }, // Hide the tab bar for this screen
+          tabBarItemStyle: { display: 'none' }, // Hide the tab bar for this screen
         }}
       /> */}
     </Tab.Navigator>

@@ -10,9 +10,11 @@ import { formatNumberWithCurrency } from '@/app/utils/helpers'
 export default function TsBottomTab({
   onPress,
   amount = 0,
+  currency = currencySymbolRupee,
 }: {
   onPress: () => void
   amount?: number
+  currency?: string
 }) {
   return (
     <View style={styles.wrapper}>
@@ -27,7 +29,7 @@ export default function TsBottomTab({
               medium
               style={{ fontFamily: 'Montserrat_600SemiBold' }}
             >
-              {formatNumberWithCurrency(amount, currencySymbolRupee)}
+              {formatNumberWithCurrency(amount, currency)}
             </TsText>
             <TsPressable small>View Details</TsPressable>
           </View>

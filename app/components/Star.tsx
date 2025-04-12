@@ -9,6 +9,7 @@ interface StarRatingProps {
   totalReview?: number // Match Figma spacing
   starSize?: number // Match Figma spacing
   totalReviewStyle?: TextProps['style'] // Match Figma spacing
+  starHeight?: number
 }
 
 export default function Star({
@@ -16,6 +17,7 @@ export default function Star({
   totalReview = 0,
   totalReviewStyle,
   starSize,
+  starHeight,
 }: StarRatingProps) {
   const filledStars = rating ? Math.floor(rating) : 0
   const totalStars = 5
@@ -36,7 +38,10 @@ export default function Star({
                 ? require('@/assets/images/starfilled.png')
                 : require('@/assets/images/star.png')
             }
-            style={{ width: starSize || 14, height: starSize || 14 }}
+            style={{
+              width: starSize || 14,
+              height: starHeight || starSize || 14,
+            }}
           />
         ))}
 
