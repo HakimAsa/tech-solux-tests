@@ -28,6 +28,7 @@ import ColorVariation from './ColorVariation'
 import SvgIcon from '@/app/components/icons/SvgIcon'
 import Address from './Address'
 import AddAdress from './AddAdress'
+import BorderWidth from '../BorderWidth'
 const MAP_SVG =
   'M6.9999 1.00042C3.69097 1.00042 1 3.52323 1 6.62539V7.0003C1 8.29806 1.43645 9.56355 2.24685 10.6154L6.04221 15.54C6.26426 15.8284 6.62077 16 7.00007 16C7.38204 16 7.7407 15.8223 7.95632 15.5269L11.8 10.2593C12.5812 9.18884 13 7.92196 13 6.62497C13 3.52282 10.309 1 7.0001 1L6.9999 1.00042ZM6.9999 1.75037C9.87649 1.75037 12.1999 3.92855 12.1999 6.62545C12.1999 7.77141 11.8308 8.89065 11.1406 9.83635L7.29516 15.1039C7.22807 15.1958 7.11865 15.2504 6.99985 15.2504C6.87678 15.2504 6.76254 15.1961 6.69049 15.1025L2.89512 10.1763C2.18302 9.25196 1.79974 8.14066 1.79974 7.00046V6.62555C1.79974 3.92871 4.12311 1.75047 6.99977 1.75047L6.9999 1.75037Z'
 export default function Cart({ route, navigation }: TsProps) {
@@ -57,6 +58,7 @@ export default function Cart({ route, navigation }: TsProps) {
             title={en.cart}
             leftIconStyle={-22}
           />
+          <BorderWidth borderColor="rgba(198, 198, 198, 0.2)" />
           <MainContainer
             style={{
               padding: 22,
@@ -234,7 +236,11 @@ export default function Cart({ route, navigation }: TsProps) {
                     </BasicRowContainer>
                   </View>
                 </BasicRowContainer>
-                <LineSeparator color="#CACACA" />
+                {/* <LineSeparator color="#CACACA" /> */}
+                <BorderWidth
+                  style={{ marginVertical: 15 }}
+                  borderColor="rgba(187, 187, 187, .6)"
+                />
                 <View style={{ top: -7.5 }}>
                   <OrderAmount
                     label="Total Order(1) :"

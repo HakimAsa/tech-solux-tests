@@ -6,6 +6,7 @@ import MainContainer, { ScrollableMainContainer } from '@/app/containers'
 import BasicHeader from '@/app/components/headers/BasicHeader'
 import en from '@/app/config/en'
 import TsProps from '@/TsProps'
+import BorderWidth from './BorderWidth'
 
 export default function Checkout({ navigation }: TsProps) {
   return (
@@ -23,6 +24,7 @@ export default function Checkout({ navigation }: TsProps) {
           title={en.checkout}
           leftIconStyle={-22}
         />
+        <BorderWidth borderColor="rgba(198, 198, 198, 0.2)" />
         <MainContainer
           style={{
             padding: 33,

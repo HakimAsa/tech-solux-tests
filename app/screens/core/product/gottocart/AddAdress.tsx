@@ -1,4 +1,11 @@
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import {
+  Modal,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 import React, { useState } from 'react'
 import { Image } from 'react-native'
 import colors from '@/app/config/colors'
@@ -6,34 +13,35 @@ import DecisionBtn from '@/app/components/buttons/DecisionBtn'
 import TsTextInput from '@/app/components/inputs/TsTextInput'
 import TsText from '@/app/components/texts/TsText'
 
-export default function AddAdress({ onPress }: { onPress?: () => void }) {
-  const [isModalVisible, setIsModalVisible] = useState(false)
+export default function AddAdress() {
+  const [isVisible, setIsVisible] = useState(false)
   const [newAddress, setNewAddress] = useState('')
   const [newContact, setNewContact] = useState('')
 
   const handleSave = () => {
-    setIsModalVisible(false)
+    setIsVisible(false)
     // Save the new address and contact here (e.g., send to server or update state)
     console.log('New Address:', newAddress)
     console.log('New Contact:', newContact)
   }
   return (
     <>
-      <Pressable
-        onPress={onPress}
+      <TouchableOpacity
+        // onPress={onPress}
+        onPress={() => setIsVisible(true)} // Show the modal
         style={styles.addIconWrapper}
       >
         <Image
           source={require('@/assets/images/pluscircleicon.png')}
           style={styles.addIcon}
         />
-      </Pressable>
+      </TouchableOpacity>
       {/* Modal for Adding Address */}
       <Modal
-        visible={isModalVisible}
+        visible={isVisible}
         transparent={true}
         animationType="slide"
-        onRequestClose={() => setIsModalVisible(false)} // Close modal on back press
+        onRequestClose={() => setIsVisible(false)} // Close modal on back press
       >
         <View style={styles.modalOverlay}>
           <View style={styles.modalContainer}>
@@ -52,7 +60,7 @@ export default function AddAdress({ onPress }: { onPress?: () => void }) {
               keyboardType="phone-pad"
             />
             <DecisionBtn
-              onCancel={() => setIsModalVisible(false)}
+              onCancel={() => setIsVisible(false)}
               onSave={handleSave}
             />
           </View>
