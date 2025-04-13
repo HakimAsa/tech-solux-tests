@@ -16,7 +16,8 @@ import ErrorMessages from '@/app/components/forms/ErrorMessages'
 import { doSetUserCredentials } from '@/app/utils/helpers'
 import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
 import { CommonActions } from '@react-navigation/native'
-
+import { jwtDecode } from 'jwt-decode'
+import authStorage from '@/app/context/auth/Storage'
 export default function Login({ navigation }: TsProps) {
   const { login } = useAuth()
 
@@ -29,7 +30,10 @@ export default function Login({ navigation }: TsProps) {
     const res = await loginUser(data as any)
     if (!res?.ok) return
     const { token } = res.data as any
-    login(token as string)
+    const user = jwtDecode(token)
+    console.log(user)
+    login(user)
+    authStorage.storeToken(token)
     // Navigate to GetStarted screen TODO should not be able to come back here using back android
     // navigation.dispatch(
     //   CommonActions.reset({

@@ -39,11 +39,14 @@ import {
 } from '@react-navigation/native'
 import SearchProvider from './context/SearchContext'
 import colors from './config/colors'
+import TsActivityIndicator from './components/loader/TsActivityIndicator'
+import AuthContext from './context/auth/AuthContext'
+import { jwtDecode } from 'jwt-decode'
 
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  const { user } = useAuth()
+  // const { user } = useAuth()
   const [fontsLoaded] = useFonts({
     LibreCaslonText_700Bold,
     Montserrat_100Thin_Italic,
@@ -60,10 +63,12 @@ export default function RootLayout() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [user, setUser] = useState<object | null>(null)
 
   useEffect(() => {
     const checkAuthStatus = async () => {
       const token = await authStorage.getToken()
+      console.log('Retrieved token:', token) // Debugging: Check if the token is retrieved...
       setIsAuthenticated(!!token)
       setIsLoading(false)
     }
@@ -77,6 +82,21 @@ export default function RootLayout() {
     }
   }, [fontsLoaded])
 
+  useEffect(() => {
+    restoreUser()
+  }, [])
+
+  const restoreUser = async () => {
+    const token = await authStorage.getToken()
+    if (!token) return
+    const user = jwtDecode(token)
+    setUser(user)
+  }
+
+  if (isLoading) {
+    return <TsActivityIndicator visible={isLoading} /> // Show a loading indicator while checking auth status
+  }
+
   if (!fontsLoaded) {
     return null // Prevent rendering until the font is loaded
   }
@@ -87,19 +107,21 @@ export default function RootLayout() {
         style="light"
         backgroundColor={colors.background}
       />
-      <NavigationIndependentTree>
-        <NavigationContainer theme={navigationTheme}>
-          {isAuthenticated ? (
-            <KkiapayProvider>
-              <SearchProvider>
-                <AppNavigator />
-              </SearchProvider>
-            </KkiapayProvider>
-          ) : (
-            <AuthNavigator />
-          )}
-        </NavigationContainer>
-      </NavigationIndependentTree>
+      <AuthContext.Provider value={{ user, setUser }}>
+        <NavigationIndependentTree>
+          <NavigationContainer theme={navigationTheme}>
+            {user ? (
+              <KkiapayProvider>
+                <SearchProvider>
+                  <AppNavigator />
+                </SearchProvider>
+              </KkiapayProvider>
+            ) : (
+              <AuthNavigator />
+            )}
+          </NavigationContainer>
+        </NavigationIndependentTree>
+      </AuthContext.Provider>
     </>
   )
 }

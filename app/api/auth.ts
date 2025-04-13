@@ -1,12 +1,12 @@
 import apiClient, { httpRequest } from './client'
 import ep from '../config/constants'
-import { doSetForwardslash as sf } from '../utils/helpers'
 import HM from '../utils/httpMethods'
-import { ApiResponse } from 'apisauce'
+import { doSetForwardslash as sf } from '../utils/helpers'
 
 const {
   AUTH,
   LOGIN,
+  LOGOUT,
   OTP,
   REGISTER,
   REQUESTFORGOTPASSWORDOTP,
@@ -23,6 +23,8 @@ export interface LoginCredentials {
 const login = (data: LoginCredentials): Promise<any> =>
   httpRequest(sf(AUTH, LOGIN), HM.POST, data)
 
+const logout = (): Promise<any> => httpRequest(sf(AUTH, LOGOUT), HM.GET)
+
 const register = (data: object): Promise<any> =>
   httpRequest(sf(AUTH, REGISTER), HM.POST, data)
 
@@ -36,6 +38,7 @@ const resendOPTCode = (email: string, userId: string) =>
   apiClient.post(sf(AUTH, VERIFY, RESEND, OTP), { email, userId })
 export default {
   login,
+  logout,
   register,
   requestForgotPasswordOTP,
   resetPasswordOTP,

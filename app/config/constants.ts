@@ -38,13 +38,16 @@ export const StatusBarHeight = Constants.statusBarHeight
 const ep = {
   AUTH: 'auth',
   LOGIN: 'login',
+  LOGOUT: 'logout',
   OTP: 'otp',
   PRODUCTS: 'products',
   REGISTER: 'register',
   REQUESTFORGOTPASSWORDOTP: 'request-forgotpassword-otp',
   RESEND: 'resend',
   RESETPASSWORDOTP: 'resetpassword-otp',
+  top: 'top',
   VERIFY: 'verify',
+  whishlists: 'whishlists',
 }
 
 export default ep

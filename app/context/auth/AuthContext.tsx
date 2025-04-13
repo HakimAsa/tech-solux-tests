@@ -1,8 +1,8 @@
 import React from 'react'
 
 interface AuthContextType {
-  user: string | null
-  setUser: React.Dispatch<React.SetStateAction<string | null>>
+  user: object | null
+  setUser: React.Dispatch<React.SetStateAction<object | null>>
 }
 
 const AuthContext = React.createContext<AuthContextType | null>({

@@ -11,9 +11,9 @@ const apiClient: ApisauceInstance = create({
 
 apiClient.addAsyncRequestTransform(async (request: any) => {
   const authToken = await authStorage.getToken()
-  if (!authToken?.isAuthenticated) return
-  request.headers['Authorization'] = `Bearer ${authToken.token}`
-  request.headers['x-auth-token'] = authToken.token
+  if (!authToken) return
+  request.headers['Authorization'] = `Bearer ${authToken}`
+  request.headers['x-auth-token'] = authToken
 })
 
 export const sleep = (ms: number) =>
