@@ -16,21 +16,34 @@ import TsButton from '@/app/components/buttons/TsButton'
 import TsText from '@/app/components/texts/TsText'
 import PaymenttInput from '@/app/components/inputs/PaymentInput'
 import routes from '@/app/navigation/routes'
+import SuccessfullPaymentContent from './SuccessfullPaymentContent'
 
 export default function Checkout({ navigation }: TsProps) {
-  const [selectedMethod, setSelectedMethod] = useState<string | null>('visa') // Track selected payment method
+  const [selectedMethod, setSelectedMethod] = useState<string | null>('visa')
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
 
   const handleSelectMethod = (method: string) => {
-    setSelectedMethod(method) // Update the selected method
+    setSelectedMethod(method)
+  }
+
+  const simulateKkiapayPayment = () => {
+    // You can integrate real SDK logic here.
+    // For demo/sandbox, we'll show the confirmation modal after a fake "success"
+    setTimeout(() => {
+      setShowConfirmationModal(true)
+    }, 1000) // simulate 1s processing delay
   }
 
   const handleContinue = () => {
     if (selectedMethod) {
       console.log(`Selected Payment Method: ${selectedMethod}`)
       // Navigate to the next screen or perform the confirmation logic
-      navigation.navigate(routes.CONFIRMATION, {
-        paymentMethod: selectedMethod,
-      })
+      //   navigation.navigate(routes.CONFIRMATION, {
+      //     paymentMethod: selectedMethod,
+      //   })
+      // }
+      // Simulate Kkiapay payment here
+      simulateKkiapayPayment()
     }
   }
   const doSetStyle = (method: string) => {
@@ -123,9 +136,51 @@ export default function Checkout({ navigation }: TsProps) {
           </MainContainer>
         </BaseScreen>
       </ScrollableMainContainer>
-      {/* <Modal></Modal> */}
+      {/* Confirmation Modal */}
+      <Modal
+        visible={showConfirmationModal}
+        animationType="slide"
+        transparent
+        onRequestClose={() => setShowConfirmationModal(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <SuccessfullPaymentContent />
+            {/* <Text style={{ fontSize: 20, marginBottom: 20 }}>
+              Payment Successful 🎉
+            </Text> */}
+            <TsButton
+              onPress={() => {
+                setShowConfirmationModal(false)
+                navigation.navigate(routes.CONFIRMATION, {
+                  paymentMethod: selectedMethod,
+                })
+              }}
+              button={{ height: 40, marginVertical: 15 }}
+              style={{
+                fontSize: 16,
+              }}
+            >
+              Go to Confirmation Page
+            </TsButton>
+          </View>
+        </View>
+      </Modal>
     </>
   )
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: 'rgba(13, 11, 11, .6)',
+    padding: 20,
+  },
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 30,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+})
