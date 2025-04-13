@@ -5,8 +5,9 @@ import {
   ViewToken,
   Alert,
   Image,
+  Animated,
 } from 'react-native'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import RadialShadowChevron from '@/app/screens/core/home/RadialShadowChevron'
 import TsText from '../texts/TsText'
@@ -35,6 +36,39 @@ export default function ImageSlider({
   showRightChevron = false,
   showLeft = false,
 }: ImageSliderProps) {
+  const flatListRef = useRef<FlatList>(null)
+  const scrollX = useRef(new Animated.Value(0)).current
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const onViewRef = useRef(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      if (viewableItems.length > 0) {
+        setActiveIndex(viewableItems[0].index || 0)
+      }
+    }
+  )
+
+  const viewConfigRef = useRef({
+    viewAreaCoveragePercentThreshold: 50,
+    minimumViewTime: 50,
+    waitForInteraction: true,
+  })
+
+  const ITEM_WIDTH = ScreenWidth - 32 //170
+  const SPACING = 32
+  // const scrollX = useRef(0)
+
+  const scrollRight = () => {
+    if (activeIndex < imageList.length - 1) {
+      const newIndex = activeIndex + 1
+      setActiveIndex(newIndex) // 🔥 Mise à jour immédiate de l'index
+      flatListRef.current?.scrollToIndex({
+        index: newIndex, // ✅ Plus propre
+        animated: true,
+      })
+    }
+  }
+
   const renderItem = ({ item }: { item: any }) => {
     return (
       <>
@@ -92,48 +126,49 @@ export default function ImageSlider({
             />
           </View>
         )}
-        {showRightChevron && (
-          <View style={{ position: 'absolute', top: '45%', right: 25 }}>
-            <RadialShadowChevron onPress={() => alert('ok')} />
-          </View>
-        )}
       </>
     )
   }
-  const [activeIndex, setActiveIndex] = useState(0)
-  const onViewRef = useRef(
-    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
-      if (viewableItems.length > 0) {
-        setActiveIndex(viewableItems[0].index || 0)
-      }
-    }
-  )
 
-  const viewConfigRef = useRef({
-    viewAreaCoveragePercentThreshold: 50,
-    minimumViewTime: 50,
-    waitForInteraction: true,
-  })
+  const handleOnScroll = (event: any) => {
+    if (activeIndex === undefined || activeIndex === null) return
+    Animated.event(
+      [
+        {
+          nativeEvent: {
+            contentOffset: {
+              x: scrollX,
+            },
+          },
+        },
+      ],
+      {
+        useNativeDriver: false,
+      }
+    )(event)
+  }
 
   return (
     <View style={styles.container}>
       <FlatList
+        ref={flatListRef}
         data={imageList}
         keyExtractor={(_, index) => index.toString()}
         horizontal
         pagingEnabled
         snapToAlignment="center"
         showsHorizontalScrollIndicator={false}
+        extraData={activeIndex}
         onViewableItemsChanged={onViewRef.current}
         viewabilityConfig={viewConfigRef.current}
         renderItem={renderItem}
-        contentContainerStyle={
-          {
-            // paddingHorizontal: -16,
-          }
-        }
+        onScroll={handleOnScroll}
+        // getItemLayout={(data, index) => ({
+        //   length: ITEM_WIDTH,
+        //   offset: ITEM_WIDTH * index,
+        //   index,
+        // })}
       />
-
       {/* Pagination Dots */}
       <View style={styles.pagination}>
         {imageList.map((_, index) => (
@@ -152,6 +187,11 @@ export default function ImageSlider({
           />
         ))}
       </View>
+      {showRightChevron && (
+        <View style={{ position: 'absolute', top: '40%', right: 20 }}>
+          <RadialShadowChevron onPress={scrollRight} />
+        </View>
+      )}
     </View>
   )
 }
