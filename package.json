@@ -20,6 +20,7 @@
     "@expo-google-fonts/plus-jakarta-sans": "^0.3.0",
     "@expo-google-fonts/poppins": "^0.3.0",
     "@expo/vector-icons": "^14.0.2",
+    "@kkiapay-org/react-native-sdk": "^0.1.5",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/elements": "^2.3.1",

@@ -236,6 +236,7 @@ export default function Cart({ route, navigation }: TsProps) {
                     </BasicRowContainer>
                   </View>
                 </BasicRowContainer>
+                {/* <LineSeparator color="#CACACA" /> */}
                 <BorderWidth
                   style={{ marginVertical: 15 }}
                   borderColor="rgba(187, 187, 187, .6)"
@@ -260,7 +261,13 @@ export default function Cart({ route, navigation }: TsProps) {
       <TsBottomTab
         amount={price || 34}
         currency={currencySymbol || currencySymbolDollar}
-        onPress={() => navigation.navigate(routes.CHECKOUT, { id: item?._id })}
+        onPress={() =>
+          navigation.navigate('ProductTab', {
+            screen: routes.CHECKOUT, // Navigate to Checkout within ShoppingCartStack
+            params: { id: item?._id },
+          })
+        }
+        // navigation.navigate(routes.CHECKOUT, { id: item?._id })}
       />
     </>
   )

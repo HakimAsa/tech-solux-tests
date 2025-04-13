@@ -1,5 +1,6 @@
-import { Modal, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import { Modal, StyleSheet, View } from 'react-native'
+import { useKkiapay } from '@kkiapay-org/react-native-sdk'
+import { useEffect, useState } from 'react'
 import BaseScreen from '@/app/components/BaseScreen'
 import colors from '@/app/config/colors'
 import MainContainer, { ScrollableMainContainer } from '@/app/containers'
@@ -21,6 +22,19 @@ import SuccessfullPaymentContent from './SuccessfullPaymentContent'
 export default function Checkout({ navigation }: TsProps) {
   const [selectedMethod, setSelectedMethod] = useState<string | null>('visa')
   const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+  const { openKkiapayWidget, addSuccessListener, addFailedListener } =
+    useKkiapay()
+
+  useEffect(() => {
+    addSuccessListener((data) => {
+      console.log('✅ Payment successful:', data)
+      setShowConfirmationModal(true) // show your modal here
+    })
+
+    addFailedListener((data) => {
+      console.log('❌ Payment failed:', data)
+    })
+  }, [])
 
   const handleSelectMethod = (method: string) => {
     setSelectedMethod(method)
@@ -29,22 +43,29 @@ export default function Checkout({ navigation }: TsProps) {
   const simulateKkiapayPayment = () => {
     // You can integrate real SDK logic here.
     // For demo/sandbox, we'll show the confirmation modal after a fake "success"
-    setTimeout(() => {
-      setShowConfirmationModal(true)
-    }, 1000) // simulate 1s processing delay
+    openKkiapayWidget({
+      amount: 1,
+      api_key: 'fee29e80184511f0936463e2e50313c3',
+      publicAPIKey: 'fee29e80184511f0936463e2e50313c3',
+      sandbox: true,
+      email: 'testuser@example.com', //'akimayena26@gmail.com',
+      key: '67fb7d971fc46d13dacd3b5d', //'67fb7d971fc46d13dacd3b5d',
+      phone: '97000000',
+      reason: 'Payment for order #12345', // Add a reason for the payment
+    })
   }
 
   const handleContinue = () => {
     if (selectedMethod) {
       console.log(`Selected Payment Method: ${selectedMethod}`)
-      // Navigate to the next screen or perform the confirmation logic
-      //   navigation.navigate(routes.CONFIRMATION, {
-      //     paymentMethod: selectedMethod,
-      //   })
-      // }
-      // Simulate Kkiapay payment here
       simulateKkiapayPayment()
     }
+  }
+  const handleModalClose = () => {
+    setShowConfirmationModal(false) // Close the modal
+    navigation.navigate(routes.CONFIRMATION, {
+      paymentMethod: selectedMethod,
+    }) // Navigate to the confirmation page
   }
   const doSetStyle = (method: string) => {
     return {
@@ -137,6 +158,7 @@ export default function Checkout({ navigation }: TsProps) {
         </BaseScreen>
       </ScrollableMainContainer>
       {/* Confirmation Modal */}
+      {console.log('modal true', showConfirmationModal)}
       <Modal
         visible={showConfirmationModal}
         animationType="slide"
@@ -150,12 +172,7 @@ export default function Checkout({ navigation }: TsProps) {
               Payment Successful 🎉
             </Text> */}
             <TsButton
-              onPress={() => {
-                setShowConfirmationModal(false)
-                navigation.navigate(routes.CONFIRMATION, {
-                  paymentMethod: selectedMethod,
-                })
-              }}
+              onPress={handleModalClose}
               button={{ height: 40, marginVertical: 15 }}
               style={{
                 fontSize: 16,

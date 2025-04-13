@@ -94,7 +94,13 @@ export default function BuyNow({ navigation, route }: TsProps) {
       </ScrollableMainContainer>
       <TsBottomTab
         amount={7000}
-        onPress={() => navigation.navigate(routes.CHECKOUT, { id: item?._id })}
+        onPress={() =>
+          navigation.navigate('ProductTab', {
+            screen: routes.CHECKOUT, // Navigate to Checkout within ShoppingCartStack
+            params: { id: item?._id },
+          })
+        }
+        //navigation.navigate(routes.CHECKOUT, { id: item?._id })}
       />
     </>
   )

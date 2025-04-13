@@ -14,6 +14,7 @@ import WhishlistStack from './WhishlistStack'
 import ProductStack from './ProductStack'
 import BuyNow from '../screens/core/product/buynow/BuyNow'
 import Checkout from '../screens/core/product/checkout/Checkout'
+import Cart from '../screens/core/product/gottocart/Cart'
 
 const Tab = createBottomTabNavigator()
 
@@ -130,13 +131,29 @@ export default function TabNavigator({
           }
         }}
       />
-      {/* <Tab.Screen
+      <Tab.Screen
         name={routes.CHECKOUT}
         component={Checkout}
         options={{
           tabBarItemStyle: { display: 'none' }, // Hide the tab bar for this screen
         }}
-      /> */}
+      />
+      <Tab.Screen
+        name={routes.CART}
+        component={Cart}
+        options={{
+          tabBarStyle: { display: 'none' }, // Hide the tab bar for Cart
+          tabBarItemStyle: { display: 'none' }, // Hide the tab bar for Cart
+        }}
+      />
+      <Tab.Screen
+        name={routes.BUYNOW}
+        component={BuyNow}
+        options={{
+          tabBarStyle: { display: 'none' }, // Hide the tab bar for Cart
+          tabBarItemStyle: { display: 'none' }, // Hide the tab bar for Cart
+        }}
+      />
     </Tab.Navigator>
   )
 }

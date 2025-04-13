@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
+// In your app file -- App
+import { KkiapayProvider } from '@kkiapay-org/react-native-sdk'
 import { PlusJakartaSans_500Medium } from '@expo-google-fonts/plus-jakarta-sans/500Medium'
 import { LibreCaslonText_700Bold } from '@expo-google-fonts/libre-caslon-text/700Bold'
 import {
@@ -88,9 +90,11 @@ export default function RootLayout() {
       <NavigationIndependentTree>
         <NavigationContainer theme={navigationTheme}>
           {isAuthenticated ? (
-            <SearchProvider>
-              <AppNavigator />
-            </SearchProvider>
+            <KkiapayProvider>
+              <SearchProvider>
+                <AppNavigator />
+              </SearchProvider>
+            </KkiapayProvider>
           ) : (
             <AuthNavigator />
           )}
