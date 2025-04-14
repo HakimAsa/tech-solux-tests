@@ -1,6 +1,6 @@
 export default [
   {
-    id: '1',
+    _id: '1',
     name: 'Woman Printed Kurta',
     price: 1500,
     size: 10,
@@ -13,7 +13,7 @@ export default [
     description: 'Neque porro quisquam est qui dolorem ipsum quia',
   },
   {
-    id: '2',
+    _id: '2',
     name: 'HRX by Hrithik Roshan',
     price: 2499,
     size: 12,
@@ -26,7 +26,7 @@ export default [
     description: 'Neque porro quisquam est qui dolorem ipsum quia',
   },
   {
-    id: '3',
+    _id: '3',
     name: 'Black Winter...',
     price: 499,
     rating: {
@@ -39,7 +39,7 @@ export default [
     description: 'Autumn And Winter Casual cotton-padded jacket...',
   },
   {
-    id: '4',
+    _id: '4',
     name: 'IWC Watch',
     price: 650,
     rating: {
@@ -53,7 +53,7 @@ export default [
     description: `IWC Schaffhausen 2021 Pilot's Watch "SIHH 2019" 44mm`,
   },
   {
-    id: '5',
+    _id: '5',
     name: 'White Sneaker',
     price: 650,
     rating: {
@@ -68,7 +68,7 @@ export default [
   },
 
   {
-    id: '6',
+    _id: '6',
     name: "Mamon Women's Handbag",
     price: 750,
     rating: {

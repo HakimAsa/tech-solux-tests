@@ -20,7 +20,8 @@ const RenderProduct = React.memo(({ item }: { item: any }) => {
 })
 
 export default function Whishlist({ navigation }: TsProps) {
-  const { searchResults, searchTerm, setAllProducts } = useSearchContext()
+  const { searchResults, searchTerm, setAllProducts, allProducts } =
+    useSearchContext()
   const isSearching = !!searchTerm
   const dataToShow = isSearching ? searchResults : products
   // const dataToShow = searchTerm ? searchResults : products
@@ -43,7 +44,9 @@ export default function Whishlist({ navigation }: TsProps) {
       >
         <FlatList
           data={dataToShow}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item, index) =>
+            item?._id?.toString() || index.toString()
+          }
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <View
@@ -71,7 +74,7 @@ export default function Whishlist({ navigation }: TsProps) {
               />
 
               <SearchBar
-                products={products}
+                products={allProducts}
                 goToSearch={goToSearch}
               />
               <FilterSortBanner title={`52,082+ items`} />

@@ -1,19 +1,24 @@
-import { FlatList, Image, Pressable, StyleSheet, View } from 'react-native'
-import { useRef, useState } from 'react'
-import colors from '@/app/config/colors'
-import products from '@/app/data/products'
+import { FlatList, StyleSheet, View } from 'react-native'
+import { useEffect, useRef } from 'react'
 import ProductCard from '@/app/components/cards/ProductCard'
 import RadialGradientChevron from './RadialShadowChevron'
-
-const dealOfDaysProducts = products.filter(
-  (product) => product.discount > 0 && product.istrending
-)
+import useApi from '@/app/hooks/useApi'
+import productApi from '@/app/api/products'
+import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
+import ErrorMessages from '@/app/components/forms/ErrorMessages'
 
 export default function TrendingProduct({
   onTrendingItemPress,
 }: {
   onTrendingItemPress?: (item: any) => void
 }) {
+  const {
+    data: trendingProducts = [],
+    error,
+    loading,
+    message,
+    request: getTopRatedProducts,
+  } = useApi<Array<any>, any>(productApi.getTopRatedProducts)
   const flatListRef = useRef<FlatList>(null)
 
   const ITEM_WIDTH = 170
@@ -21,7 +26,8 @@ export default function TrendingProduct({
   const scrollX = useRef(0)
 
   const scrollRight = () => {
-    const maxOffset = (products.length - 1) * (ITEM_WIDTH + SPACING)
+    const maxOffset =
+      ((trendingProducts?.length || 0) - 1) * (ITEM_WIDTH + SPACING)
     const nextOffset = Math.min(
       scrollX.current + ITEM_WIDTH + SPACING,
       maxOffset
@@ -29,41 +35,63 @@ export default function TrendingProduct({
 
     flatListRef.current?.scrollToOffset({ offset: nextOffset, animated: true })
   }
+  useEffect(() => {
+    const fetchTopRated = async () => {
+      await getTopRatedProducts()
+    }
+
+    fetchTopRated()
+  }, [])
 
   return (
-    <View style={styles.container}>
-      <FlatList
-        ref={flatListRef}
-        data={dealOfDaysProducts}
-        renderItem={({ item }) => (
-          <ProductCard
-            showName={false}
-            showStar={false}
-            width={142}
-            height={186}
-            imageHeight={100}
-            item={item}
-            nameFontSize={12}
-            descriptionFontSize={10}
-            onPress={() => onTrendingItemPress?.(item)}
+    <>
+      {loading ? (
+        <TsActivityIndicator visible={loading} />
+      ) : (
+        <>
+          <ErrorMessages
+            visible={error}
+            error={message || ''}
           />
-        )}
-        onScroll={(e) => {
-          scrollX.current = e.nativeEvent.contentOffset.x
-        }}
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => item.id.toString()}
-        contentContainerStyle={styles.listContent}
-      />
+          <View style={styles.container}>
+            <FlatList
+              ref={flatListRef}
+              data={trendingProducts}
+              renderItem={({ item }) => (
+                <ProductCard
+                  showName={false}
+                  showStar={false}
+                  width={142}
+                  height={186}
+                  imageHeight={100}
+                  item={item}
+                  nameFontSize={12}
+                  descriptionFontSize={10}
+                  onPress={() => onTrendingItemPress?.(item)}
+                />
+              )}
+              onScroll={(e) => {
+                scrollX.current = e.nativeEvent.contentOffset.x
+              }}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyExtractor={(item, index) =>
+                item?._id?.toString() || index.toString()
+              }
+              contentContainerStyle={styles.listContent}
+            />
 
-      {/* Next button at right angle in the middle */}
-      <View style={styles.chevron}>
-        <RadialGradientChevron onPress={scrollRight} />
-      </View>
-    </View>
+            {/* Next button at right angle in the middle */}
+            <View style={styles.chevron}>
+              <RadialGradientChevron onPress={scrollRight} />
+            </View>
+          </View>
+        </>
+      )}
+    </>
   )
 }
+
 const styles = StyleSheet.create({
   container: {
     marginVertical: 15,

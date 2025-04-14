@@ -45,7 +45,7 @@ const ep = {
   REQUESTFORGOTPASSWORDOTP: 'request-forgotpassword-otp',
   RESEND: 'resend',
   RESETPASSWORDOTP: 'resetpassword-otp',
-  top: 'top',
+  TOP: 'top',
   VERIFY: 'verify',
   whishlists: 'whishlists',
 }

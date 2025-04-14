@@ -16,16 +16,17 @@ import { currencySymbolRupee } from '@/app/config/constants'
 
 interface ProductProps {
   item: {
-    id: string
+    _id: string
     price: number
     discount?: number
+    currencySymbol?: string
     rating?: {
       average: number
       count: number
     }
     description?: string
     name?: string
-    image: ImageSourcePropType
+    image: ImageSourcePropType | string[]
   }
   onPress?: () => void
   small?: boolean // Match Figma size
@@ -66,7 +67,13 @@ export default memo(function ProductCard({
         <View style={{ width, height: imageHeight, overflow: 'hidden' }}>
           <Image
             resizeMode="contain"
-            source={item.image}
+            source={
+              typeof item.image === 'string'
+                ? { uri: item.image }
+                : Array.isArray(item.image) && typeof item.image[0] === 'string'
+                ? { uri: item.image[0] }
+                : undefined
+            }
             style={styles.image}
           />
         </View>
@@ -97,7 +104,7 @@ export default memo(function ProductCard({
             small
             style={[styles.commonTextStyle]}
           >
-            {currencySymbolRupee}
+            {item?.currencySymbol || currencySymbolRupee}
             {item.price}
           </TsText>
           {showDiscount && item.discount && item.discount > 0 ? (

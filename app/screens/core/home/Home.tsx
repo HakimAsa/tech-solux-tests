@@ -40,7 +40,10 @@ export default function Home({ navigation }: TsProps) {
     request: getProducts,
   } = useApi(productApi.getProducts)
   const isSearching = !!searchTerm
+
   const dataToShow: any[] = isSearching ? searchResults : (products as any[])
+  const allData = dataToShow?.length > 0 ? dataToShow : []
+  console.log('all', allData)
   // const dataToShow = searchTerm ? searchResults : products
 
   const onDealOfDayPress = () => {
@@ -63,11 +66,14 @@ export default function Home({ navigation }: TsProps) {
   }, []) // useCallback to memoize the renderItem function
 
   useEffect(() => {
-    // getProducts()
-    // if (Array.isArray(products) && products.length > 0) {
-    //   setAllProducts(products as any[]) // ✅ store them globally once
-    // }
-    setAllProducts(staticProducts as any[])
+    const fetchProducts = async () => {
+      await getProducts()
+    }
+    if (Array.isArray(products) && products.length > 0) {
+      setAllProducts(products as any[]) // ✅ store them globally once
+    }
+    // setAllProducts(staticProducts as any[])
+    fetchProducts()
   }, [])
 
   if (loading) {
@@ -82,13 +88,14 @@ export default function Home({ navigation }: TsProps) {
       />
     )
   }
-  const allData = dataToShow?.length > 0 ? dataToShow : staticProducts
 
   return (
     <BaseScreen>
       <FlatList
         data={allData}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item, index) =>
+          item && item._id ? item._id.toString() : index.toString()
+        }
         renderItem={renderItem} // null since navigating to Search Screen. Searched Products should not be displayed in home screen
         ListHeaderComponent={
           <View>
@@ -101,7 +108,7 @@ export default function Home({ navigation }: TsProps) {
               }}
             >
               <SearchBar
-                products={products as any[]}
+                products={allData}
                 goToSearch={goToSearch}
               />
               {/* Any other non-list sections can go here */}

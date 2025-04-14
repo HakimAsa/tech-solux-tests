@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Pressable, StyleSheet, Text, View } from 'react-native'
 import { useState } from 'react'
 import TsText from '@/app/components/texts/TsText'
 
@@ -17,22 +17,28 @@ export default function Size({ productSize }: { productSize: number }) {
       </TsText>
       <View style={styles.sizeContainer}>
         {sizeList.map((item, index) => (
-          <TsText
-            medium
-            key={index}
-            style={[
-              styles.size,
-              {
-                backgroundColor: size === item ? '#FA7189' : '#fff',
-                color: size === item ? '#fff' : '#FA7189',
-              },
-            ]}
+          <Pressable
             onPress={() => {
               setSize(item)
             }}
+            key={index}
+            style={[
+              styles.sizeWrapper,
+              {
+                backgroundColor: size === item ? '#FA7189' : '#fff',
+              },
+            ]}
           >
-            {item} UK
-          </TsText>
+            <TsText
+              medium
+              style={[
+                styles.size,
+                { color: size === item ? '#fff' : '#FA7189' },
+              ]}
+            >
+              {item} UK
+            </TsText>
+          </Pressable>
         ))}
       </View>
     </View>
@@ -50,23 +56,21 @@ const styles = StyleSheet.create({
   },
   sizeContainer: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
-
-    alignItems: 'center',
     gap: 8,
   },
   size: {
     // width: 50,
-    height: 32,
-    borderRadius: 4,
+
     fontFamily: 'Montserrat_600SemiBold',
-    justifyContent: 'center',
-    alignItems: 'center',
-    textAlign: 'center',
-    padding: 8,
-    lineHeight: 16,
     alignSelf: 'center',
+    lineHeight: 16,
+  },
+  sizeWrapper: {
+    padding: 8,
+    borderRadius: 4,
     borderWidth: 2,
     borderColor: '#FA7189',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })

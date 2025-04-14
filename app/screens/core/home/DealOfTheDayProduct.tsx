@@ -46,7 +46,7 @@ export default function DealOfTheDayProduct({
         }}
         horizontal
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item, index) => item?._id.toString() || index.toString()}
         contentContainerStyle={styles.listContent}
       />
 

@@ -321,7 +321,9 @@ export default function ProductDetails({ navigation, route }: TsProps) {
             horizontal
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => <ProductCard item={item} />}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item, index) =>
+              item?._id?.toString() || index.toString()
+            }
             contentContainerStyle={{ paddingBottom: 8, gap: 10 }}
           />
         </View>

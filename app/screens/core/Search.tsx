@@ -44,10 +44,11 @@ export default function Search({ navigation }: TsProps) {
         ) : (
           <FlatList
             data={searchResults}
-            keyExtractor={(item) => item.id.toString()}
+            keyExtractor={(item) => item?._id?.toString()}
             renderItem={({ item }) => (
               <ProductCard
                 item={item}
+                descriptionFontSize={12}
                 width={ScreenWidth}
                 height={ScreenWidth}
                 imageHeight={ScreenWidth - imageSizeDelta}
