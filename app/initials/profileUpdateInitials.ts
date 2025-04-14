@@ -1,13 +1,13 @@
 const profileUpdateInitials = {
   address: '',
-  avatar: '',
+  // avatar: '',should not be part of updating all
   bankaccountholdername: '',
   bankaccountnumber: '',
   city: '',
   country: '',
   email: '',
   ifsccode: '',
-  password: '',
+  // password: '',should not be part of updating all
   pincode: '',
   state: '',
   username: '',

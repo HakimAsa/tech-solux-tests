@@ -13,9 +13,9 @@ export default {
     backgroundColor: '#e0f7fa', //todo
     borderColor: colors.primary, //'#00796b', //todo
     borderWidth: 0,
-    borderTopLeftRadius: 0,
-    borderBottomLeftRadius: 0,
-    borderLeftWidth: 2,
+    borderTopLeftRadius: 2,
+    borderBottomLeftRadius: 2,
+    borderLeftWidth: 4,
     borderBottomWidth: 0,
   },
 }

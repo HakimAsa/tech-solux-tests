@@ -68,7 +68,7 @@ export default function TsTextInput({
               fontFamily: 'Montserrat_500Medium',
             },
             styles.input,
-            style,
+            // style,
           ]}
           secureTextEntry={secureTextEntry}
           {...props}
