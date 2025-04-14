@@ -15,11 +15,18 @@ import profileUpdateInitials from '@/app/initials/profileUpdateInitials'
 import TsProps from '@/TsProps'
 import BasicHeader from '@/app/components/headers/BasicHeader'
 import routes from '@/app/navigation/routes'
+import useAuth from '@/app/context/auth/useAuth'
 
 export default function Profile({ navigation }: TsProps) {
+  const { user } = useAuth()
   const updateProfile = async (values: Record<string, any>) => {
     // Update user profile with values.avatar
     console.log('updateProfile', values)
+  }
+  const newInitialValues = {
+    ...profileUpdateInitials,
+    email: user?.email,
+    username: user?.username,
   }
   return (
     <BaseScreen style={{ backgroundColor: colors.white }}>
@@ -35,7 +42,7 @@ export default function Profile({ navigation }: TsProps) {
       >
         <ScrollableMainContainer>
           <TsForm
-            initialValues={profileUpdateInitials}
+            initialValues={newInitialValues}
             validationSchema={profileUpdateValidationSchema}
             onSubmit={updateProfile}
           >
@@ -75,8 +82,10 @@ export default function Profile({ navigation }: TsProps) {
             <TsFormField
               label={en.password}
               name="password"
+              placeholder="**************"
               style={styles.inputStyle}
               textStyle={styles.textStyle}
+              secureTextEntry
             />
             <Pressable
               onPress={() => navigation.navigate('Change Password')}
