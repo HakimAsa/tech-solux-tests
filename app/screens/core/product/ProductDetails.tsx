@@ -57,7 +57,11 @@ export default function ProductDetails({ navigation, route }: TsProps) {
   const addToCart = cartContext?.addToCart
   const cart = cartContext?.cart
   const { allProducts } = useSearchContext()
-  console.log('all product', allProducts)
+  const similarProducts = allProducts.filter(
+    (product) =>
+      product._id !== item._id &&
+      product.name.toLowerCase().includes(item.name.toLowerCase().split(' ')[0])
+  )
 
   useEffect(() => {
     console.log('🔥 allProducts in this screen:', allProducts)
@@ -358,7 +362,7 @@ export default function ProductDetails({ navigation, route }: TsProps) {
         {/* Similar Products */}
         <View style={{ marginTop: 8, marginBottom: 0 }}>
           <FlatList
-            data={allProducts}
+            data={similarProducts}
             horizontal
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => <ProductCard item={item} />}

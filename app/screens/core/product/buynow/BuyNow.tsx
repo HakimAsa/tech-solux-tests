@@ -49,10 +49,11 @@ export default function BuyNow({ navigation, route }: TsProps) {
 
   console.log(selectedQuantities)
 
-  const totalPrice = (cart ?? []).reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0
-  )
+  const totalPrice = Number(price) * Number(selectedValue)
+  // (cart ?? []).reduce(
+  //   (acc, item) => acc + item.price * item.quantity,
+  //   0
+  // )
 
   return (
     <>
@@ -141,12 +142,12 @@ export default function BuyNow({ navigation, route }: TsProps) {
         </BaseScreen>
       </ScrollableMainContainer>
       <TsBottomTab
-        cart={cart}
+        totalPrice={totalPrice}
         currency={currencySymbol || currencySymbolRupee}
         onPress={() =>
           navigation.navigate('ProductTab', {
             screen: routes.CHECKOUT, // Navigate to Checkout within ShoppingCartStack
-            params: { id: item?._id },
+            params: { item },
           })
         }
         //navigation.navigate(routes.CHECKOUT, { id: item?._id })}

@@ -7,8 +7,6 @@ import { KkiapayProvider } from '@kkiapay-org/react-native-sdk'
 import { PlusJakartaSans_500Medium } from '@expo-google-fonts/plus-jakarta-sans/500Medium'
 import { LibreCaslonText_700Bold } from '@expo-google-fonts/libre-caslon-text/700Bold'
 import {
-  Montserrat_100Thin,
-  Montserrat_200ExtraLight,
   Montserrat_300Light,
   Montserrat_400Regular,
   Montserrat_500Medium,
@@ -21,7 +19,6 @@ import {
 import { Poppins_600SemiBold } from '@expo-google-fonts/poppins/600SemiBold'
 
 import AuthNavigator from './navigation/AuthNavigator'
-import useAuth from './context/auth/useAuth'
 import AppNavigator from './navigation/AppNavigator'
 import authStorage from './context/auth/Storage'
 import navigationTheme from './navigation/navigationTheme'
@@ -39,7 +36,6 @@ import authApi from '@/app/api/auth'
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
-  // const { user } = useAuth()
   const [fontsLoaded] = useFonts({
     LibreCaslonText_700Bold,
     Montserrat_100Thin_Italic,
@@ -81,7 +77,6 @@ export default function RootLayout() {
 
   const restoreUser = async () => {
     const user = await authStorage.getUser()
-    console.log(user)
     if (!user) return setUser(null)
     try {
       const { data } = await authApi.getMe()

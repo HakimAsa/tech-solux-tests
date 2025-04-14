@@ -29,7 +29,7 @@ export default function Checkout({ navigation, route }: TsProps) {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false)
   const { openKkiapayWidget, addSuccessListener, addFailedListener } =
     useKkiapay()
-  const { id } = route.params || {} //a workaround for quantiy when coming from BuyNow screen: todo handle that globally
+  const { item } = route.params || {} //a workaround for quantiy when coming from BuyNow screen: todo handle that globally
 
   useEffect(() => {
     addSuccessListener((data) => {
@@ -124,9 +124,13 @@ export default function Checkout({ navigation, route }: TsProps) {
             }}
           >
             <OrderSummary
-              totalOrderAmount={total}
+              totalOrderAmount={cart?.length === 0 ? item.price : total}
               totalShippingFee={totalShippingFee}
-              currency={cart?.[0]?.currencySymbol || currencySymbolRupee}
+              currency={
+                cart?.[0]?.currencySymbol ||
+                item?.currencySymbol ||
+                currencySymbolRupee
+              }
             />
             <TsText style={{ fontSize: 18, lineHeight: 27, color: '#222222' }}>
               Payment

@@ -14,12 +14,8 @@ import routes from '@/app/navigation/routes'
 import TsProps from '@/TsProps'
 import ProductCard from '@/app/components/cards/ProductCard'
 import { ScreenWidth } from '@/app/config/constants'
-import getApiUrl from '@/app/utils/helpers'
-import productApi from '@/app/api/products'
 
-const RenderProduct = React.memo(({ item }: { item: any }) => {
-  return <Text>{item.name}</Text>
-})
+import productApi from '@/app/api/products'
 
 export default function Whishlist({ navigation }: TsProps) {
   const { searchResults, searchTerm, setAllProducts, allProducts } =
@@ -66,9 +62,6 @@ export default function Whishlist({ navigation }: TsProps) {
     navigation.navigate(routes.SEARCH, { searchTerm })
   }
 
-  useEffect(() => {
-    setAllProducts(products) // ✅ store them globally once
-  }, [])
   return (
     <BaseScreen>
       <MainContainer
@@ -109,7 +102,9 @@ export default function Whishlist({ navigation }: TsProps) {
                 products={allProducts}
                 goToSearch={goToSearch}
               />
-              <FilterSortBanner title={`52,082+ items`} />
+              <FilterSortBanner
+                title={`${wishlistProducts.length - 1 || 1}+ items`}
+              />
             </>
           }
           contentContainerStyle={{
