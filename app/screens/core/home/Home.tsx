@@ -26,10 +26,6 @@ import useApi from '@/app/hooks/useApi'
 import ErrorMessages from '@/app/components/forms/ErrorMessages'
 import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
 
-const RenderProduct = React.memo(({ item }: { item: any }) => {
-  return <Text>{item.name}</Text>
-})
-
 export default function Home({ navigation }: TsProps) {
   const { searchResults, searchTerm, setAllProducts } = useSearchContext()
   const {
@@ -67,14 +63,18 @@ export default function Home({ navigation }: TsProps) {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      await getProducts()
-    }
-    if (Array.isArray(products) && products.length > 0) {
-      setAllProducts(products as any[]) // ✅ store them globally once
+      const fetched = await getProducts()
+      const res = fetched.data?.data
+      console.log('fetched', res)
+      if (Array.isArray(res) && res.length > 0) {
+        setAllProducts(res)
+      }
     }
     // setAllProducts(staticProducts as any[])
     fetchProducts()
-  }, [])
+  }, [setAllProducts])
+
+  // console.log(allP)
 
   if (loading) {
     return <TsActivityIndicator visible={loading} />

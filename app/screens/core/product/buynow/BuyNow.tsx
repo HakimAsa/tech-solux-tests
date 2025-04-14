@@ -87,7 +87,9 @@ export default function BuyNow({ navigation, route }: TsProps) {
                     source={
                       image?.[0]
                         ? { uri: image?.[0] }
-                        : require('@/assets/images/womenprintedkurta.png')
+                        : {
+                            uri: 'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
+                          }
                     }
                     resizeMode="contain"
                     style={{ width: '100%', height: '100%' }}

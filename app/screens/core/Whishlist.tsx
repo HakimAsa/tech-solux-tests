@@ -1,5 +1,5 @@
 import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import BaseScreen from '@/app/components/BaseScreen'
 import LogoHeader from '@/app/components/headers/LogoHeader'
@@ -14,6 +14,8 @@ import routes from '@/app/navigation/routes'
 import TsProps from '@/TsProps'
 import ProductCard from '@/app/components/cards/ProductCard'
 import { ScreenWidth } from '@/app/config/constants'
+import getApiUrl from '@/app/utils/helpers'
+import productApi from '@/app/api/products'
 
 const RenderProduct = React.memo(({ item }: { item: any }) => {
   return <Text>{item.name}</Text>
@@ -22,6 +24,36 @@ const RenderProduct = React.memo(({ item }: { item: any }) => {
 export default function Whishlist({ navigation }: TsProps) {
   const { searchResults, searchTerm, setAllProducts, allProducts } =
     useSearchContext()
+  const [wishlistProducts, setWishlistProducts] = useState<
+    { _id: string; [key: string]: any }[]
+  >([])
+
+  useEffect(() => {
+    fetchWishlist()
+  }, [])
+
+  const fetchWishlist = async () => {
+    try {
+      const response = await productApi.getUserWishlist()
+      if (!response?.ok) {
+        throw new Error('Failed to fetch wishlist')
+      }
+      const data = response.data
+      setWishlistProducts(
+        data.map((product: any) => ({
+          ...product,
+          price: product.price ?? 0, // Ensure price is a number
+          image:
+            Array.isArray(product.image) && product.image.length > 0
+              ? product.image
+              : ['default-image-url'], // Ensure image is a non-empty array
+          name: product.name ?? 'Unnamed Product', // Ensure name is defined
+        }))
+      ) // assuming this returns an array of product objects
+    } catch (error) {
+      console.error('Error fetching wishlist:', error)
+    }
+  }
   const isSearching = !!searchTerm
   const dataToShow = isSearching ? searchResults : products
   // const dataToShow = searchTerm ? searchResults : products
@@ -43,7 +75,7 @@ export default function Whishlist({ navigation }: TsProps) {
         style={{ paddingLeft: 16, padding: 16, flex: 1, paddingBottom: 0 }}
       >
         <FlatList
-          data={dataToShow}
+          data={wishlistProducts}
           keyExtractor={(item, index) =>
             item?._id?.toString() || index.toString()
           }

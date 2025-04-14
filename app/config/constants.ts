@@ -37,8 +37,11 @@ export const StatusBarHeight = Constants.statusBarHeight
 //export endpoints
 const ep = {
   AUTH: 'auth',
+  FILE: 'file',
+  FILES: 'files',
   LOGIN: 'login',
   LOGOUT: 'logout',
+  ME: 'me',
   OTP: 'otp',
   PRODUCTS: 'products',
   REGISTER: 'register',
@@ -46,6 +49,9 @@ const ep = {
   RESEND: 'resend',
   RESETPASSWORDOTP: 'resetpassword-otp',
   TOP: 'top',
+  UPDATEPROFILEPICTURE: 'updateprofilepicture',
+  UPLOAD: 'upload',
+  UPLOADS: 'uploads',
   VERIFY: 'verify',
   whishlists: 'whishlists',
 }
