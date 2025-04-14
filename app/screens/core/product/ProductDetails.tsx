@@ -13,7 +13,11 @@ import Size from './Size'
 import Star from '@/app/components/Star'
 import TsText from '@/app/components/texts/TsText'
 import { calculateListPrice } from '@/app/utils/helpers'
-import { currencySymbolRupee, ScreenWidth } from '@/app/config/constants'
+import {
+  currencySymbolRupee,
+  ScreenWidth,
+  StatusBarHeight,
+} from '@/app/config/constants'
 import MoreText from '@/app/components/MoreText'
 import TsText20 from '@/app/components/texts/TsText20'
 import DetailBtn from './DetailBtn'
@@ -24,6 +28,7 @@ import FilterSortBanner from '@/app/components/FilterSortBanner'
 import routes from '@/app/navigation/routes'
 import products from '@/app/data/products'
 import ProductCard from '@/app/components/cards/ProductCard'
+import { useCart } from '@/app/context/CartContext'
 
 const PATH =
   'M24.3333 1C19 1 16 5.445 16 7.66667C16 5.445 13 1 7.66667 1C2.33333 1 1 5.445 1 7.66667C1 19.3333 16 27.6667 16 27.6667C16 27.6667 31 19.3333 31 7.66667C31 5.445 29.6667 1 24.3333 1Z'
@@ -43,6 +48,11 @@ const images = [
 export default function ProductDetails({ navigation, route }: TsProps) {
   const [isLiked, setIsLiked] = useState(false)
   const { item } = route?.params || {}
+  // Inside your component:
+  const cartContext = useCart()
+  const addToCart = cartContext?.addToCart
+  const cart = cartContext?.cart
+
   const goToCart = (item: any) => {
     navigation.navigate(routes.CART, { item })
   }
@@ -90,10 +100,18 @@ export default function ProductDetails({ navigation, route }: TsProps) {
   const ListHeaderItem = () => (
     <>
       <BasicHeader
+        style={{ top: 15 }}
         leftIconStyle={-16}
         showRight
         showTitle={false}
+        cartCount={cart?.[0]?.quantity ?? 0}
         onPress={() => navigation.goBack()}
+        onRightIconPress={() => {
+          console.log('item', item)
+          console.log('cartt', cart)
+
+          addToCart?.(item)
+        }}
         rightIconStyle={{
           width: 32,
           height: 32,
@@ -195,7 +213,12 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           gap={10}
           style={{ height: 40, marginVertical: 8 }}
         >
-          <GoToCartBtn onPress={() => goToCart(item)} />
+          <GoToCartBtn
+            onPress={() => {
+              addToCart?.(item)
+              goToCart(item)
+            }}
+          />
           <BuyNowBtn onPress={() => buyNow(item)} />
           <Pressable
             style={{

@@ -19,7 +19,7 @@ import PaymenttInput from '@/app/components/inputs/PaymentInput'
 import routes from '@/app/navigation/routes'
 import SuccessfullPaymentContent from './SuccessfullPaymentContent'
 
-export default function Checkout({ navigation }: TsProps) {
+export default function Checkout({ navigation, route }: TsProps) {
   const [selectedMethod, setSelectedMethod] = useState<string | null>('visa')
   const [showConfirmationModal, setShowConfirmationModal] = useState(false)
   const { openKkiapayWidget, addSuccessListener, addFailedListener } =

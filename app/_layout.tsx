@@ -41,7 +41,7 @@ import SearchProvider from './context/SearchContext'
 import colors from './config/colors'
 import TsActivityIndicator from './components/loader/TsActivityIndicator'
 import AuthContext from './context/auth/AuthContext'
-import { jwtDecode } from 'jwt-decode'
+import { CartProvider } from './context/CartContext'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -87,10 +87,9 @@ export default function RootLayout() {
   }, [])
 
   const restoreUser = async () => {
-    const token = await authStorage.getToken()
-    if (!token) return
-    const user = jwtDecode(token)
-    setUser(user)
+    const user = await authStorage.getUser()
+    if (!user) return setUser(null)
+    return setUser(user)
   }
 
   if (isLoading) {
@@ -108,19 +107,21 @@ export default function RootLayout() {
         backgroundColor={colors.background}
       />
       <AuthContext.Provider value={{ user, setUser }}>
-        <NavigationIndependentTree>
-          <NavigationContainer theme={navigationTheme}>
-            {user ? (
-              <KkiapayProvider>
-                <SearchProvider>
-                  <AppNavigator />
-                </SearchProvider>
-              </KkiapayProvider>
-            ) : (
-              <AuthNavigator />
-            )}
-          </NavigationContainer>
-        </NavigationIndependentTree>
+        <CartProvider>
+          <NavigationIndependentTree>
+            <NavigationContainer theme={navigationTheme}>
+              {user ? (
+                <KkiapayProvider>
+                  <SearchProvider>
+                    <AppNavigator />
+                  </SearchProvider>
+                </KkiapayProvider>
+              ) : (
+                <AuthNavigator />
+              )}
+            </NavigationContainer>
+          </NavigationIndependentTree>
+        </CartProvider>
       </AuthContext.Provider>
     </>
   )

@@ -1,5 +1,6 @@
 import * as SecureStore from 'expo-secure-store'
 import { onWeb } from '@/app/config/constants'
+import { jwtDecode } from 'jwt-decode'
 
 const key = 'authToken'
 
@@ -25,7 +26,7 @@ const getToken = async () => {
 const getUser = async () => {
   try {
     const token = await getToken()
-    return token ? token : null
+    return token ? jwtDecode(token) : null
   } catch (error) {
     console.error('Error getting the user', error)
   }

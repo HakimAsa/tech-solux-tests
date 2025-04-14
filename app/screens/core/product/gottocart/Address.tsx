@@ -10,12 +10,18 @@ import DecisionBtn from '@/app/components/buttons/DecisionBtn'
 
 export default function Address({
   onPencilClick,
+  address,
+  setAddress,
+  contact,
+  setContact,
 }: {
   onPencilClick: () => void
+  address: string
+  setAddress: (value: string) => void
+  contact: string
+  setContact: (value: string) => void
 }) {
   const [isModalVisible, setIsModalVisible] = useState(false)
-  const [address, setAddress] = useState("216 St Paul's Rd, London N1 2LL, UK")
-  const [contact, setContact] = useState('+44-784232')
 
   const handleSave = async () => {
     setIsModalVisible(false)

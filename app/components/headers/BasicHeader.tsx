@@ -14,6 +14,7 @@ export default function BasicHeader({
   style,
   showTitle = true,
   showRight = false,
+  cartCount = 0, // Add cartCount prop to display the badge
 }: {
   onPress: () => void
   onRightIconPress?: () => void
@@ -24,6 +25,7 @@ export default function BasicHeader({
   showRight?: boolean
   iconName?: keyof typeof Feather.glyphMap
   style?: ViewProps['style']
+  cartCount?: number // Add cartCount prop to display the badge
 }) {
   return (
     <View style={[styles.container, style]}>
@@ -49,6 +51,11 @@ export default function BasicHeader({
             size={20}
             color={colors.black}
           />
+          {cartCount >= 0 && (
+            <View style={styles.badge}>
+              <TsText style={styles.badgeText}>{cartCount}</TsText>
+            </View>
+          )}
         </Pressable>
       )}
     </View>
@@ -56,8 +63,24 @@ export default function BasicHeader({
 }
 
 const styles = StyleSheet.create({
+  badge: {
+    position: 'absolute',
+    top: 0,
+    right: 8,
+    backgroundColor: colors.primary,
+    borderRadius: 7,
+    width: 14,
+    height: 14,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  badgeText: {
+    color: colors.white,
+    fontSize: 8,
+  },
   container: {
     justifyContent: 'center',
+
     height: 56,
   },
   icon: {

@@ -25,7 +25,7 @@ export default function DecisionBtn({
           borderColor: colors.primary,
           borderWidth: 1,
         }}
-        style={{ color: colors.black }}
+        style={{ color: colors.primary }}
         onPress={onCancel}
       >
         {leftText}
