@@ -55,6 +55,7 @@ export default function Cart({ route, navigation }: TsProps) {
     currencySymbol,
     colorVariation,
   } = item || {}
+  console.log(item.quantities)
 
   return (
     <>
@@ -128,6 +129,7 @@ export default function Cart({ route, navigation }: TsProps) {
                     discount?: number
                     currencySymbol?: string
                     colorVariation?: string[]
+                    quantity?: number
                   },
                   index: number
                 ) => (
@@ -277,7 +279,10 @@ export default function Cart({ route, navigation }: TsProps) {
                           styles.labelStyle,
                           { fontFamily: 'Montserrat_600SemiBold' },
                         ]}
-                        amount={price || 34}
+                        amount={
+                          price * (item?.quantity ?? 1) ||
+                          34 * (item.quantity ?? 1)
+                        }
                         currency={currencySymbol || currencySymbolDollar}
                       />
                     </View>

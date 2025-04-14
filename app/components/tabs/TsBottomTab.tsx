@@ -9,11 +9,13 @@ import { formatNumberWithCurrency } from '@/app/utils/helpers'
 
 export default function TsBottomTab({
   onPress,
+  totalPrice,
   cart,
   currency = currencySymbolRupee,
 }: {
   onPress: () => void
   currency?: string
+  totalPrice?: number
   cart?: any[]
 }) {
   const total = (cart ?? []).reduce(
@@ -34,7 +36,7 @@ export default function TsBottomTab({
               medium
               style={{ fontFamily: 'Montserrat_600SemiBold' }}
             >
-              {formatNumberWithCurrency(total, currency)}
+              {formatNumberWithCurrency(total || totalPrice, currency)}
             </TsText>
             <TsPressable small>View Details</TsPressable>
           </View>

@@ -18,15 +18,18 @@ import TsText from '@/app/components/texts/TsText'
 import PaymenttInput from '@/app/components/inputs/PaymentInput'
 import routes from '@/app/navigation/routes'
 import SuccessfullPaymentContent from './SuccessfullPaymentContent'
-import { useCart } from '@/app/context/CartContext'
+import CartContext, { useCart } from '@/app/context/CartContext'
 
 export default function Checkout({ navigation, route }: TsProps) {
   const cartContext = useCart()
   const cart = cartContext?.cart || []
+  const clearCart = cartContext?.clearCart
+  const selectedQuantities = cartContext?.selectedQuantities
   const [selectedMethod, setSelectedMethod] = useState<string | null>('visa')
   const [showConfirmationModal, setShowConfirmationModal] = useState(false)
   const { openKkiapayWidget, addSuccessListener, addFailedListener } =
     useKkiapay()
+  const { id } = route.params || {} //a workaround for quantiy when coming from BuyNow screen: todo handle that globally
 
   useEffect(() => {
     addSuccessListener((data) => {
@@ -42,13 +45,20 @@ export default function Checkout({ navigation, route }: TsProps) {
   const handleSelectMethod = (method: string) => {
     setSelectedMethod(method)
   }
+  const buyQty = 0
   //compute total prices
   const total = (cart ?? []).reduce(
-    (acc, item) => acc + item.price * item.quantity,
+    (acc, item) =>
+      acc + (buyQty ?? 0) > 1
+        ? item.price * (buyQty ?? 0)
+        : item.price * item.quantity,
     0
   )
   const totalShippingFee = (cart ?? []).reduce(
-    (acc, item) => acc + item.shippingPrice || 0 * item.quantity,
+    (acc, item) =>
+      acc +
+      (item.shippingPrice || 0) *
+        ((buyQty ?? 0) > 1 ? buyQty ?? 0 : item.quantity),
     0
   )
 
@@ -65,6 +75,9 @@ export default function Checkout({ navigation, route }: TsProps) {
       phone: '97000000',
       reason: 'Payment for order #12345', // Add a reason for the payment
     })
+    if (clearCart) {
+      clearCart()
+    }
   }
 
   const handleContinue = () => {

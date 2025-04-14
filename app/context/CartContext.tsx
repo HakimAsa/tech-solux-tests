@@ -1,5 +1,11 @@
 import TsProps from '@/TsProps'
-import React, { createContext, useContext, useEffect, useReducer } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from 'react'
 import Storage from '../utils/Storage'
 
 interface CartContextType {
@@ -7,6 +13,9 @@ interface CartContextType {
   addToCart: (item: { _id: string; [key: string]: any }) => void
   removeFromCart: (id: string) => void
   clearCart: () => void
+  selectedQuantities: { [key: string]: number }
+  updateQuantity: (itemId: string, quantity: number) => void
+  setQuantity: (id: string, quantity: number) => void
 }
 
 const CartContext = createContext<CartContextType | null>(null)
@@ -28,6 +37,22 @@ const cartReducer = (state: any[], action: { type: string; payload?: any }) => {
         return updatedState
       }
       return [...state, { ...action.payload, quantity: 1 }]
+    case 'INCREASE_QUANTITY': {
+      const updatedState = state.map((item) =>
+        item._id === action.payload
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      )
+      return updatedState
+    }
+    case 'SET_QUANTITY': {
+      const updatedState = state.map((item) =>
+        item._id === action.payload.id
+          ? { ...item, quantity: action.payload.quantity }
+          : item
+      )
+      return updatedState
+    }
     case 'REMOVE_FROM_CART':
       return state.filter((item) => item._id !== action.payload)
     case 'CLEAR_CART':
@@ -38,7 +63,16 @@ const cartReducer = (state: any[], action: { type: string; payload?: any }) => {
 }
 
 export const CartProvider = ({ children }: TsProps) => {
+  const [selectedQuantities, setSelectedQuantities] = useState({}) // Store quantities globally
+
   const [cart, dispatch] = useReducer(cartReducer, [])
+
+  const updateQuantity = (itemId: string, quantity: number) => {
+    setSelectedQuantities((prev) => ({
+      ...prev,
+      [itemId]: quantity, // Update the quantity for the specific item
+    }))
+  }
 
   // Load cart on startup
   useEffect(() => {
@@ -73,9 +107,20 @@ export const CartProvider = ({ children }: TsProps) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: id })
   const clearCart = () => dispatch({ type: 'CLEAR_CART' })
 
+  const setQuantity = (id: string, quantity: number | string) =>
+    dispatch({ type: 'SET_QUANTITY', payload: { id, quantity } })
+
   return (
     <CartContext.Provider
-      value={{ cart, clearCart, addToCart, removeFromCart }}
+      value={{
+        cart,
+        clearCart,
+        addToCart,
+        removeFromCart,
+        selectedQuantities,
+        updateQuantity,
+        setQuantity,
+      }}
     >
       {children}
     </CartContext.Provider>

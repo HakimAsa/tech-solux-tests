@@ -7,9 +7,11 @@ import TsPressable from '@/app/components/texts/TsPressable'
 import OrderAmount from '../OrderAmount'
 
 export default function OrderPaymentDetails({
+  currency,
   amount = 7000,
 }: {
   amount?: number
+  currency?: string
 }) {
   return (
     <View style={styles.container}>
@@ -18,6 +20,7 @@ export default function OrderPaymentDetails({
       </TsText>
       <View style={styles.details}>
         <OrderAmount
+          currency={currency}
           labelStyle={styles.text}
           amount={amount}
         />

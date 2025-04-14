@@ -1,10 +1,17 @@
 import { StyleSheet, View } from 'react-native'
 import OrderAmount from './OrderAmount'
 
-export default function TotalOrder({ amount = 0 }: { amount?: number }) {
+export default function TotalOrder({
+  amount = 0,
+  currency,
+}: {
+  amount?: number
+  currency: string
+}) {
   return (
     <View style={styles.container}>
       <OrderAmount
+        currency={currency}
         label="Order Total"
         labelStyle={styles.label}
         amount={amount}

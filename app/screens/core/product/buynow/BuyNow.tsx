@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 
 import BaseScreen from '@/app/components/BaseScreen'
 import MainContainer, {
@@ -20,11 +20,40 @@ import TotalOrder from '../TotalOrder'
 import EmiAvailable from './EmiAvailable'
 import TsBottomTab from '@/app/components/tabs/TsBottomTab'
 import routes from '@/app/navigation/routes'
+import { useCart } from '@/app/context/CartContext'
+import { currencySymbolRupee } from '@/app/config/constants'
 
 export default function BuyNow({ navigation, route }: TsProps) {
+  const cartContext = useCart()
+  const [selectedValue, setSelectedValue] = useState<number | string>(1)
+  const cart = cartContext?.cart || []
+  const updateQuantity = cartContext?.updateQuantity
+  const setQuantity = cartContext?.setQuantity
+  const selectedQuantities = cartContext?.selectedQuantities
+
   const { item } = route?.params || {}
-  const { name, shortDescription, price, discount, image } = item || {}
-  const discountedPrice = discount ? price - (price * discount) / 100 : price
+  const {
+    name,
+    shortDescription,
+    countInStock,
+    currencySymbol,
+    price,
+    discount,
+    image,
+    _id,
+  } = item || {}
+  const handleQuantityChange = (value: number | string) => {
+    setSelectedValue(value) // Update local state with the number
+    setQuantity?.(_id, Number(value))
+  }
+
+  console.log(selectedQuantities)
+
+  const totalPrice = (cart ?? []).reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  )
+
   return (
     <>
       <ScrollableMainContainer
@@ -53,13 +82,17 @@ export default function BuyNow({ navigation, route }: TsProps) {
           >
             <View style={{ flex: 1, gap: 40 }}>
               <BasicRowContainer gap={15}>
-                <Image
-                  source={
-                    image?.[0] ||
-                    require('@/assets/images/womenprintedkurta.png')
-                  }
-                  style={{ width: 123, height: 153, borderRadius: 4 }}
-                />
+                <View style={{ width: 123, height: 153, borderRadius: 4 }}>
+                  <Image
+                    source={
+                      image?.[0]
+                        ? { uri: image?.[0] }
+                        : require('@/assets/images/womenprintedkurta.png')
+                    }
+                    resizeMode="contain"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                </View>
 
                 <View style={{ flex: 1, justifyContent: 'space-around' }}>
                   <TsText>{name || 'Women’s Casual Wear'}</TsText>
@@ -71,7 +104,14 @@ export default function BuyNow({ navigation, route }: TsProps) {
                     <ItemPicker
                       label="Qty"
                       onPress={() => console.log('Qties')}
-                      value={1}
+                      options={Array.from(
+                        { length: countInStock },
+                        (_, i) => i + 1
+                      )}
+                      value={selectedValue}
+                      selectedValue={selectedValue}
+                      setSelectedValue={handleQuantityChange}
+                      onSelect={(item) => console.log('Selected item:', item)} // Callback when an item is selected
                     />
                   </RowContainer>
 
@@ -84,16 +124,23 @@ export default function BuyNow({ navigation, route }: TsProps) {
 
               <ApplyCoupon />
               <LineSeparator color="#CACACA" />
-              <OrderPaymentDetails />
+              <OrderPaymentDetails
+                amount={totalPrice || 7000}
+                currency={currencySymbol || currencySymbolRupee}
+              />
               <LineSeparator color="#CACACA" />
-              <TotalOrder amount={7000} />
+              <TotalOrder
+                amount={totalPrice || 7000}
+                currency={currencySymbol || currencySymbolRupee}
+              />
               <EmiAvailable />
             </View>
           </MainContainer>
         </BaseScreen>
       </ScrollableMainContainer>
       <TsBottomTab
-        amount={7000}
+        cart={cart}
+        currency={currencySymbol || currencySymbolRupee}
         onPress={() =>
           navigation.navigate('ProductTab', {
             screen: routes.CHECKOUT, // Navigate to Checkout within ShoppingCartStack
