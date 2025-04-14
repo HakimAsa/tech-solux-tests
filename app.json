@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/splash-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.hakimesco.ecommercetechsoluxtests"
     },
     "web": {
       "bundler": "metro",
@@ -29,27 +30,29 @@
         {
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
-          "resizeMode": "contain",
+          "resizeMode": "cover",
           "backgroundColor": "#ffffff"
         }
       ],
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./node_modules/@expo-google-fonts/montserrat/Montserrat_900Black"
-          ]
-        }
-      ],
+
+      "expo-font",
       "expo-asset",
       "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
     },
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#ffffff"
+    },
     "extra": {
       "router": {
         "origin": false
+      },
+      "eas": {
+        "projectId": "6b4254e3-31a7-4f7f-817e-1451d7b3d6e4"
       }
     }
   }

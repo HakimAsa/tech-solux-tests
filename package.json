@@ -1,5 +1,6 @@
 {
   "name": "e-commerce-techsolux-tests",
+  "slug": "e-commerce-techsolux-tests",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
@@ -13,6 +14,16 @@
   },
   "jest": {
     "preset": "jest-expo"
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "listUnknownPackages": false,
+        "exclude": [
+          "jwt-decode"
+        ]
+      }
+    }
   },
   "dependencies": {
     "@expo-google-fonts/libre-caslon-text": "^0.3.0",
@@ -53,7 +64,8 @@
     "react-native-svg": "15.8.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "yup": "^1.6.1"
+    "yup": "^1.6.1",
+    "expo-dev-client": "~5.0.19"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
