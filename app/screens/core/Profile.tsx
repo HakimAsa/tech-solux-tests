@@ -69,13 +69,13 @@ export default function Profile({ navigation }: TsProps) {
             <TsFormField
               label={en.emailAddress}
               name="email"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
             <TsFormField
               label={en.username}
               name="username"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
 
@@ -83,7 +83,7 @@ export default function Profile({ navigation }: TsProps) {
               label={en.password}
               name="password"
               placeholder="**************"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
               secureTextEntry
             />
@@ -111,32 +111,32 @@ export default function Profile({ navigation }: TsProps) {
             <TsFormField
               label={en.pincode}
               name="pincode"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
             <TsFormField
               label={en.address}
               name="address"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
             <TsFormField
               label={en.city}
               name="city"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
             {/* it is a picker here */}
             <TsFormField
               label={en.state}
               name="state"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
             <TsFormField
               label={en.country}
               name="country"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
             <LineSeparator />
@@ -152,19 +152,19 @@ export default function Profile({ navigation }: TsProps) {
             <TsFormField
               label={en.bankAccountNumber}
               name="bankaccountnumber"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
             <TsFormField
               label={en.bankAccountHolderName}
               name="bankaccountholdername"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
             <TsFormField
               label={en.ifscCode}
               name="ifsccode"
-              style={styles.inputStyle}
+              inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />
 

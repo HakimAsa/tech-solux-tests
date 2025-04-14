@@ -23,6 +23,7 @@ export interface TsTextInputProps extends TextInputProps {
   isPasswordField?: boolean
   secureTextEntry?: boolean
   style?: any
+  inputStyle?: any
   textStyle?: object
 }
 
@@ -36,6 +37,7 @@ export default function TsTextInput({
   isPasswordField,
   secureTextEntry,
   style,
+  inputStyle,
   textStyle,
   ...props
 }: TsTextInputProps) {
@@ -68,6 +70,7 @@ export default function TsTextInput({
               fontFamily: 'Montserrat_500Medium',
             },
             styles.input,
+            inputStyle,
             // style,
           ]}
           secureTextEntry={secureTextEntry}
