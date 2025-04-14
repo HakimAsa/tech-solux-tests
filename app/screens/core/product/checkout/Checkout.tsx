@@ -18,8 +18,11 @@ import TsText from '@/app/components/texts/TsText'
 import PaymenttInput from '@/app/components/inputs/PaymentInput'
 import routes from '@/app/navigation/routes'
 import SuccessfullPaymentContent from './SuccessfullPaymentContent'
+import { useCart } from '@/app/context/CartContext'
 
 export default function Checkout({ navigation, route }: TsProps) {
+  const cartContext = useCart()
+  const cart = cartContext?.cart || []
   const [selectedMethod, setSelectedMethod] = useState<string | null>('visa')
   const [showConfirmationModal, setShowConfirmationModal] = useState(false)
   const { openKkiapayWidget, addSuccessListener, addFailedListener } =
@@ -39,12 +42,21 @@ export default function Checkout({ navigation, route }: TsProps) {
   const handleSelectMethod = (method: string) => {
     setSelectedMethod(method)
   }
+  //compute total prices
+  const total = (cart ?? []).reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  )
+  const totalShippingFee = (cart ?? []).reduce(
+    (acc, item) => acc + item.shippingPrice || 0 * item.quantity,
+    0
+  )
 
   const simulateKkiapayPayment = () => {
     // You can integrate real SDK logic here.
     // For demo/sandbox, we'll show the confirmation modal after a fake "success"
     openKkiapayWidget({
-      amount: 1,
+      amount: total + totalShippingFee,
       api_key: 'fee29e80184511f0936463e2e50313c3',
       publicAPIKey: 'fee29e80184511f0936463e2e50313c3',
       sandbox: true,
@@ -99,7 +111,9 @@ export default function Checkout({ navigation, route }: TsProps) {
             }}
           >
             <OrderSummary
-              currency={currencySymbolDollar || currencySymbolRupee}
+              totalOrderAmount={total}
+              totalShippingFee={totalShippingFee}
+              currency={cart?.[0]?.currencySymbol || currencySymbolRupee}
             />
             <TsText style={{ fontSize: 18, lineHeight: 27, color: '#222222' }}>
               Payment

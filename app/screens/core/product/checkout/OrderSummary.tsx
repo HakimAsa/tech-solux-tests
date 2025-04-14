@@ -7,11 +7,11 @@ import BorderWidth from '../BorderWidth'
 
 export default function OrderSummary({
   totalOrderAmount = 34,
-  shippingFee = 0,
+  totalShippingFee = 0,
   currency,
 }: {
   totalOrderAmount?: number
-  shippingFee?: number
+  totalShippingFee?: number
   currency?: string
 }) {
   return (
@@ -25,13 +25,16 @@ export default function OrderSummary({
       <RowContainer>
         <TsText style={styles.common}>Shipping</TsText>
         <TsText style={styles.common}>
-          {formatNumberWithCurrency(shippingFee, currency)}
+          {formatNumberWithCurrency(totalShippingFee, currency)}
         </TsText>
       </RowContainer>
       <RowContainer>
         <TsText style={styles.total}>Total</TsText>
         <TsText style={styles.total}>
-          {formatNumberWithCurrency(totalOrderAmount + shippingFee, currency)}
+          {formatNumberWithCurrency(
+            totalOrderAmount + totalShippingFee,
+            currency
+          )}
         </TsText>
       </RowContainer>
       <BorderWidth
