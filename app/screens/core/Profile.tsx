@@ -1,14 +1,5 @@
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native'
-import React, { useEffect, useState } from 'react'
-import * as ImagePicker from 'expo-image-picker' // For react-native-image-picker
-// If using Expo, replace with: import * as ImagePicker from 'expo-image-picker';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
+import React from 'react'
 
 import BaseScreen from '@/app/components/BaseScreen'
 import MainContainer, { ScrollableMainContainer } from '@/app/containers'
@@ -32,95 +23,6 @@ import { Alert } from 'react-native'
 
 export default function Profile({ navigation }: TsProps) {
   const { user } = useAuth()
-  const {
-    data: userData,
-    error,
-    loading,
-    message,
-    request: getMe,
-  } = useApi(authApi.getMe)
-
-  const avatarApi = useApi(authApi.updateAvatar)
-  const updateDetailsApi = useApi(authApi.updateDetails)
-
-  const [avatar, setAvatar] = useState(user?.avatar || null) // State for avatar
-  const [imageData, setImageData] = useState(null)
-
-  const handleEditImage = () => {
-    console.log('hey')
-    Alert.alert(
-      'Edit Profile Picture',
-      'Choose an option',
-      [
-        {
-          text: 'Take Photo',
-          onPress: openCamera,
-        },
-        {
-          text: 'Choose from Gallery',
-          onPress: openGallery,
-        },
-        {
-          text: 'Cancel',
-          style: 'cancel',
-        },
-      ],
-      { cancelable: true }
-    )
-  }
-
-  const openCamera = async () => {
-    const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ['images'],
-      allowsEditing: true,
-      quality: 1,
-    })
-
-    if (result.canceled) {
-      alert('You cancelled image picker')
-    } else if (result.assets && result.assets.length > 0) {
-      setImageData(result.assets[0])
-      setAvatar(result.assets[0].uri) // Update avatar with the selected image
-    }
-  }
-
-  const openGallery = async () => {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
-      allowsEditing: true,
-      quality: 1,
-    })
-
-    if (result.canceled) {
-      alert('User cancelled image picker')
-    } else if (result.assets && result.assets.length > 0) {
-      console.log(result.assets[0])
-      setImageData(result.assets[0])
-      setAvatar(result.assets[0].uri) // Update avatar with the selected image
-    }
-  }
-
-  useEffect(() => {
-    requestPermission()
-  }, [])
-  const requestPermission = async () => {
-    const { status, granted } =
-      await ImagePicker.getMediaLibraryPermissionsAsync()
-    if (status !== 'granted') {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
-      if (status !== 'granted') {
-        return alert(`L'autorisation d'accéder à la pellicule a été refusée`) //'Permission to access camera roll was denied'
-      }
-    }
-  }
-
-  interface UserDetails {
-    avatar?: string
-    email?: string
-    username?: string
-    [key: string]: any
-  }
-
   const updateProfile = async (values: Record<string, any>) => {
     console.log('wow', values)
     if (imageData?.fileName) {
@@ -187,20 +89,6 @@ export default function Profile({ navigation }: TsProps) {
     email: user?.email,
     username: user?.username,
   }
-  useEffect(() => {
-    const getUser = async () => {
-      await getMe()
-    }
-
-    getUser()
-  }, [])
-  console.log(userData)
-
-  if (loading) return <TsActivityIndicator visible={loading} />
-  if (avatarApi.loading)
-    return <TsActivityIndicator visible={avatarApi.loading} />
-  if (updateDetailsApi.loading)
-    return <TsActivityIndicator visible={updateDetailsApi.loading} />
   return (
     <BaseScreen style={{ backgroundColor: colors.white }}>
       <BasicHeader
@@ -223,16 +111,14 @@ export default function Profile({ navigation }: TsProps) {
             <View style={styles.avatar}>
               {/* Add your avatar here */}
               <Image
-                source={
-                  avatar || userData?.avatar
-                    ? { uri: avatar || userData?.avatar }
-                    : require('@/assets/images/avatar.png')
-                }
+                source={require('@/assets/images/avatar.png')}
                 style={styles.image}
               />
-              <TouchableOpacity
-                style={[styles.pencilView]}
-                onPress={handleEditImage}
+              <Pressable
+                style={styles.pencilView}
+                onPress={() =>
+                  console.log('choose from gallery or open camera')
+                }
               >
                 <Image
                   source={require('@/assets/images/pencil.png')}

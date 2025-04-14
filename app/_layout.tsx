@@ -81,6 +81,7 @@ export default function RootLayout() {
 
   const restoreUser = async () => {
     const user = await authStorage.getUser()
+    console.log(user)
     if (!user) return setUser(null)
     try {
       const { data } = await authApi.getMe()

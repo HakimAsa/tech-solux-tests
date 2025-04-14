@@ -37,30 +37,6 @@ const requestForgotPasswordOTP = (data: object) =>
 const resetPasswordOTP = (data: object) =>
   httpRequest(sf(AUTH, RESETPASSWORDOTP), HM.POST, data)
 
-const updateDetails = (data: any) =>
-  httpRequest(sf(AUTH, 'updatedetails'), HM.PUT, data)
-
-const updateAvatar = (data: Record<any, any>) => {
-  const formData = new FormData()
-  const fileUri = data.uri
-  const fileName = 'image' + data.fileName
-  const fileType = data.mimeType
-  formData.append('avatar', {
-    type: fileType,
-    uri: fileUri,
-    name: fileName,
-  } as any)
-  return httpRequest(sf(AUTH, UPDATEPROFILEPICTURE), HM.PATCH, formData, {
-    // onUploadProgress: (progress) => {
-    //   onUploadProgress && onUploadProgress(progress.loaded / progress.total)
-    // },
-    headers: {
-      Accept: 'multipart/form-data',
-      'Content-Type': 'multipart/form-data',
-    },
-  })
-}
-
 const resendOPTCode = (email: string, userId: string) =>
   apiClient.post(sf(AUTH, VERIFY, RESEND, OTP), { email, userId })
 export default {
