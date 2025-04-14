@@ -117,6 +117,7 @@ export default function Home({ navigation }: TsProps) {
               <ShopNow />
               <DealOfTheDayBanner onPress={onDealOfDayPress} />
               <DealOfTheDayProduct
+                dealProduct={allData}
                 onDealOfDayItemPress={(item) =>
                   navigation.navigate(routes.PRODUCT_DETAILS, { item })
                 }

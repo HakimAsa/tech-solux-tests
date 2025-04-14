@@ -4,13 +4,14 @@ import colors from '@/app/config/colors'
 import products from '@/app/data/products'
 import ProductCard from '@/app/components/cards/ProductCard'
 import RadialGradientChevron from './RadialShadowChevron'
-
-const dealOfDaysProducts = products.filter((product) => product.discount > 0)
+import { useSearchContext } from '@/app/context/SearchContext'
 
 export default function DealOfTheDayProduct({
   onDealOfDayItemPress,
+  dealProduct = [],
 }: {
   onDealOfDayItemPress?: (item: any) => void
+  dealProduct?: any[]
 }) {
   const flatListRef = useRef<FlatList>(null)
 
@@ -19,7 +20,7 @@ export default function DealOfTheDayProduct({
   const scrollX = useRef(0)
 
   const scrollRight = () => {
-    const maxOffset = (products.length - 1) * (ITEM_WIDTH + SPACING)
+    const maxOffset = (dealProduct.length - 1) * (ITEM_WIDTH + SPACING)
     const nextOffset = Math.min(
       scrollX.current + ITEM_WIDTH + SPACING,
       maxOffset
@@ -32,7 +33,7 @@ export default function DealOfTheDayProduct({
     <View style={styles.container}>
       <FlatList
         ref={flatListRef}
-        data={dealOfDaysProducts}
+        data={dealProduct}
         renderItem={({ item }) => (
           <ProductCard
             item={item}

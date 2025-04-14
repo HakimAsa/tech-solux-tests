@@ -106,7 +106,7 @@ export default function ProductDetails({ navigation, route }: TsProps) {
       />
       <MainContainer style={{ paddingLeft: 16, padding: 16, paddingBottom: 0 }}>
         <ImageSlider
-          imageList={images}
+          imageList={item?.image || images}
           dotColor={colors.primary}
           activeDotSize={10}
           showRightChevron
@@ -128,7 +128,8 @@ export default function ProductDetails({ navigation, route }: TsProps) {
         </TsText>
         <Star
           starSize={18}
-          totalReview={0}
+          rating={item?.rating?.average}
+          totalReview={item?.rating?.count || 0}
           totalReviewStyle={{
             fontFamily: 'Montserrat_500Regular',
             fontSize: 14,
@@ -144,8 +145,8 @@ export default function ProductDetails({ navigation, route }: TsProps) {
             medium
             style={styles.listPrice}
           >
-            {currencySymbolRupee}
-            {calculateListPrice(1500, 50)}
+            {item?.currencySymbol || currencySymbolRupee}
+            {calculateListPrice(item?.price || 1500, item?.discount || 50)}
           </TsText>
           <TsText
             medium
@@ -154,7 +155,8 @@ export default function ProductDetails({ navigation, route }: TsProps) {
               color: colors.black,
             }}
           >
-            {currencySymbolRupee}1500
+            {item?.currencySymbol || currencySymbolRupee}
+            {item?.price || 1500}
           </TsText>
           <TsText
             medium
@@ -164,11 +166,16 @@ export default function ProductDetails({ navigation, route }: TsProps) {
               color: colors.secondary,
             }}
           >
-            50% Off
+            {item?.discount || 50}% Off
           </TsText>
         </BasicRowContainer>
         <TsText medium>Product Details</TsText>
-        <MoreText text='Perhaps the most iconic sneaker of all-time, this original "Chicago"? colorway is the cornerstone to any sneaker collection. Made famous in 1985 by Michael Jordan, the shoe has stood the test of time, becoming the most famous colorway of the Air Jordan 1. This 2015 release saw the day' />
+        <MoreText
+          text={
+            item?.longDescription ||
+            'Perhaps the most iconic sneaker of all-time, this original "Chicago"? colorway is the cornerstone to any sneaker collection. Made famous in 1985 by Michael Jordan, the shoe has stood the test of time, becoming the most famous colorway of the Air Jordan 1. This 2015 release saw the day'
+          }
+        />
         <BasicRowContainer gap={8}>
           <DetailBtn
             iconName="map-marker-radius-outline"

@@ -6,6 +6,7 @@ import {
   Alert,
   Image,
   Animated,
+  ActivityIndicator,
 } from 'react-native'
 import { useEffect, useRef, useState } from 'react'
 
@@ -39,6 +40,7 @@ export default function ImageSlider({
   const flatListRef = useRef<FlatList>(null)
   const scrollX = useRef(new Animated.Value(0)).current
   const [activeIndex, setActiveIndex] = useState(0)
+  const [loading, setLoading] = useState(true)
 
   const onViewRef = useRef(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
@@ -54,10 +56,6 @@ export default function ImageSlider({
     waitForInteraction: true,
   })
 
-  const ITEM_WIDTH = ScreenWidth - 32 //170
-  const SPACING = 32
-  // const scrollX = useRef(0)
-
   const scrollRight = () => {
     if (activeIndex < imageList.length - 1) {
       const newIndex = activeIndex + 1
@@ -70,15 +68,25 @@ export default function ImageSlider({
   }
 
   const renderItem = ({ item }: { item: any }) => {
+    const source = typeof item === 'string' ? { uri: item } : item
     return (
       <>
         <View style={styles.imageContainer}>
           <Image
-            source={item}
+            source={source}
             style={styles.image}
             resizeMode="contain"
+            onLoadStart={() => setLoading(true)}
+            onLoadEnd={() => setLoading(false)}
           />
         </View>
+        {loading && (
+          <ActivityIndicator
+            size="small"
+            color={colors.primary}
+            style={StyleSheet.absoluteFill}
+          />
+        )}
         {showLeft && (
           <View style={{ position: 'absolute', top: '25%', left: 30 }}>
             <TsText
