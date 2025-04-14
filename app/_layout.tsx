@@ -17,14 +17,6 @@ import {
   Montserrat_800ExtraBold,
   Montserrat_900Black,
   Montserrat_100Thin_Italic,
-  Montserrat_200ExtraLight_Italic,
-  Montserrat_300Light_Italic,
-  Montserrat_400Regular_Italic,
-  Montserrat_500Medium_Italic,
-  Montserrat_600SemiBold_Italic,
-  Montserrat_700Bold_Italic,
-  Montserrat_800ExtraBold_Italic,
-  Montserrat_900Black_Italic,
 } from '@expo-google-fonts/montserrat'
 import { Poppins_600SemiBold } from '@expo-google-fonts/poppins/600SemiBold'
 
@@ -42,6 +34,7 @@ import colors from './config/colors'
 import TsActivityIndicator from './components/loader/TsActivityIndicator'
 import AuthContext from './context/auth/AuthContext'
 import { CartProvider } from './context/CartContext'
+import authApi from '@/app/api/auth'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -89,7 +82,13 @@ export default function RootLayout() {
   const restoreUser = async () => {
     const user = await authStorage.getUser()
     if (!user) return setUser(null)
-    return setUser(user)
+    try {
+      const { data } = await authApi.getMe()
+      setUser(data?.data)
+    } catch (err) {
+      console.log('Failed to fetch user profile', err)
+      setUser(null)
+    }
   }
 
   if (isLoading) {

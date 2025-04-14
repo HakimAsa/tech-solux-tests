@@ -1,5 +1,5 @@
 import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import BaseScreen from '@/app/components/BaseScreen'
 import MainContainer, {
   BasicRowContainer,
@@ -12,7 +12,7 @@ import colors from '@/app/config/colors'
 import Size from './Size'
 import Star from '@/app/components/Star'
 import TsText from '@/app/components/texts/TsText'
-import { calculateListPrice } from '@/app/utils/helpers'
+import getApiUrl, { calculateListPrice } from '@/app/utils/helpers'
 import {
   currencySymbolRupee,
   ScreenWidth,
@@ -29,6 +29,9 @@ import routes from '@/app/navigation/routes'
 import products from '@/app/data/products'
 import ProductCard from '@/app/components/cards/ProductCard'
 import { useCart } from '@/app/context/CartContext'
+import { useSearchContext } from '@/app/context/SearchContext'
+import useAuth from '@/app/context/auth/useAuth'
+import productApi from '@/app/api/products'
 
 const PATH =
   'M24.3333 1C19 1 16 5.445 16 7.66667C16 5.445 13 1 7.66667 1C2.33333 1 1 5.445 1 7.66667C1 19.3333 16 27.6667 16 27.6667C16 27.6667 31 19.3333 31 7.66667C31 5.445 29.6667 1 24.3333 1Z'
@@ -38,20 +41,27 @@ const COMP_SVG =
   'M1.52998 17.65L2.86998 18.21V9.18L0.439977 15.04C0.0299771 16.06 0.519977 17.23 1.52998 17.65ZM21.03 13.95L16.07 1.98C15.76 1.23 15.03 0.77 14.26 0.75C14 0.75 13.73 0.79 13.47 0.9L6.09998 3.95C5.34998 4.26 4.88998 4.98 4.86998 5.75C4.85998 6.02 4.90998 6.29 5.01998 6.55L9.97998 18.52C10.29 19.28 11.03 19.74 11.81 19.75C12.07 19.75 12.33 19.7 12.58 19.6L19.94 16.55C20.96 16.13 21.45 14.96 21.03 13.95ZM11.83 17.75L6.86998 5.79L14.22 2.75H14.23L19.18 14.7L11.83 17.75Z'
 
 const images = [
-  require('@/assets/images/nikesneakermixed.png'),
-  require('@/assets/images/nikesneakermixed.png'),
-  require('@/assets/images/nikesneakermixed.png'),
-  require('@/assets/images/nikesneakermixed.png'),
-  require('@/assets/images/nikesneakermixed.png'),
+  'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
+  'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
+  'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
+  'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
+  'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
 ]
 
 export default function ProductDetails({ navigation, route }: TsProps) {
+  const { user } = useAuth()
   const [isLiked, setIsLiked] = useState(false)
   const { item } = route?.params || {}
   // Inside your component:
   const cartContext = useCart()
   const addToCart = cartContext?.addToCart
   const cart = cartContext?.cart
+  const { allProducts } = useSearchContext()
+  console.log('all product', allProducts)
+
+  useEffect(() => {
+    console.log('🔥 allProducts in this screen:', allProducts)
+  }, [allProducts])
 
   const goToCart = (item: any) => {
     navigation.navigate(routes.CART, { item })
@@ -73,26 +83,30 @@ export default function ProductDetails({ navigation, route }: TsProps) {
 
     // Set a new debounce timeout
     debounceTimeout.current = setTimeout(async () => {
-      // try {
-      //   const response = await fetch('https://your-api.com/wishlist', {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({
-      //       userId: user.id, // Replace with the actual user ID
-      //       productId: product.id,
-      //       liked: !isLiked, // Send the new like state
-      //     }),
-      //   });
-      //   if (!response.ok) {
-      //     const errorData = await response.json();
-      //     Alert.alert('Error', errorData.message || 'Failed to update wishlist.');
-      //   }
-      // } catch (error) {
-      //   console.error('Error saving to wishlist:', error);
-      //   Alert.alert('Error', 'An error occurred while updating the wishlist.');
-      // }
+      try {
+        const response = await productApi.createWishlist({
+          user: user?._id, // Replace with the actual user ID
+          product: product._id,
+          liked: !isLiked, // Send the new like state
+        })
+        // const response = await fetch(`${getApiUrl()}/wishlists`, {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify(),
+        // })
+        if (!response.ok) {
+          const errorData = await response.json()
+          Alert.alert(
+            'Error',
+            errorData.message || 'Failed to update wishlist.'
+          )
+        }
+      } catch (error) {
+        console.error('Error saving to wishlist:', error)
+        Alert.alert('Error', 'An error occurred while updating the wishlist.')
+      }
     }, 500) // Delay of 500ms
   }
 
@@ -107,9 +121,6 @@ export default function ProductDetails({ navigation, route }: TsProps) {
         cartCount={cart?.[0]?.quantity ?? 0}
         onPress={() => navigation.goBack()}
         onRightIconPress={() => {
-          console.log('item', item)
-          console.log('cartt', cart)
-
           addToCart?.(item)
         }}
         rightIconStyle={{
@@ -341,13 +352,13 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           Similar To
         </TsText>
         <FilterSortBanner
-          title="282+ Items"
+          title={`${allProducts.length - 1 || 1}+ Items`}
           textStyle={{ fontFamily: 'Montserrat_600SemiBold' }}
         />
         {/* Similar Products */}
         <View style={{ marginTop: 8, marginBottom: 0 }}>
           <FlatList
-            data={products}
+            data={allProducts}
             horizontal
             showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => <ProductCard item={item} />}

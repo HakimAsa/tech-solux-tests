@@ -5,7 +5,8 @@ export default [
     price: 1500,
     size: 10,
     discount: 40,
-    image: require('@/assets/images/womenprintedkurta.png'),
+    image:
+      'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
     rating: {
       count: 56890,
       average: 4.5,
@@ -18,7 +19,8 @@ export default [
     price: 2499,
     size: 12,
     discount: 50,
-    image: require('@/assets/images/hrxby.png'),
+    image:
+      'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
     rating: {
       count: 344567,
       average: 4.7,
@@ -35,7 +37,8 @@ export default [
     },
     size: 14,
     discount: 0,
-    image: require('@/assets/images/blackwinter.png'),
+    image:
+      'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
     description: 'Autumn And Winter Casual cotton-padded jacket...',
   },
   {
@@ -48,7 +51,8 @@ export default [
     },
     size: 14,
     discount: 60,
-    image: require('@/assets/images/iwcwatch.png'),
+    image:
+      'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
     istrending: true,
     description: `IWC Schaffhausen 2021 Pilot's Watch "SIHH 2019" 44mm`,
   },
@@ -63,7 +67,8 @@ export default [
     size: 14,
     discount: 70,
     istrending: true,
-    image: require('@/assets/images/labbinwhitesneaker.png'),
+    image:
+      'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
     description: `Labbin White Sneakers For Men and Female`,
   },
 
@@ -77,7 +82,8 @@ export default [
     },
     size: 14,
     discount: 60,
-    image: require('@/assets/images/mamonwomenhandbag.png'),
+    image:
+      'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
     istrending: true,
     description: `Mammon Women's Handbag (Set of 3, Beige)`,
   },

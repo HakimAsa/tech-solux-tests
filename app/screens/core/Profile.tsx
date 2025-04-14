@@ -1,5 +1,14 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
+import React, { useEffect, useState } from 'react'
+import * as ImagePicker from 'expo-image-picker' // For react-native-image-picker
+// If using Expo, replace with: import * as ImagePicker from 'expo-image-picker';
 
 import BaseScreen from '@/app/components/BaseScreen'
 import MainContainer, { ScrollableMainContainer } from '@/app/containers'
@@ -16,18 +25,182 @@ import TsProps from '@/TsProps'
 import BasicHeader from '@/app/components/headers/BasicHeader'
 import routes from '@/app/navigation/routes'
 import useAuth from '@/app/context/auth/useAuth'
+import useApi from '@/app/hooks/useApi'
+import authApi from '@/app/api/auth'
+import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
+import { Alert } from 'react-native'
 
 export default function Profile({ navigation }: TsProps) {
   const { user } = useAuth()
+  const {
+    data: userData,
+    error,
+    loading,
+    message,
+    request: getMe,
+  } = useApi(authApi.getMe)
+
+  const avatarApi = useApi(authApi.updateAvatar)
+  const updateDetailsApi = useApi(authApi.updateDetails)
+
+  const [avatar, setAvatar] = useState(user?.avatar || null) // State for avatar
+  const [imageData, setImageData] = useState(null)
+
+  const handleEditImage = () => {
+    console.log('hey')
+    Alert.alert(
+      'Edit Profile Picture',
+      'Choose an option',
+      [
+        {
+          text: 'Take Photo',
+          onPress: openCamera,
+        },
+        {
+          text: 'Choose from Gallery',
+          onPress: openGallery,
+        },
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+      ],
+      { cancelable: true }
+    )
+  }
+
+  const openCamera = async () => {
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      quality: 1,
+    })
+
+    if (result.canceled) {
+      alert('You cancelled image picker')
+    } else if (result.assets && result.assets.length > 0) {
+      setImageData(result.assets[0])
+      setAvatar(result.assets[0].uri) // Update avatar with the selected image
+    }
+  }
+
+  const openGallery = async () => {
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ['images'],
+      allowsEditing: true,
+      quality: 1,
+    })
+
+    if (result.canceled) {
+      alert('User cancelled image picker')
+    } else if (result.assets && result.assets.length > 0) {
+      console.log(result.assets[0])
+      setImageData(result.assets[0])
+      setAvatar(result.assets[0].uri) // Update avatar with the selected image
+    }
+  }
+
+  useEffect(() => {
+    requestPermission()
+  }, [])
+  const requestPermission = async () => {
+    const { status, granted } =
+      await ImagePicker.getMediaLibraryPermissionsAsync()
+    if (status !== 'granted') {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+      if (status !== 'granted') {
+        return alert(`L'autorisation d'accéder à la pellicule a été refusée`) //'Permission to access camera roll was denied'
+      }
+    }
+  }
+
+  interface UserDetails {
+    avatar?: string
+    email?: string
+    username?: string
+    [key: string]: any
+  }
+
   const updateProfile = async (values: Record<string, any>) => {
+    console.log('wow', values)
+    if (imageData?.fileName) {
+      const res = await avatarApi.request(imageData)
+
+      if (res.status === 201) {
+        const data = {
+          ...values,
+          bankdetails: {
+            bankaccountnumber: values.bankaccountnumber,
+            bankaccountholdername: values.bankaccountholdername,
+            ifsccode: values.ifsccode,
+          },
+          businessaddress: {
+            pincode: values.pincode,
+            address: values.address,
+            city: values.city,
+            state: values.state,
+            country: values.country,
+          },
+          avatar: res.avatar,
+        }
+        data.password === '' && delete data.password
+        // updating data now
+        const updateDetails = await updateDetailsApi.request(data)
+        if (updateDetails.status === 200)
+          Alert.alert('Profile Update', 'Successfull')
+        else {
+          Alert.alert('Error', 'Error occured')
+        }
+      }
+    } else {
+      console.log(values)
+      const data = {
+        ...values,
+        bankdetails: {
+          bankaccountnumber: values.bankaccountnumber,
+          bankaccountholdername: values.bankaccountholdername,
+          ifsccode: values.ifsccode,
+        },
+        businessaddress: {
+          pincode: values.pincode,
+          address: values.address,
+          city: values.city,
+          state: values.state,
+          country: values.country,
+        },
+      }
+      data.password === '' && delete data.password
+      const updateDetails = await updateDetailsApi.request(data)
+      if (updateDetails.status === 200)
+        Alert.alert('Profile Update', 'Successfull')
+      else {
+        console.error(updateDetails)
+
+        Alert.alert('Error', 'Error occured')
+      }
+    }
     // Update user profile with values.avatar
-    console.log('updateProfile', values)
+    // console.log('updateProfile', values)
   }
   const newInitialValues = {
     ...profileUpdateInitials,
     email: user?.email,
     username: user?.username,
   }
+  useEffect(() => {
+    const getUser = async () => {
+      await getMe()
+    }
+
+    getUser()
+  }, [])
+  console.log(userData)
+
+  if (loading) return <TsActivityIndicator visible={loading} />
+  if (avatarApi.loading)
+    return <TsActivityIndicator visible={avatarApi.loading} />
+  if (updateDetailsApi.loading)
+    return <TsActivityIndicator visible={updateDetailsApi.loading} />
   return (
     <BaseScreen style={{ backgroundColor: colors.white }}>
       <BasicHeader
@@ -50,20 +223,22 @@ export default function Profile({ navigation }: TsProps) {
             <View style={styles.avatar}>
               {/* Add your avatar here */}
               <Image
-                source={require('@/assets/images/avatar.png')}
+                source={
+                  avatar || userData?.avatar
+                    ? { uri: avatar || userData?.avatar }
+                    : require('@/assets/images/avatar.png')
+                }
                 style={styles.image}
               />
-              <Pressable
-                style={styles.pencilView}
-                onPress={() =>
-                  console.log('choose from gallery or open camera')
-                }
+              <TouchableOpacity
+                style={[styles.pencilView]}
+                onPress={handleEditImage}
               >
                 <Image
                   source={require('@/assets/images/pencil.png')}
                   style={styles.pencil}
                 />
-              </Pressable>
+              </TouchableOpacity>
             </View>
             <TsText style={styles.heading}>{en.personalDetails}</TsText>
             <TsFormField
@@ -111,6 +286,7 @@ export default function Profile({ navigation }: TsProps) {
             <TsFormField
               label={en.pincode}
               name="pincode"
+              keyboardType="numeric"
               inputStyle={styles.inputStyle}
               textStyle={styles.textStyle}
             />

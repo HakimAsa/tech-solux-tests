@@ -36,6 +36,7 @@ export default function LogoHeader({
   style,
 }: LogoHeaderProps) {
   const { logout } = useAuth()
+  const { user } = useAuth()
   const {
     error,
     loading,
@@ -100,7 +101,11 @@ export default function LogoHeader({
               borderRadius: 24,
             }}
             alt="avatar"
-            source={require('@/assets/images/avatar.png')}
+            source={
+              user?.avatar
+                ? { uri: user.avatar }
+                : require('@/assets/images/avatar.png')
+            }
           />
         </TouchableOpacity>
       </View>
