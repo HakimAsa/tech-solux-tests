@@ -3,7 +3,7 @@ import React from 'react'
 import TsText from '@/app/components/texts/TsText'
 import colors from '@/app/config/colors'
 import TsButton from '@/app/components/buttons/TsButton'
-import { getPercentage } from '@/app/config/constants'
+import { getPercentage, ScreenHeight } from '@/app/config/constants'
 import TsProps from '@/TsProps'
 import routes from '@/app/navigation/routes'
 
@@ -26,9 +26,12 @@ export default function GetStarted({ navigation }: TsProps) {
           onPress={() => navigation.navigate('TabNavigator')}
           button={{
             width: 279,
-            top: getPercentage(755),
-            left: 55,
-            position: 'absolute',
+            // top: getPercentage(755),
+            top: ScreenHeight / 4,
+            // left: 55,
+            // alignItems: 'center',
+
+            // position: 'absolute',
           }}
         >
           Get Started
@@ -46,22 +49,24 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.63)',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   layout: {
-    position: 'absolute',
+    // position: 'absolute',
     width: 315,
     height: 123,
-    top: getPercentage(552),
-    left: 37,
+    // top: getPercentage(552),
+    top: ScreenHeight / 5,
+    // left: 37,
   },
   sublayout: {
-    position: 'absolute',
+    // position: 'absolute',
     width: 315,
     height: 22,
-    top: getPercentage(689),
-    left: 37,
+    // top: getPercentage(689),
+    top: ScreenHeight / 5,
+    // left: 37,
   },
   subtagline: {
     fontFamily: 'Montserrat_400Regular',
