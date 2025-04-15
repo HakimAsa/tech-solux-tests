@@ -103,7 +103,9 @@ export default function Whishlist({ navigation }: TsProps) {
                 goToSearch={goToSearch}
               />
               <FilterSortBanner
-                title={`${wishlistProducts.length - 1 || 1}+ items`}
+                title={`${
+                  wishlistProducts.length > 0 ? wishlistProducts.length - 1 : 1
+                }+ items`}
               />
             </>
           }

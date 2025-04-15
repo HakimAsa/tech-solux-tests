@@ -57,11 +57,15 @@ export default function ProductDetails({ navigation, route }: TsProps) {
   const addToCart = cartContext?.addToCart
   const cart = cartContext?.cart
   const { allProducts } = useSearchContext()
-  const similarProducts = allProducts.filter(
-    (product) =>
-      product._id !== item._id &&
-      product.name.toLowerCase().includes(item.name.toLowerCase().split(' ')[0])
-  )
+  const similarProducts =
+    allProducts?.length &&
+    allProducts.filter(
+      (product) =>
+        product?._id !== item?._id &&
+        product?.name
+          .toLowerCase()
+          .includes(item?.name.toLowerCase().split(' ')[0])
+    )
 
   useEffect(() => {
     console.log('🔥 allProducts in this screen:', allProducts)
@@ -90,7 +94,7 @@ export default function ProductDetails({ navigation, route }: TsProps) {
       try {
         const response = await productApi.createWishlist({
           user: user?._id, // Replace with the actual user ID
-          product: product._id,
+          product: product?._id,
           liked: !isLiked, // Send the new like state
         })
         // const response = await fetch(`${getApiUrl()}/wishlists`, {
