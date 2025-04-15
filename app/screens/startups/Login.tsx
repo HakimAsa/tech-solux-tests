@@ -44,7 +44,9 @@ export default function Login({ navigation }: TsProps) {
   }
   if (loading) return <TsActivityIndicator visible={loading} />
   return (
-    <MainContainer style={{ paddingLeft: 0 }}>
+    <MainContainer
+      style={{ paddingLeft: 32, paddingTop: 10, paddingRight: 32 }}
+    >
       <KeyboardAvoidViewContainer>
         <AuthHeader title={en.welcomeBack} />
         <TsForm
@@ -52,10 +54,12 @@ export default function Login({ navigation }: TsProps) {
           onSubmit={handleSubmit}
           validationSchema={loginValidationSchema}
         >
-          <ErrorMessages
-            error={message || 'Something went wrong!'}
-            visible={error}
-          />
+          {error && (
+            <ErrorMessages
+              error={message || 'Something went wrong!'}
+              visible={error}
+            />
+          )}
           <AuthForm showForgotPassword />
           <SubmitAuthButton title={en.login} />
         </TsForm>

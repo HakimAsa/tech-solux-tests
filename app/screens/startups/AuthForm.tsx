@@ -54,12 +54,13 @@ export default function AuthForm({
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    left: 32,
+    // left: 32,
     top: 182,
-    width: 317,
+    // width: 317,
+    width: '100%',
   },
   forgotPassword: {
-    left: 242 - 32,
+    left: 242 - 64,
     height: 15,
     bottom: 10,
     width: 108,
@@ -67,6 +68,7 @@ const styles = StyleSheet.create({
   forgotText: {
     color: colors.primary,
     fontFamily: 'Montserrat_400Regular',
+    textAlign: 'right',
     lineHeight: 12,
   },
 })

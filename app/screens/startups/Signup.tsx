@@ -36,9 +36,13 @@ export default function Signup({ navigation }: TsProps) {
     if (!res?.ok) return
     navigation.navigate(routes.LOGIN)
   }
+  console.log('nn', message)
+  console.log('err', error)
   if (loading) return <TsActivityIndicator visible={loading} />
   return (
-    <MainContainer style={{ paddingLeft: 0 }}>
+    <MainContainer
+      style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 10 }}
+    >
       <ScrollableMainContainer>
         <AuthHeader title={en.createAnAccountLineBreak} />
         <TsForm
@@ -57,7 +61,7 @@ export default function Signup({ navigation }: TsProps) {
             style={{
               position: 'absolute',
               top: 428 + 5, // Adjust based on input field
-              left: 30,
+              left: 0,
               width: 258,
               height: 30,
               flexDirection: 'row',
@@ -99,7 +103,7 @@ export default function Signup({ navigation }: TsProps) {
               position: 'absolute',
               top: 428 + 20, // Adjust based on input field
               bottom: 30,
-              left: 30,
+              left: 0,
               width: 258,
               height: 30,
             }}

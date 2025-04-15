@@ -29,12 +29,15 @@ export default function useApi<T, Args extends any[]>(
     setError(!response?.ok)
     setData(response?.data?.data ?? null)
     setMessage(
-      (!response && 'Unauthorized!') ||
-        (!response?.ok &&
-          (response?.data?.errorMessage ||
-            response?.data?.message ||
-            (response?.data as any))) // Ensure a valid string
+      !response
+        ? 'Unauthorized!'
+        : !response?.ok
+        ? response?.data?.errorMessage ||
+          response?.data?.message ||
+          'An error occurred'
+        : null
     )
+
     return response
   }
 

@@ -19,9 +19,9 @@ export default function AuthButton({
       button={{
         position: 'absolute',
         top,
-        left: 29,
+        left: -8,
         bottom: 21,
-        width: 317,
+        width: '105%',
       }}
       onPress={onPress}
       disabled={disabled}
