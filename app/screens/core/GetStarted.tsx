@@ -3,9 +3,7 @@ import React from 'react'
 import TsText from '@/app/components/texts/TsText'
 import colors from '@/app/config/colors'
 import TsButton from '@/app/components/buttons/TsButton'
-import { getPercentage, ScreenHeight } from '@/app/config/constants'
 import TsProps from '@/TsProps'
-import routes from '@/app/navigation/routes'
 
 export default function GetStarted({ navigation }: TsProps) {
   return (
@@ -14,28 +12,25 @@ export default function GetStarted({ navigation }: TsProps) {
       source={require('@/assets/images/getstarted.png')}
     >
       <View style={styles.main}>
-        <View style={styles.layout}>
+        <View style={styles.topSection}>
           <TsText style={styles.tagline}>
             {'You want\n Authentic, here\n you go!'}
           </TsText>
-        </View>
-        <View style={styles.sublayout}>
           <TsText style={styles.subtagline}>Find it here, buy it now!</TsText>
         </View>
-        <TsButton
-          onPress={() => navigation.navigate('TabNavigator')}
-          button={{
-            width: 279,
-            // top: getPercentage(755),
-            top: ScreenHeight / 4,
-            // left: 55,
-            // alignItems: 'center',
-
-            // position: 'absolute',
-          }}
-        >
-          Get Started
-        </TsButton>
+        {/* <View style={styles.middleSection}>
+        </View> */}
+        {/* <View style={styles.spacer} /> */}
+        <View style={styles.bottomSection}>
+          <TsButton
+            onPress={() => navigation.navigate('TabNavigator')}
+            button={{
+              width: 279,
+            }}
+          >
+            Get Started
+          </TsButton>
+        </View>
       </View>
     </ImageBackground>
   )
@@ -45,28 +40,6 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-  },
-  main: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.63)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  layout: {
-    // position: 'absolute',
-    width: 315,
-    height: 123,
-    // top: getPercentage(552),
-    top: ScreenHeight / 5,
-    // left: 37,
-  },
-  sublayout: {
-    // position: 'absolute',
-    width: 315,
-    height: 22,
-    // top: getPercentage(689),
-    top: ScreenHeight / 5,
-    // left: 37,
   },
   subtagline: {
     fontFamily: 'Montserrat_400Regular',
@@ -81,5 +54,24 @@ const styles = StyleSheet.create({
     lineHeight: 34,
     color: colors.white,
     textAlign: 'center',
+  },
+
+  main: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.63)',
+    paddingHorizontal: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  topSection: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    top: '30%',
+    flex: 1,
+  },
+  bottomSection: {
+    alignItems: 'center',
+    marginBottom: 45,
   },
 })
