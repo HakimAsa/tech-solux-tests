@@ -36,14 +36,13 @@ export default function Signup({ navigation }: TsProps) {
     if (!res?.ok) return
     navigation.navigate(routes.LOGIN)
   }
-  console.log('nn', message)
-  console.log('err', error)
+
   if (loading) return <TsActivityIndicator visible={loading} />
   return (
     <MainContainer
       style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 10 }}
     >
-      <ScrollableMainContainer>
+      <ScrollableMainContainer contentContainerStyle={{ paddingVertical: 10 }}>
         <AuthHeader title={en.createAnAccountLineBreak} />
         <TsForm
           initialValues={signupInitials}

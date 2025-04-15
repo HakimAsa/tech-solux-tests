@@ -54,12 +54,10 @@ export default function Login({ navigation }: TsProps) {
           onSubmit={handleSubmit}
           validationSchema={loginValidationSchema}
         >
-          {error && (
-            <ErrorMessages
-              error={message || 'Something went wrong!'}
-              visible={error}
-            />
-          )}
+          <ErrorMessages
+            error={message || 'Something went wrong!'}
+            visible={error}
+          />
           <AuthForm showForgotPassword />
           <SubmitAuthButton title={en.login} />
         </TsForm>

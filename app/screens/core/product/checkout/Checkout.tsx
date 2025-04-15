@@ -50,8 +50,8 @@ export default function Checkout({ navigation, route }: TsProps) {
   const total = (cart ?? []).reduce(
     (acc, item) =>
       acc + (buyQty ?? 0) > 1
-        ? item.price * (buyQty ?? 0)
-        : item.price * item.quantity,
+        ? item?.price * (buyQty ?? 0)
+        : item?.price * item.quantity,
     0
   )
   const totalShippingFee = (cart ?? []).reduce(
@@ -66,7 +66,7 @@ export default function Checkout({ navigation, route }: TsProps) {
     // You can integrate real SDK logic here.
     // For demo/sandbox, we'll show the confirmation modal after a fake "success"
     openKkiapayWidget({
-      amount: total + totalShippingFee,
+      amount: cart?.length > 0 ? total + totalShippingFee : item?.price || 0,
       api_key: 'fee29e80184511f0936463e2e50313c3',
       publicAPIKey: 'fee29e80184511f0936463e2e50313c3',
       sandbox: true,
@@ -124,7 +124,7 @@ export default function Checkout({ navigation, route }: TsProps) {
             }}
           >
             <OrderSummary
-              totalOrderAmount={cart?.length === 0 ? item.price : total}
+              totalOrderAmount={cart?.length === 0 ? item?.price || 0 : total}
               totalShippingFee={totalShippingFee}
               currency={
                 cart?.[0]?.currencySymbol ||
