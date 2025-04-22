@@ -31,18 +31,6 @@ import { Alert } from 'react-native'
 
 export default function Profile({ navigation }: TsProps) {
   const { user } = useAuth()
-  interface UserData {
-    avatar?: string
-    [key: string]: any
-  }
-
-  const {
-    data: userData,
-    error,
-    loading,
-    message,
-    request: getMe,
-  } = useApi<UserData, any>(authApi.getMe)
 
   const avatarApi = useApi(authApi.updateAvatar)
   const updateDetailsApi = useApi(authApi.updateDetails)
@@ -52,7 +40,6 @@ export default function Profile({ navigation }: TsProps) {
     useState<ImagePicker.ImagePickerAsset | null>(null)
 
   const handleEditImage = () => {
-    console.log('hey')
     Alert.alert(
       'Edit Profile Picture',
       'Choose an option',
@@ -118,13 +105,6 @@ export default function Profile({ navigation }: TsProps) {
     }
   }
 
-  interface UserDetails {
-    avatar?: string
-    email?: string
-    username?: string
-    [key: string]: any
-  }
-
   const updateProfile = async (values: Record<string, any>) => {
     if (imageData?.fileName) {
       const res = await avatarApi.request(imageData)
@@ -182,24 +162,22 @@ export default function Profile({ navigation }: TsProps) {
         Alert.alert('Error', 'Error occured')
       }
     }
-    // Update user profile with values.avatar
-    // console.log('updateProfile', values)
   }
+
   const newInitialValues = {
     ...profileUpdateInitials,
+    address: user?.businessaddress?.address,
+    bankaccountnumber: user?.bankdetails?.bankaccountnumber,
+    bankaccountholdername: user?.bankdetails?.bankaccountholdername,
+    city: user?.businessaddress?.city,
+    country: user?.businessaddress?.country,
     email: user?.email,
+    ifsccode: user?.bankdetails?.ifsccode,
+    pincode: user?.businessaddress?.pincode.toString(),
+    state: user?.businessaddress?.state,
     username: user?.username,
   }
-  useEffect(() => {
-    const getUser = async () => {
-      await getMe()
-    }
 
-    getUser()
-  }, [])
-  console.log(userData)
-
-  if (loading) return <TsActivityIndicator visible={loading} />
   if (avatarApi.loading)
     return <TsActivityIndicator visible={avatarApi.loading} />
   if (updateDetailsApi.loading)
@@ -227,8 +205,8 @@ export default function Profile({ navigation }: TsProps) {
               {/* Add your avatar here */}
               <Image
                 source={
-                  avatar || userData?.avatar
-                    ? { uri: avatar || userData?.avatar }
+                  avatar || user?.avatar
+                    ? { uri: avatar || user?.avatar }
                     : require('@/assets/images/avatar.png')
                 }
                 style={styles.image}

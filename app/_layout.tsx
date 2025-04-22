@@ -50,20 +50,8 @@ export default function RootLayout() {
     Poppins_600SemiBold,
   })
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState<object | null>(null)
-
-  useEffect(() => {
-    const checkAuthStatus = async () => {
-      const token = await authStorage.getToken()
-      console.log('Retrieved token:', token) // Debugging: Check if the token is retrieved...
-      setIsAuthenticated(!!token)
-      setIsLoading(false)
-    }
-
-    checkAuthStatus()
-  }, [])
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -81,6 +69,7 @@ export default function RootLayout() {
     try {
       const { data } = await authApi.getMe()
       setUser(data?.data)
+      setIsLoading(false)
     } catch (err) {
       console.log('Failed to fetch user profile', err)
       setUser(null)

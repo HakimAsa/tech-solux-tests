@@ -1,6 +1,7 @@
 import TsProps from '@/TsProps'
 import React, {
   createContext,
+  ReactNode,
   useContext,
   useEffect,
   useReducer,
@@ -62,7 +63,9 @@ const cartReducer = (state: any[], action: { type: string; payload?: any }) => {
   }
 }
 
-export const CartProvider = ({ children }: TsProps) => {
+export const CartProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [selectedQuantities, setSelectedQuantities] = useState({}) // Store quantities globally
 
   const [cart, dispatch] = useReducer(cartReducer, [])
