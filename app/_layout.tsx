@@ -54,34 +54,34 @@ export default function RootLayout() {
   const [user, setUser] = useState<object | null>(null)
 
   useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync()
+    const prepare = async () => {
+      if (!fontsLoaded) return
+
+      const user = await authStorage.getUser()
+      if (!user) {
+        setUser(null)
+        setIsLoading(false)
+        SplashScreen.hideAsync()
+        return
+      }
+
+      try {
+        const { data } = await authApi.getMe()
+        setUser(data?.data)
+      } catch (err) {
+        console.log('Failed to fetch user profile', err)
+        setUser(null)
+      } finally {
+        setIsLoading(false)
+        SplashScreen.hideAsync()
+      }
     }
+
+    prepare()
   }, [fontsLoaded])
 
-  useEffect(() => {
-    restoreUser()
-  }, [])
-
-  const restoreUser = async () => {
-    const user = await authStorage.getUser()
-    if (!user) return setUser(null)
-    try {
-      const { data } = await authApi.getMe()
-      setUser(data?.data)
-      setIsLoading(false)
-    } catch (err) {
-      console.log('Failed to fetch user profile', err)
-      setUser(null)
-    }
-  }
-
-  if (isLoading) {
-    return <TsActivityIndicator visible={isLoading} /> // Show a loading indicator while checking auth status
-  }
-
-  if (!fontsLoaded) {
-    return null // Prevent rendering until the font is loaded
+  if (isLoading || !fontsLoaded) {
+    return <TsActivityIndicator visible={isLoading} /> // Show a loading indicator while fetching user and loading fonts
   }
 
   return (

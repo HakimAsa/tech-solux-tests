@@ -39,8 +39,6 @@ export default function Home({ navigation }: TsProps) {
 
   const dataToShow: any[] = isSearching ? searchResults : (products as any[])
   const allData = dataToShow?.length > 0 ? dataToShow : []
-  console.log('all', allData)
-  // const dataToShow = searchTerm ? searchResults : products
 
   const onDealOfDayPress = () => {
     Alert.alert('DEAL OF THE DAY', 'View them All')
@@ -65,7 +63,6 @@ export default function Home({ navigation }: TsProps) {
     const fetchProducts = async () => {
       const fetched = await getProducts()
       const res = fetched.data?.data
-      console.log('fetched', res)
       if (Array.isArray(res) && res.length > 0) {
         setAllProducts(res)
       }
@@ -73,8 +70,6 @@ export default function Home({ navigation }: TsProps) {
     // setAllProducts(staticProducts as any[])
     fetchProducts()
   }, [setAllProducts])
-
-  // console.log(allP)
 
   if (loading) {
     return <TsActivityIndicator visible={loading} />

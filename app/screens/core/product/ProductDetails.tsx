@@ -64,10 +64,6 @@ export default function ProductDetails({ navigation, route }: TsProps) {
       )
     : []
 
-  useEffect(() => {
-    console.log('🔥 allProducts in this screen:', allProducts)
-  }, [allProducts])
-
   const goToCart = (item: any) => {
     navigation.navigate(routes.CART, { item })
   }
