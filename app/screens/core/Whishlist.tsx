@@ -1,15 +1,13 @@
-import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
+import { ImageSourcePropType, View } from 'react-native'
+import { useEffect, useState } from 'react'
 
 import BaseScreen from '@/app/components/BaseScreen'
 import LogoHeader from '@/app/components/headers/LogoHeader'
 import MainContainer from '@/app/containers'
 import SearchBar from '@/app/components/SearchBar'
-import products from '@/app/data/products'
 import { useSearchContext } from '@/app/context/SearchContext'
 import { FlatList } from 'react-native'
 import FilterSortBanner from '@/app/components/FilterSortBanner'
-import TsText from '@/app/components/texts/TsText'
 import routes from '@/app/navigation/routes'
 import TsProps from '@/TsProps'
 import ProductCard from '@/app/components/cards/ProductCard'
@@ -17,12 +15,24 @@ import { ScreenWidth } from '@/app/config/constants'
 
 import productApi from '@/app/api/products'
 
+// Put this outside of the component for reuse
+type Product = {
+  _id: string
+  price: number
+  image: string[] | ImageSourcePropType
+  name?: string
+  description?: string
+  discount?: number
+  currencySymbol?: string
+  rating?: {
+    average: number
+    count: number
+  }
+}
+
 export default function Whishlist({ navigation }: TsProps) {
-  const { searchResults, searchTerm, setAllProducts, allProducts } =
-    useSearchContext()
-  const [wishlistProducts, setWishlistProducts] = useState<
-    { _id: string; [key: string]: any }[]
-  >([])
+  const { searchTerm, allProducts } = useSearchContext()
+  const [wishlistProducts, setWishlistProducts] = useState<Product[]>([])
 
   useEffect(() => {
     fetchWishlist()
@@ -36,7 +46,7 @@ export default function Whishlist({ navigation }: TsProps) {
       }
       const data = response.data
       setWishlistProducts(
-        data.map((product: any) => ({
+        data.map((product: Product) => ({
           ...product,
           price: product.price ?? 0, // Ensure price is a number
           image:
@@ -50,9 +60,6 @@ export default function Whishlist({ navigation }: TsProps) {
       console.error('Error fetching wishlist:', error)
     }
   }
-  const isSearching = !!searchTerm
-  const dataToShow = isSearching ? searchResults : products
-  // const dataToShow = searchTerm ? searchResults : products
 
   const onAvatarPress = () => {
     navigation.navigate(routes.PROFILE)
@@ -80,9 +87,8 @@ export default function Whishlist({ navigation }: TsProps) {
               <ProductCard
                 elevation={2}
                 item={item}
-                // imageHeight={110}
                 lineHeight={20}
-                width={ScreenWidth * 0.45 - 2.5}
+                width={ScreenWidth}
                 height={260}
                 descriptionFontSize={10}
                 onPress={() =>

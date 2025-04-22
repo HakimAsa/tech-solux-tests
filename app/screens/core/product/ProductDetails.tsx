@@ -1,5 +1,6 @@
 import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native'
 import { useState, useRef, useEffect } from 'react'
+
 import BaseScreen from '@/app/components/BaseScreen'
 import MainContainer, {
   BasicRowContainer,
@@ -12,12 +13,8 @@ import colors from '@/app/config/colors'
 import Size from './Size'
 import Star from '@/app/components/Star'
 import TsText from '@/app/components/texts/TsText'
-import getApiUrl, { calculateListPrice } from '@/app/utils/helpers'
-import {
-  currencySymbolRupee,
-  ScreenWidth,
-  StatusBarHeight,
-} from '@/app/config/constants'
+import { calculateListPrice } from '@/app/utils/helpers'
+import { currencySymbolRupee } from '@/app/config/constants'
 import MoreText from '@/app/components/MoreText'
 import TsText20 from '@/app/components/texts/TsText20'
 import DetailBtn from './DetailBtn'
@@ -26,7 +23,6 @@ import BuyNowBtn from './buynow/BuyNowBtn'
 import SvgIcon from '@/app/components/icons/SvgIcon'
 import FilterSortBanner from '@/app/components/FilterSortBanner'
 import routes from '@/app/navigation/routes'
-import products from '@/app/data/products'
 import ProductCard from '@/app/components/cards/ProductCard'
 import { useCart } from '@/app/context/CartContext'
 import { useSearchContext } from '@/app/context/SearchContext'
@@ -57,15 +53,16 @@ export default function ProductDetails({ navigation, route }: TsProps) {
   const addToCart = cartContext?.addToCart
   const cart = cartContext?.cart
   const { allProducts } = useSearchContext()
-  const similarProducts =
-    allProducts?.length &&
-    allProducts.filter(
-      (product) =>
-        product?._id !== item?._id &&
-        product?.name
-          .toLowerCase()
-          .includes(item?.name.toLowerCase().split(' ')[0])
-    )
+
+  const similarProducts = allProducts?.length
+    ? allProducts.filter(
+        (product) =>
+          product?._id !== item?._id &&
+          product?.name
+            .toLowerCase()
+            .includes(item?.name.toLowerCase().split(' ')[0])
+      )
+    : []
 
   useEffect(() => {
     console.log('🔥 allProducts in this screen:', allProducts)
@@ -97,13 +94,6 @@ export default function ProductDetails({ navigation, route }: TsProps) {
           product: product?._id,
           liked: !isLiked, // Send the new like state
         })
-        // const response = await fetch(`${getApiUrl()}/wishlists`, {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(),
-        // })
         if (!response.ok) {
           const errorData = await response.json()
           Alert.alert(
