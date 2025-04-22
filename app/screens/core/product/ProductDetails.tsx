@@ -1,5 +1,5 @@
 import { Alert, FlatList, Pressable, StyleSheet, View } from 'react-native'
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef } from 'react'
 
 import BaseScreen from '@/app/components/BaseScreen'
 import MainContainer, {

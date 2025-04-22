@@ -26,10 +26,7 @@ import { currencySymbolRupee } from '@/app/config/constants'
 export default function BuyNow({ navigation, route }: TsProps) {
   const cartContext = useCart()
   const [selectedValue, setSelectedValue] = useState<number | string>(1)
-  const cart = cartContext?.cart || []
-  const updateQuantity = cartContext?.updateQuantity
   const setQuantity = cartContext?.setQuantity
-  const selectedQuantities = cartContext?.selectedQuantities
 
   const { item } = route?.params || {}
   const {
@@ -38,7 +35,6 @@ export default function BuyNow({ navigation, route }: TsProps) {
     countInStock,
     currencySymbol,
     price,
-    discount,
     image,
     _id,
   } = item || {}
@@ -47,13 +43,7 @@ export default function BuyNow({ navigation, route }: TsProps) {
     setQuantity?.(_id, Number(value))
   }
 
-  console.log(selectedQuantities)
-
   const totalPrice = Number(price) * Number(selectedValue)
-  // (cart ?? []).reduce(
-  //   (acc, item) => acc + item.price * item.quantity,
-  //   0
-  // )
 
   return (
     <>
@@ -147,10 +137,14 @@ export default function BuyNow({ navigation, route }: TsProps) {
         onPress={() =>
           navigation.navigate('ProductTab', {
             screen: routes.CHECKOUT, // Navigate to Checkout within ShoppingCartStack
-            params: { item },
+            params: {
+              item: {
+                ...item, // Spread the existing item properties
+                quantity: selectedValue, // Override or add the quantity property
+              },
+            },
           })
         }
-        //navigation.navigate(routes.CHECKOUT, { id: item?._id })}
       />
     </>
   )
