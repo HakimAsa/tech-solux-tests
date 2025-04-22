@@ -126,32 +126,3 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
 })
-
-// export default function SearchBar({
-//   searchText,
-//   search,
-// }: {
-//   searchText?: string
-//   search?: () => void
-// }) {
-//   return (
-//     <View style={{ backgroundColor: colors.white }}>
-//       <TsTextInput
-//         rightIcon="microphone-outline"
-//         style={styles.input}
-//         right
-//         icon="map-search"
-//       />
-//     </View>
-//   )
-// }
-
-// const styles = StyleSheet.create({
-//   input: {
-//     elevation: 1,
-//     backgroundColor: colors.white,
-//     borderWidth: 0,
-//     borderRadius: 4,
-//     height: 40,
-//   },
-// })

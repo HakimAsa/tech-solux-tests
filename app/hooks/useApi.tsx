@@ -2,8 +2,10 @@ import { useState } from 'react'
 
 export type ApiResponse<T> = {
   ok: boolean
+  status: number
   data?: {
     token: string
+    avatar?: string
     data?: T
     errorMessage?: string
     message?: string

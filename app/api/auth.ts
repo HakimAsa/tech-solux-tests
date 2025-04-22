@@ -37,10 +37,10 @@ const requestForgotPasswordOTP = (data: object) =>
 const resetPasswordOTP = (data: object) =>
   httpRequest(sf(AUTH, RESETPASSWORDOTP), HM.POST, data)
 
-const updateDetails = (data: any) =>
+const updateDetails = (data: any): Promise<any> =>
   httpRequest(sf(AUTH, 'updatedetails'), HM.PUT, data)
 
-const updateAvatar = (data: Record<any, any>) => {
+const updateAvatar = (data: Record<any, any>): Promise<any> => {
   const formData = new FormData()
   const fileUri = data.uri
   const fileName = 'image' + data.fileName

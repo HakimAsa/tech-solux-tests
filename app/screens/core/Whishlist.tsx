@@ -88,7 +88,7 @@ export default function Whishlist({ navigation }: TsProps) {
                 elevation={2}
                 item={item}
                 lineHeight={20}
-                width={ScreenWidth}
+                width={ScreenWidth * 0.45 - 2.5}
                 height={260}
                 descriptionFontSize={10}
                 onPress={() =>

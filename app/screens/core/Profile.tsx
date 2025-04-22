@@ -2,11 +2,10 @@ import {
   Image,
   Pressable,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import * as ImagePicker from 'expo-image-picker' // For react-native-image-picker
 // If using Expo, replace with: import * as ImagePicker from 'expo-image-picker';
 
@@ -32,19 +31,25 @@ import { Alert } from 'react-native'
 
 export default function Profile({ navigation }: TsProps) {
   const { user } = useAuth()
+  interface UserData {
+    avatar?: string
+    [key: string]: any
+  }
+
   const {
     data: userData,
     error,
     loading,
     message,
     request: getMe,
-  } = useApi(authApi.getMe)
+  } = useApi<UserData, any>(authApi.getMe)
 
   const avatarApi = useApi(authApi.updateAvatar)
   const updateDetailsApi = useApi(authApi.updateDetails)
 
   const [avatar, setAvatar] = useState(user?.avatar || null) // State for avatar
-  const [imageData, setImageData] = useState(null)
+  const [imageData, setImageData] =
+    useState<ImagePicker.ImagePickerAsset | null>(null)
 
   const handleEditImage = () => {
     console.log('hey')
@@ -104,8 +109,7 @@ export default function Profile({ navigation }: TsProps) {
     requestPermission()
   }, [])
   const requestPermission = async () => {
-    const { status, granted } =
-      await ImagePicker.getMediaLibraryPermissionsAsync()
+    const { status } = await ImagePicker.getMediaLibraryPermissionsAsync()
     if (status !== 'granted') {
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync()
       if (status !== 'granted') {
@@ -122,12 +126,11 @@ export default function Profile({ navigation }: TsProps) {
   }
 
   const updateProfile = async (values: Record<string, any>) => {
-    console.log('wow', values)
     if (imageData?.fileName) {
       const res = await avatarApi.request(imageData)
 
-      if (res.status === 201) {
-        const data = {
+      if (res?.status === 201) {
+        const data: any = {
           ...values,
           bankdetails: {
             bankaccountnumber: values.bankaccountnumber,
@@ -141,7 +144,7 @@ export default function Profile({ navigation }: TsProps) {
             state: values.state,
             country: values.country,
           },
-          avatar: res.avatar,
+          avatar: res.data?.avatar,
         }
         data.password === '' && delete data.password
         // updating data now
@@ -153,8 +156,7 @@ export default function Profile({ navigation }: TsProps) {
         }
       }
     } else {
-      console.log(values)
-      const data = {
+      const data: any = {
         ...values,
         bankdetails: {
           bankaccountnumber: values.bankaccountnumber,
@@ -169,6 +171,7 @@ export default function Profile({ navigation }: TsProps) {
           country: values.country,
         },
       }
+
       data.password === '' && delete data.password
       const updateDetails = await updateDetailsApi.request(data)
       if (updateDetails.status === 200)

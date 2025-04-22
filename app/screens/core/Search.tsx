@@ -14,8 +14,6 @@ import routes from '@/app/navigation/routes'
 export default function Search({ navigation }: TsProps) {
   const { searchResults, searchTerm } = useSearchContext()
 
-  const imageSizeDelta = 117 // base on figma design
-
   return (
     <BaseScreen>
       <BasicHeader
@@ -49,9 +47,10 @@ export default function Search({ navigation }: TsProps) {
               <ProductCard
                 item={item}
                 descriptionFontSize={12}
-                width={ScreenWidth}
+                mode="cover"
+                width="100%"
                 height={ScreenWidth}
-                imageHeight={ScreenWidth - imageSizeDelta}
+                imageHeight={ScreenWidth * 0.7}
                 onPress={() =>
                   navigation.navigate(routes.PRODUCT_DETAILS, { item })
                 }

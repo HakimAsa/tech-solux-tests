@@ -13,6 +13,7 @@ import { BasicRowContainer } from '@/app/containers'
 import { calculateListPrice } from '@/app/utils/helpers'
 import Star from '../Star'
 import { currencySymbolRupee } from '@/app/config/constants'
+import { DimensionValue } from 'react-native'
 
 interface ProductProps {
   item: {
@@ -34,14 +35,15 @@ interface ProductProps {
   big?: boolean // Match Figma size
   nameFontSize?: number // Match Figma size
   descriptionFontSize?: number // Match Figma size
-  width?: number
-  height?: number
-  imageHeight?: number // Match Figma size
+  width?: DimensionValue
+  height?: DimensionValue
+  imageHeight?: DimensionValue // Match Figma size
   showDiscount?: boolean
   showName?: boolean
   showStar?: boolean
   elevation?: number
   lineHeight?: number
+  mode?: 'contain' | 'cover'
 }
 
 export default memo(function ProductCard({
@@ -60,13 +62,23 @@ export default memo(function ProductCard({
   showDiscount = true,
   showName = true,
   showStar = true,
+  mode = 'contain',
 }: ProductProps) {
   return (
     <Pressable onPress={onPress}>
       <View style={[styles.container, { width, height, elevation }]}>
-        <View style={{ width, height: imageHeight, overflow: 'hidden' }}>
+        <View
+          style={{
+            width,
+            height: imageHeight,
+            overflow: 'hidden',
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderRadius: 4,
+          }}
+        >
           <Image
-            resizeMode="contain"
+            resizeMode={mode}
             source={
               typeof item.image === 'string'
                 ? { uri: item.image }
@@ -158,7 +170,6 @@ const styles = StyleSheet.create({
   image: {
     width: '100%',
     height: '100%',
-    borderRadius: 4,
   },
   off: {
     color: colors.lightRed,
