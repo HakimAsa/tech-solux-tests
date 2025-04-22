@@ -1,6 +1,10 @@
 import { useEffect, useState } from 'react'
 import { StatusBar } from 'expo-status-bar'
 import { useFonts } from 'expo-font'
+import {
+  NavigationContainer,
+  NavigationIndependentTree,
+} from '@react-navigation/native'
 import * as SplashScreen from 'expo-splash-screen'
 // In your app file -- App
 import { KkiapayProvider } from '@kkiapay-org/react-native-sdk'
@@ -22,10 +26,7 @@ import AuthNavigator from './navigation/AuthNavigator'
 import AppNavigator from './navigation/AppNavigator'
 import authStorage from './context/auth/Storage'
 import navigationTheme from './navigation/navigationTheme'
-import {
-  NavigationContainer,
-  NavigationIndependentTree,
-} from '@react-navigation/native'
+
 import SearchProvider from './context/SearchContext'
 import colors from './config/colors'
 import TsActivityIndicator from './components/loader/TsActivityIndicator'
@@ -51,14 +52,14 @@ export default function RootLayout() {
   })
 
   const [isLoading, setIsLoading] = useState(true)
-  const [user, setUser] = useState<object | null>(null)
+  const [user, setUser] = useState<object | null | undefined>(undefined)
 
   useEffect(() => {
     const prepare = async () => {
       if (!fontsLoaded) return
 
-      const user = await authStorage.getUser()
-      if (!user) {
+      const storedUser = await authStorage.getUser()
+      if (!storedUser) {
         setUser(null)
         setIsLoading(false)
         SplashScreen.hideAsync()
@@ -67,7 +68,13 @@ export default function RootLayout() {
 
       try {
         const { data } = await authApi.getMe()
-        setUser(data?.data)
+        console.log('User data fetched:', data) // Debugging
+        if (data?.data) {
+          setUser(data.data)
+        } else {
+          console.error('Invalid API response:', data) // Debugging
+          setUser(null)
+        }
       } catch (err) {
         console.log('Failed to fetch user profile', err)
         setUser(null)
@@ -80,8 +87,12 @@ export default function RootLayout() {
     prepare()
   }, [fontsLoaded])
 
-  if (isLoading || !fontsLoaded) {
-    return <TsActivityIndicator visible={isLoading} /> // Show a loading indicator while fetching user and loading fonts
+  if (user === undefined || !fontsLoaded) {
+    return <TsActivityIndicator visible={true} />
+  }
+
+  if (isLoading) {
+    return <TsActivityIndicator visible={isLoading} /> // Show a loading indicator while fetching user and loading
   }
 
   return (

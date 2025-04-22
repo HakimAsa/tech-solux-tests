@@ -29,11 +29,8 @@ export default function Login({ navigation }: TsProps) {
 
     const res = await loginUser(data as any)
     if (!res?.ok) return
-    const { token } = res.data as any
-    const user = jwtDecode(token)
-    console.log(user)
-    login(user)
-    authStorage.storeToken(token)
+    login(res.data as any)
+    // authStorage.storeToken(token)
     // Navigate to GetStarted screen TODO should not be able to come back here using back android
     // navigation.dispatch(
     //   CommonActions.reset({

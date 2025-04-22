@@ -10,13 +10,14 @@ export default function useAuth() {
   }
 
   const { user, setUser } = authContext
-  const login = (user: object) => {
+  const login = (user: any) => {
     setUser(user)
+    authStorage.storeToken(user?.token)
   }
   const logout = () => {
     setUser(null)
     authStorage.removeToken()
   }
 
-  return { user, login, logout }
+  return { user, login, logout, setUser }
 }

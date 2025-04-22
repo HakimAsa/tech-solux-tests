@@ -32,11 +32,9 @@ interface LogoHeaderProps {
 export default function LogoHeader({
   onAvatarPress,
   onLogoPress,
-  onMenuPress,
   style,
 }: LogoHeaderProps) {
-  const { logout } = useAuth()
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
   const {
     error,
     loading,
@@ -122,7 +120,11 @@ export default function LogoHeader({
               onPress={closeMenu}
               style={styles.closeButton}
             >
-              <Text style={styles.closeText}>X</Text>
+              <MaterialIcons
+                name="close"
+                color={colors.white}
+                size={20}
+              />
             </TouchableOpacity>
             <View style={styles.menuItems}>
               <TsText style={styles.menuItem}>Home</TsText>
@@ -206,7 +208,13 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     alignSelf: 'flex-end',
-    padding: 8,
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    borderColor: colors.white,
+    borderWidth: 3,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   closeText: {
     fontSize: 18,

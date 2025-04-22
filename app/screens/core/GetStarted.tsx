@@ -18,9 +18,7 @@ export default function GetStarted({ navigation }: TsProps) {
           </TsText>
           <TsText style={styles.subtagline}>Find it here, buy it now!</TsText>
         </View>
-        {/* <View style={styles.middleSection}>
-        </View> */}
-        {/* <View style={styles.spacer} /> */}
+
         <View style={styles.bottomSection}>
           <TsButton
             onPress={() => navigation.navigate('TabNavigator')}
