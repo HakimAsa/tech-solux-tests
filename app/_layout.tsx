@@ -93,7 +93,7 @@ export default function RootLayout() {
   }
 
   if (isLoading) {
-    return null //<TsActivityIndicator visible={isLoading} /> // Show a loading indicator while fetching user and loading
+    return <TsActivityIndicator visible={isLoading} /> // Show a loading indicator while fetching user and loading
   }
 
   return (
