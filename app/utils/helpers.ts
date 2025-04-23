@@ -61,7 +61,7 @@ function formatNumberWithCurrency(
   const formattedNumber = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: decimalPrecision, // Ensures two decimal places
     maximumFractionDigits: decimalPrecision, // Ensures no more than two decimal places
-  }).format(number)
+  }).format(number || 0)
   return currency ? `${currency} ${formattedNumber}` : formattedNumber // Formats the number with commas
 }
 

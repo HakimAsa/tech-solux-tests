@@ -31,7 +31,9 @@ const cartReducer = (state: any[], action: { type: string; payload?: any }) => {
       //   const existingItem = state.find((i) => i._id === action.payload._id)
       //   if (existingItem) return state // Skip duplicates for now
       //   return [...state, action.payload]
-      const itemIndex = state.findIndex((i) => i._id === action.payload._id)
+      const itemIndex = state.findIndex(
+        (i) => i?._id === action.payload?._id || i?.id === action.payload?.id
+      )
       if (itemIndex >= 0) {
         const updatedState = [...state]
         updatedState[itemIndex].quantity += 1

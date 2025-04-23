@@ -56,17 +56,17 @@ export default function RootLayout() {
 
   useEffect(() => {
     const prepare = async () => {
-      if (!fontsLoaded) return
-
-      const storedUser = await authStorage.getUser()
-      if (!storedUser) {
-        setUser(null)
-        setIsLoading(false)
-        SplashScreen.hideAsync()
-        return
-      }
-
       try {
+        if (!fontsLoaded) return
+
+        const storedUser = await authStorage.getUser()
+        if (!storedUser) {
+          setUser(null)
+          setIsLoading(false)
+          SplashScreen.hideAsync()
+          return
+        }
+
         const { data } = await authApi.getMe()
         console.log('User data fetched:', data) // Debugging
         if (data?.data) {
@@ -92,7 +92,7 @@ export default function RootLayout() {
   }
 
   if (isLoading) {
-    return <TsActivityIndicator visible={isLoading} /> // Show a loading indicator while fetching user and loading
+    return null //<TsActivityIndicator visible={isLoading} /> // Show a loading indicator while fetching user and loading
   }
 
   return (

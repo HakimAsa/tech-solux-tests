@@ -11,7 +11,7 @@ const getTopRatedProducts = (): Promise<any> =>
 const getUserWishlist = (): Promise<any> =>
   httpRequest('/wishlists/userwishlists', HM.GET)
 
-const createWishlist = (data): Promise<any> =>
+const createWishlist = (data: any): Promise<any> =>
   httpRequest('/wishlists', HM.POST, data)
 
 export default {

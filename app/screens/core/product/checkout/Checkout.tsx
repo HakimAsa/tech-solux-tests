@@ -50,14 +50,14 @@ export default function Checkout({ navigation, route }: TsProps) {
     (acc, item) =>
       acc + (buyQty ?? 0) > 1
         ? item?.price * (buyQty ?? 0)
-        : item?.price * item.quantity,
+        : item?.price * item?.quantity || 34, //34 default price
     0
   )
   const totalShippingFee = (cart ?? []).reduce(
     (acc, item) =>
       acc +
       (item.shippingPrice || 0) *
-        ((buyQty ?? 0) > 1 ? buyQty ?? 0 : item.quantity),
+        ((buyQty ?? 0) > 1 ? buyQty ?? 0 : item?.quantity || 1),
     0
   )
 
@@ -68,7 +68,7 @@ export default function Checkout({ navigation, route }: TsProps) {
       amount:
         cart?.length > 0
           ? total + totalShippingFee
-          : item?.price * item.quantity || 0,
+          : item?.price * item?.quantity || 1,
       api_key: 'fee29e80184511f0936463e2e50313c3',
       publicAPIKey: 'fee29e80184511f0936463e2e50313c3',
       sandbox: true,
@@ -127,13 +127,13 @@ export default function Checkout({ navigation, route }: TsProps) {
           >
             <OrderSummary
               totalOrderAmount={
-                cart?.length === 0 ? item?.price * item.quantity || 0 : total
+                cart?.length === 0 ? item?.price * item?.quantity || 34 : total
               }
               totalShippingFee={totalShippingFee}
               currency={
                 cart?.[0]?.currencySymbol ||
                 item?.currencySymbol ||
-                currencySymbolRupee
+                currencySymbolDollar
               }
             />
             <TsText style={{ fontSize: 18, lineHeight: 27, color: '#222222' }}>
@@ -193,7 +193,7 @@ export default function Checkout({ navigation, route }: TsProps) {
         </BaseScreen>
       </ScrollableMainContainer>
       {/* Confirmation Modal */}
-      {console.log('modal true', showConfirmationModal)}
+
       <Modal
         visible={showConfirmationModal}
         animationType="slide"
