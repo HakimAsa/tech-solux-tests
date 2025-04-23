@@ -29,6 +29,7 @@ export default function AuthFooter({
         height,
         width,
         alignSelf: 'center',
+        marginBottom: 45,
       }}
     >
       <TsText
