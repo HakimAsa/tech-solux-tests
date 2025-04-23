@@ -33,6 +33,7 @@ import TsActivityIndicator from './components/loader/TsActivityIndicator'
 import AuthContext from './context/auth/AuthContext'
 import { CartProvider } from './context/CartContext'
 import authApi from '@/app/api/auth'
+import { WishlistProvider } from './context/WishlistContext'
 
 SplashScreen.preventAutoHideAsync()
 
@@ -102,21 +103,23 @@ export default function RootLayout() {
         backgroundColor={colors.background}
       />
       <AuthContext.Provider value={{ user, setUser }}>
-        <CartProvider>
-          <NavigationIndependentTree>
-            <NavigationContainer theme={navigationTheme}>
-              {user ? (
-                <KkiapayProvider>
-                  <SearchProvider>
-                    <AppNavigator />
-                  </SearchProvider>
-                </KkiapayProvider>
-              ) : (
-                <AuthNavigator />
-              )}
-            </NavigationContainer>
-          </NavigationIndependentTree>
-        </CartProvider>
+        <WishlistProvider>
+          <CartProvider>
+            <NavigationIndependentTree>
+              <NavigationContainer theme={navigationTheme}>
+                {user ? (
+                  <KkiapayProvider>
+                    <SearchProvider>
+                      <AppNavigator />
+                    </SearchProvider>
+                  </KkiapayProvider>
+                ) : (
+                  <AuthNavigator />
+                )}
+              </NavigationContainer>
+            </NavigationIndependentTree>
+          </CartProvider>
+        </WishlistProvider>
       </AuthContext.Provider>
     </>
   )

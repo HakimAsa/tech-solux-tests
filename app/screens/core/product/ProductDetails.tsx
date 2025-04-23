@@ -28,6 +28,7 @@ import { useCart } from '@/app/context/CartContext'
 import { useSearchContext } from '@/app/context/SearchContext'
 import useAuth from '@/app/context/auth/useAuth'
 import productApi from '@/app/api/products'
+import useWishlist from '@/app/hooks/useWishlist'
 
 const PATH =
   'M24.3333 1C19 1 16 5.445 16 7.66667C16 5.445 13 1 7.66667 1C2.33333 1 1 5.445 1 7.66667C1 19.3333 16 27.6667 16 27.6667C16 27.6667 31 19.3333 31 7.66667C31 5.445 29.6667 1 24.3333 1Z'
@@ -48,6 +49,12 @@ export default function ProductDetails({ navigation, route }: TsProps) {
   const { user } = useAuth()
   const [isLiked, setIsLiked] = useState(false)
   const { item } = route?.params || {}
+  const [saving, setSaving] = useState(false)
+
+  //wishlist values
+  const { ids, toggle } = useWishlist()
+  const liked = ids.has(item?._id)
+
   // Inside your component:
   const cartContext = useCart()
   const addToCart = cartContext?.addToCart
@@ -85,11 +92,13 @@ export default function ProductDetails({ navigation, route }: TsProps) {
     // Set a new debounce timeout
     debounceTimeout.current = setTimeout(async () => {
       try {
+        setSaving(true)
         const response = await productApi.createWishlist({
           user: user?._id, // Replace with the actual user ID
           product: product?._id,
           liked: !isLiked, // Send the new like state
         })
+        setSaving(false)
         if (!response.ok) {
           const errorData = await response.json()
           Alert.alert(
@@ -232,14 +241,22 @@ export default function ProductDetails({ navigation, route }: TsProps) {
               alignContent: 'center',
               borderRadius: 2,
             }}
-            onPress={() => saveToWishlist(item)}
+            disabled={saving || !item?._id}
+            onPress={() => {
+              saveToWishlist(item)
+              toggle(item._id)
+            }}
           >
             <SvgIcon
               path={PATH}
               width={32}
               height={29}
-              stroke={isLiked ? colors.primary : colors.black}
-              color={isLiked ? colors.primary : colors.white}
+              stroke={
+                isLiked || liked || item?.liked ? colors.primary : colors.black
+              }
+              color={
+                isLiked || liked || item?.liked ? colors.primary : colors.white
+              }
               strokeWidth={2}
               strokeLinecap="round"
               strokeLinejoin="round"

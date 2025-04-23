@@ -1,13 +1,13 @@
-import apiClient, { httpRequest } from './client'
+import { httpRequest } from './client'
 import HM from '../utils/httpMethods'
 import { doSetForwardslash as sf } from '../utils/helpers'
 import ep from '../config/constants'
 
 const { FILES, UPLOAD, UPLOADS } = ep
 
-const uploadFiles = (data, onUploadProgress) => {
-  const imageData = new FormData()
-  data?.images.forEach((image, index) => {
+const uploadFiles = (data: any, onUploadProgress: any) => {
+  const imageData: any = new FormData()
+  data?.images.forEach((image: any, index: number) => {
     const fileUri = image.uri
     const fileName = 'image' + index + image.fileName
     const fileType = image.mimeType
@@ -19,7 +19,7 @@ const uploadFiles = (data, onUploadProgress) => {
   })
   //todo use httpRequest later
   return httpRequest(sf(FILES, UPLOADS), HM.POST, imageData, {
-    onUploadProgress: (progress) => {
+    onUploadProgress: (progress: any) => {
       onUploadProgress && onUploadProgress(progress.loaded / progress.total)
     },
     headers: {

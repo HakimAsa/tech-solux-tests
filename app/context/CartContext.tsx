@@ -1,5 +1,4 @@
-import TsProps from '@/TsProps'
-import React, {
+import {
   createContext,
   ReactNode,
   useContext,

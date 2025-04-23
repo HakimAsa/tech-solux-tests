@@ -143,11 +143,10 @@ export default function Cart({ route, navigation }: TsProps) {
                     <BasicRowContainer gap={5}>
                       <View
                         style={{
-                          justifyContent: 'center',
-                          alignItems: 'center',
                           overflow: 'hidden',
-                          width: 130.53,
-                          height: 130.53,
+                          // flex: 1,
+                          width: 125,
+                          height: 'auto',
                           borderRadius: 6,
                         }}
                       >
@@ -160,7 +159,11 @@ export default function Cart({ route, navigation }: TsProps) {
                                   uri: 'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
                                 }
                           }
-                          style={{ width: '100%', height: '100%' }}
+                          style={{
+                            width: '100%',
+                            height: undefined, // Allow height to adjust automatically
+                            aspectRatio: 1.25, // Adjust aspect ratio as needed (e.g., 1.5 for 3:2 ratio)
+                          }}
                         />
                       </View>
 
