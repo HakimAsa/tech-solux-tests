@@ -145,9 +145,9 @@ export default function Cart({ route, navigation }: TsProps) {
                         style={{
                           justifyContent: 'center',
                           alignItems: 'center',
-
+                          overflow: 'hidden',
                           width: 130.53,
-                          height: 125,
+                          height: 130.53,
                           borderRadius: 6,
                         }}
                       >

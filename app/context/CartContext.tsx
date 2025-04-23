@@ -27,10 +27,7 @@ const cartReducer = (state: any[], action: { type: string; payload?: any }) => {
   switch (action.type) {
     case 'LOAD_CART':
       return action.payload || []
-    case 'ADD_TO_CART':
-      //   const existingItem = state.find((i) => i._id === action.payload._id)
-      //   if (existingItem) return state // Skip duplicates for now
-      //   return [...state, action.payload]
+    case 'ADD_TO_CART': {
       const itemIndex = state.findIndex((i) => i?._id === action.payload?._id)
       if (itemIndex >= 0) {
         const updatedState = [...state]
@@ -41,6 +38,8 @@ const cartReducer = (state: any[], action: { type: string; payload?: any }) => {
         ...state,
         { ...action.payload, quantity: action.payload.quantity || 1 },
       ]
+    }
+
     case 'INCREASE_QUANTITY': {
       const updatedState = state.map((item) =>
         item._id === action.payload
