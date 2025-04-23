@@ -14,7 +14,6 @@ import BasicHeader from '@/app/components/headers/BasicHeader'
 import en from '@/app/config/en'
 import { Image } from 'react-native'
 import TsText from '@/app/components/texts/TsText'
-import LineSeparator from '@/app/components/LineSeparator'
 import routes from '@/app/navigation/routes'
 import Star from '@/app/components/Star'
 import {
@@ -130,7 +129,7 @@ export default function Cart({ route, navigation }: TsProps) {
                   index: number
                 ) => (
                   <View
-                    key={item._id || index}
+                    key={item._id.toString() || index.toString()}
                     style={{
                       elevation: 1,
                       backgroundColor: '#fff',
@@ -155,8 +154,8 @@ export default function Cart({ route, navigation }: TsProps) {
                         <Image
                           resizeMode="contain"
                           source={
-                            image?.[0]
-                              ? { uri: image?.[0] }
+                            item?.image?.[0]
+                              ? { uri: item.image?.[0] }
                               : {
                                   uri: 'https://techsoluxdb.s3.us-east-1.amazonaws.com/file-1744564054593-441063258hrxby.png',
                                 }
@@ -170,12 +169,12 @@ export default function Cart({ route, navigation }: TsProps) {
                           medium
                           style={styles.shoppingHeader}
                         >
-                          {name || 'Women’s Casual Wear'}
+                          {item.name || 'Women’s Casual Wear'}
                         </TsText>
                         {/* Variation Section */}
 
                         <ColorVariation
-                          colorList={colorVariation || ['Black', 'Red']}
+                          colorList={item.colorVariation || ['Black', 'Red']}
                         />
 
                         <BasicRowContainer
@@ -189,10 +188,10 @@ export default function Cart({ route, navigation }: TsProps) {
                               alignSelf: 'center',
                             }}
                           >
-                            {rating?.average ?? 4.8}
+                            {item.rating?.average ?? 4.8}
                           </TsText>
                           <Star
-                            rating={rating?.average}
+                            rating={item.rating?.average}
                             starSize={11.67}
                             starHeight={11.08}
                           />
@@ -225,8 +224,8 @@ export default function Cart({ route, navigation }: TsProps) {
                               }}
                             >
                               {formatNumberWithCurrency(
-                                price || 34,
-                                currencySymbol || currencySymbolDollar
+                                item.price || 34,
+                                item.currencySymbol || currencySymbolDollar
                               )}
                             </TsText>
                           </View>
@@ -243,11 +242,11 @@ export default function Cart({ route, navigation }: TsProps) {
                                 // top: -3,
                               }}
                             >
-                              upto {discount || 33}% off
+                              upto {item.discount || 33}% off
                             </TsText>
 
                             <TsText
-                              small
+                              fontSize={10}
                               style={{
                                 lineHeight: 22,
                                 color: '#A7A7A7',
@@ -256,8 +255,8 @@ export default function Cart({ route, navigation }: TsProps) {
                               }}
                             >
                               {formatNumberWithCurrency(
-                                calculateListPrice(price || 34, 33),
-                                currencySymbolDollar
+                                calculateListPrice(item.price || 34, 33),
+                                item.currencySymbol || currencySymbolDollar
                               )}
                             </TsText>
                           </View>
@@ -271,17 +270,17 @@ export default function Cart({ route, navigation }: TsProps) {
                     />
                     <View style={{ top: -5 }}>
                       <OrderAmount
-                        label={`Total Order(${cart[0].quantity}) :`}
+                        label={`Total Order(${item.quantity}) :`}
                         labelStyle={styles.labelStyle}
                         amountStyle={[
                           styles.labelStyle,
                           { fontFamily: 'Montserrat_600SemiBold' },
                         ]}
                         amount={
-                          price * (item?.quantity ?? 1) ||
+                          (item?.price ?? 0) * (item?.quantity ?? 1) ||
                           34 * (item.quantity ?? 1)
                         }
-                        currency={currencySymbol || currencySymbolDollar}
+                        currency={item.currencySymbol || currencySymbolDollar}
                       />
                     </View>
                     <TsPressable

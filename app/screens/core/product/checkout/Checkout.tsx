@@ -44,20 +44,13 @@ export default function Checkout({ navigation, route }: TsProps) {
   const handleSelectMethod = (method: string) => {
     setSelectedMethod(method)
   }
-  const buyQty = 0
   //compute total prices
   const total = (cart ?? []).reduce(
-    (acc, item) =>
-      acc + (buyQty ?? 0) > 1
-        ? item?.price * (buyQty ?? 0)
-        : item?.price * item?.quantity || 34, //34 default price
+    (acc, item) => acc + item?.price * item?.quantity || 34, //34 default price
     0
   )
   const totalShippingFee = (cart ?? []).reduce(
-    (acc, item) =>
-      acc +
-      (item.shippingPrice || 0) *
-        ((buyQty ?? 0) > 1 ? buyQty ?? 0 : item?.quantity || 1),
+    (acc, item) => acc + (item.shippingPrice || 0) * item?.quantity || 0,
     0
   )
 

@@ -20,10 +20,9 @@ export default function TsBottomTab({
 }) {
   const DEFAULT_PRICE = 34
   const total = (cart ?? []).reduce(
-    (acc, item) => acc + item.price || DEFAULT_PRICE * item.quantity,
+    (acc, item) => acc + (item.price || DEFAULT_PRICE) * item.quantity,
     0
   )
-  console.log(total)
 
   return (
     <View style={styles.wrapper}>

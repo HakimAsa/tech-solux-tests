@@ -31,15 +31,16 @@ const cartReducer = (state: any[], action: { type: string; payload?: any }) => {
       //   const existingItem = state.find((i) => i._id === action.payload._id)
       //   if (existingItem) return state // Skip duplicates for now
       //   return [...state, action.payload]
-      const itemIndex = state.findIndex(
-        (i) => i?._id === action.payload?._id || i?.id === action.payload?.id
-      )
+      const itemIndex = state.findIndex((i) => i?._id === action.payload?._id)
       if (itemIndex >= 0) {
         const updatedState = [...state]
-        updatedState[itemIndex].quantity += 1
+        updatedState[itemIndex].quantity += action.payload.quantity || 1
         return updatedState
       }
-      return [...state, { ...action.payload, quantity: 1 }]
+      return [
+        ...state,
+        { ...action.payload, quantity: action.payload.quantity || 1 },
+      ]
     case 'INCREASE_QUANTITY': {
       const updatedState = state.map((item) =>
         item._id === action.payload
