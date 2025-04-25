@@ -15,9 +15,8 @@ import useAuth from '@/app/context/auth/useAuth'
 import ErrorMessages from '@/app/components/forms/ErrorMessages'
 import { doSetUserCredentials } from '@/app/utils/helpers'
 import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
-import { CommonActions } from '@react-navigation/native'
-import { jwtDecode } from 'jwt-decode'
-import authStorage from '@/app/context/auth/Storage'
+import { StatusBarHeight } from '@/app/config/constants'
+
 export default function Login({ navigation }: TsProps) {
   const { login } = useAuth()
 
@@ -30,19 +29,15 @@ export default function Login({ navigation }: TsProps) {
     const res = await loginUser(data as any)
     if (!res?.ok) return
     login(res.data as any)
-    // authStorage.storeToken(token)
-    // Navigate to GetStarted screen TODO should not be able to come back here using back android
-    // navigation.dispatch(
-    //   CommonActions.reset({
-    //     index: 0,
-    //     routes: [{ name: 'AppNavigator' }], // Now Welcome is properly handled in MainNavigator
-    //   })
-    // )
   }
   if (loading) return <TsActivityIndicator visible={loading} />
   return (
     <MainContainer
-      style={{ paddingLeft: 32, paddingTop: 10, paddingRight: 32 }}
+      style={{
+        paddingLeft: 32,
+        paddingTop: message ? StatusBarHeight + 35 : 10,
+        paddingRight: 32,
+      }}
     >
       <KeyboardAvoidViewContainer>
         <AuthHeader title={en.welcomeBack} />

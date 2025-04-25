@@ -1,7 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import TsText from '@/app/components/texts/TsText'
-import en, { enKeys } from '@/app/config/en'
 import colors from '@/app/config/colors'
 
 interface AuthFooterProps {
@@ -56,5 +55,3 @@ export default function AuthFooter({
     </View>
   )
 }
-
-const styles = StyleSheet.create({})

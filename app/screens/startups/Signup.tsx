@@ -2,7 +2,6 @@ import authApi from '@/app/api/auth'
 import MainContainer, { ScrollableMainContainer } from '@/app/containers'
 import AuthHeader from '@/app/screens/startups/AuthHeader'
 import AuthForm from './AuthForm'
-import AuthButton from './AuthButton'
 import en from '@/app/config/en'
 import AuthFooter from './AuthFooter'
 import { View } from 'react-native'
@@ -18,6 +17,7 @@ import useApi from '@/app/hooks/useApi'
 import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
 import SubmitAuthButton from '@/app/components/forms/SubmitAuthButton'
 import routes from '@/app/navigation/routes'
+import { StatusBarHeight } from '@/app/config/constants'
 
 export default function Signup({ navigation }: TsProps) {
   const {
@@ -40,9 +40,15 @@ export default function Signup({ navigation }: TsProps) {
   if (loading) return <TsActivityIndicator visible={loading} />
   return (
     <MainContainer
-      style={{ paddingLeft: 32, paddingRight: 32, paddingTop: 10 }}
+      style={{
+        paddingLeft: 32,
+        paddingRight: 32,
+        paddingTop: message ? StatusBarHeight + 35 : 10,
+      }}
     >
-      <ScrollableMainContainer contentContainerStyle={{ paddingVertical: 10 }}>
+      <ScrollableMainContainer
+        contentContainerStyle={{ paddingVertical: 10, marginBottom: 45 }}
+      >
         <AuthHeader title={en.createAnAccountLineBreak} />
         <TsForm
           initialValues={signupInitials}
