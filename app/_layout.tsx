@@ -61,6 +61,7 @@ export default function RootLayout() {
         if (!fontsLoaded) return
 
         const storedUser = await authStorage.getUser()
+        console.log('stored User data fetched:', storedUser)
         if (!storedUser) {
           setUser(null)
           setIsLoading(false)

@@ -17,6 +17,7 @@ const en = {
   continue: 'Continue',
   chooseProducts: 'Choose Products',
   city: 'City',
+  contact: 'Contact',
   createAccount: 'Create Account',
   createAnAccount: 'Create An Account',
   createAnAccountLineBreak: 'Create an\nAccount',

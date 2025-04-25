@@ -15,7 +15,7 @@ import TrendingProductsBanner from './TrendingProductsBanner'
 import ShopNow from './ShopNow'
 import DealOfTheDayProduct from './DealOfTheDayProduct'
 import TsProps from '@/TsProps'
-import routes from '@/app/navigation/routes'
+import routes, { TABNAMES } from '@/app/navigation/routes'
 import SpecialOffer from './SpecialOffer'
 import TrendingProduct from './TrendingProduct'
 import HotSummerSale from './HotSummerSale'
@@ -47,11 +47,11 @@ export default function Home({ navigation }: TsProps) {
     Alert.alert('TRENDING PRODUCT', 'View them All')
   }
   const onAvatarPress = () => {
-    navigation.navigate(routes.PROFILE)
+    navigation.navigate(TABNAMES.PROFILETAB)
   }
 
   const goToSearch = () => {
-    navigation.navigate(routes.SEARCH, { searchTerm })
+    navigation.navigate(TABNAMES.SEARCHTAB, { searchTerm })
   }
 
   // renderItem function is used to render each item in the FlatList for founction purity

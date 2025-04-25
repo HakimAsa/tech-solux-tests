@@ -18,7 +18,8 @@ export default function ProfileStack() {
 
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen
-          name="My Profile"
+          // DON'T USE Profile here to avoid TabNavigator > HomeTab > Profile, TabNavigator > HomeTab > Profile > Profile warning
+          name="Profile Tab"
           component={Profile}
         />
         <Stack.Screen
@@ -26,7 +27,7 @@ export default function ProfileStack() {
           component={Settings}
         />
         <Stack.Screen
-          name="Change Password"
+          name={routes.CHANGEPASSWORD}
           component={ChangePassword}
         />
       </Stack.Navigator>

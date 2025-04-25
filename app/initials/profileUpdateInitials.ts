@@ -4,6 +4,7 @@ const profileUpdateInitials = {
   bankaccountholdername: '',
   bankaccountnumber: '',
   city: '',
+  contact: '',
   country: '',
   email: '',
   ifsccode: '',

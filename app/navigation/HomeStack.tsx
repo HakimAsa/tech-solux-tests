@@ -1,16 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import routes from './routes'
-import Profile from '../screens/core/Profile'
-import Settings from '../screens/core/Settings'
-import ChangePassword from '../screens/core/ChangePassword'
 import { StatusBar } from 'expo-status-bar'
 import colors from '../config/colors'
 import Home from '../screens/core/home/Home'
 import Search from '../screens/core/Search'
 import ProductDetails from '../screens/core/product/ProductDetails'
-import Cart from '../screens/core/product/gottocart/Cart'
-import BuyNow from '../screens/core/product/buynow/BuyNow'
-import Confirmation from '../screens/core/product/checkout/Confirmation'
+import ProfileStack from './ProfileStack'
 
 const Stack = createNativeStackNavigator()
 
@@ -32,8 +27,8 @@ export default function HomeStack() {
           component={Search}
         />
         <Stack.Screen
-          name="HomeFromProfile"
-          component={Profile}
+          name={routes.PROFILE}
+          component={ProfileStack}
         />
         <Stack.Screen
           name={routes.PRODUCT_DETAILS}

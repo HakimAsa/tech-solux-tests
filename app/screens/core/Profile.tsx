@@ -30,7 +30,7 @@ import TsActivityIndicator from '@/app/components/loader/TsActivityIndicator'
 import { Alert } from 'react-native'
 
 export default function Profile({ navigation }: TsProps) {
-  const { user } = useAuth()
+  const { user, setUser } = useAuth()
 
   const avatarApi = useApi(authApi.updateAvatar)
   const updateDetailsApi = useApi(authApi.updateDetails)
@@ -86,7 +86,6 @@ export default function Profile({ navigation }: TsProps) {
     if (result.canceled) {
       alert('User cancelled image picker')
     } else if (result.assets && result.assets.length > 0) {
-      console.log(result.assets[0])
       setImageData(result.assets[0])
       setAvatar(result.assets[0].uri) // Update avatar with the selected image
     }
@@ -109,7 +108,7 @@ export default function Profile({ navigation }: TsProps) {
     if (imageData?.fileName) {
       const res = await avatarApi.request(imageData)
 
-      if (res?.status === 201) {
+      if (res?.ok) {
         const data: any = {
           ...values,
           bankdetails: {
@@ -118,7 +117,7 @@ export default function Profile({ navigation }: TsProps) {
             ifsccode: values.ifsccode,
           },
           businessaddress: {
-            pincode: values.pincode,
+            pincode: +values.pincode,
             address: values.address,
             city: values.city,
             state: values.state,
@@ -129,9 +128,10 @@ export default function Profile({ navigation }: TsProps) {
         data.password === '' && delete data.password
         // updating data now
         const updateDetails = await updateDetailsApi.request(data)
-        if (updateDetails.status === 200)
-          Alert.alert('Profile Update', 'Successfull')
-        else {
+        if (updateDetails.status === 200) {
+          setUser(updateDetails.data)
+          Alert.alert('Profile Update', 'Profile Successfull updated!')
+        } else {
           Alert.alert('Error', 'Error occured')
         }
       }
@@ -144,7 +144,7 @@ export default function Profile({ navigation }: TsProps) {
           ifsccode: values.ifsccode,
         },
         businessaddress: {
-          pincode: values.pincode,
+          pincode: +values.pincode,
           address: values.address,
           city: values.city,
           state: values.state,
@@ -154,9 +154,10 @@ export default function Profile({ navigation }: TsProps) {
 
       data.password === '' && delete data.password
       const updateDetails = await updateDetailsApi.request(data)
-      if (updateDetails.status === 200)
+      if (updateDetails.status === 200) {
+        setUser(updateDetails.data)
         Alert.alert('Profile Update', 'Successfull')
-      else {
+      } else {
         console.error(updateDetails)
 
         Alert.alert('Error', 'Error occured')
@@ -170,6 +171,7 @@ export default function Profile({ navigation }: TsProps) {
     bankaccountnumber: user?.bankdetails?.bankaccountnumber,
     bankaccountholdername: user?.bankdetails?.bankaccountholdername,
     city: user?.businessaddress?.city,
+    contact: user?.contact,
     country: user?.businessaddress?.country,
     email: user?.email,
     ifsccode: user?.bankdetails?.ifsccode,
@@ -243,8 +245,14 @@ export default function Profile({ navigation }: TsProps) {
               textStyle={styles.textStyle}
               secureTextEntry
             />
+            <TsFormField
+              label={en.contact}
+              name="contact"
+              inputStyle={styles.inputStyle}
+              textStyle={styles.textStyle}
+            />
             <Pressable
-              onPress={() => navigation.navigate('Change Password')}
+              onPress={() => navigation.navigate(routes.CHANGEPASSWORD)}
               style={{ marginVertical: 15, marginBottom: 30 }}
             >
               <TsText

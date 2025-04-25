@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import routes from './routes'
+import routes, { TABNAMES } from './routes'
 import Home from '../screens/core/home/Home'
 import Whishlist from '../screens/core/Whishlist'
 import ProductDetails from '../screens/core/product/ProductDetails'
@@ -8,7 +8,7 @@ import Profile from '../screens/core/Profile'
 import colors from '../config/colors'
 import { Feather } from '@expo/vector-icons'
 import ProfileStack from './ProfileStack'
-import { Pressable, View } from 'react-native'
+import { View } from 'react-native'
 import HomeStack from './HomeStack'
 import WhishlistStack from './WhishlistStack'
 import ProductStack from './ProductStack'
@@ -43,7 +43,7 @@ export default function TabNavigator({
     >
       {/* Add your screens here */}
       <Tab.Screen
-        name="HomeTab"
+        name={TABNAMES.HOMETAB}
         component={HomeStack}
         options={{
           tabBarLabel: routes.HOME,
@@ -57,7 +57,7 @@ export default function TabNavigator({
         }}
       />
       <Tab.Screen
-        name="WishlistTab"
+        name={TABNAMES.WISHLISTTAB}
         component={WhishlistStack}
         options={() => ({
           tabBarLabel: routes.WHISHLIST,
@@ -101,7 +101,7 @@ export default function TabNavigator({
         component={ProductStack}
       />
       <Tab.Screen
-        name="SearchTab"
+        name={TABNAMES.SEARCHTAB}
         component={Search}
         options={{
           tabBarLabel: routes.SEARCH,
@@ -115,7 +115,7 @@ export default function TabNavigator({
         }}
       />
       <Tab.Screen
-        name="ProfileTab"
+        name={TABNAMES.PROFILETAB}
         component={ProfileStack}
         options={() => {
           return {

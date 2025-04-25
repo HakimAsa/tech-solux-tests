@@ -17,3 +17,10 @@ export default Object.freeze({
   WELCOME: 'Welcome',
   WHISHLIST: 'Whishlist',
 })
+
+export const TABNAMES = Object.freeze({
+  HOMETAB: 'HomeTab',
+  PROFILETAB: 'ProfileTab',
+  SEARCHTAB: 'SearchTab',
+  WISHLISTTAB: 'WishlistTab',
+})

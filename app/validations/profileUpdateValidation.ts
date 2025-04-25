@@ -8,6 +8,7 @@ const profileUpdateValidationSchema = Yup.object().shape({
   bankaccountholdername: Yup.string(),
   bankaccountnumer: Yup.number(),
   city: Yup.string(),
+  contact: Yup.string(),
   country: Yup.string(),
   email: Yup.string().email().label(en.emailAddress),
   ifsccode: Yup.string(),
