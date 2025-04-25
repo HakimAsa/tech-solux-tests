@@ -15,6 +15,7 @@ import ProductStack from './ProductStack'
 import BuyNow from '../screens/core/product/buynow/BuyNow'
 import Checkout from '../screens/core/product/checkout/Checkout'
 import Cart from '../screens/core/product/gottocart/Cart'
+import SearchStack from './SearchStack'
 
 const Tab = createBottomTabNavigator()
 
@@ -102,7 +103,7 @@ export default function TabNavigator({
       />
       <Tab.Screen
         name={TABNAMES.SEARCHTAB}
-        component={Search}
+        component={SearchStack}
         options={{
           tabBarLabel: routes.SEARCH,
           tabBarIcon: ({ color, size }) => (

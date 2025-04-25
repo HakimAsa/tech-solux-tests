@@ -11,14 +11,24 @@ import { ScreenWidth } from '@/app/config/constants'
 import BasicHeader from '@/app/components/headers/BasicHeader'
 import TsProps from '@/TsProps'
 import routes from '@/app/navigation/routes'
-export default function Search({ navigation }: TsProps) {
+
+export default function Search({ navigation, route }: TsProps) {
   const { searchResults, searchTerm } = useSearchContext()
+  const fromTab = route.params?.fromTab
+
+  const handleGoBack = () => {
+    if (fromTab) {
+      navigation.navigate(fromTab)
+    } else {
+      navigation.goBack()
+    }
+  }
 
   return (
     <BaseScreen>
       <BasicHeader
         title="Search"
-        onPress={() => navigation.goBack()}
+        onPress={handleGoBack}
       />
       <MainContainer
         style={{

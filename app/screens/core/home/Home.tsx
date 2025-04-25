@@ -51,7 +51,10 @@ export default function Home({ navigation }: TsProps) {
   }
 
   const goToSearch = () => {
-    navigation.navigate(TABNAMES.SEARCHTAB, { searchTerm })
+    navigation.navigate(TABNAMES.SEARCHTAB, {
+      screen: routes.SEARCH,
+      params: { fromTab: TABNAMES.HOMETAB, searchTerm },
+    })
   }
 
   // renderItem function is used to render each item in the FlatList for founction purity

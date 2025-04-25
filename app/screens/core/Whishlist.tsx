@@ -1,5 +1,5 @@
 import { ImageSourcePropType, View } from 'react-native'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import BaseScreen from '@/app/components/BaseScreen'
 import LogoHeader from '@/app/components/headers/LogoHeader'
@@ -8,7 +8,7 @@ import SearchBar from '@/app/components/SearchBar'
 import { useSearchContext } from '@/app/context/SearchContext'
 import { FlatList } from 'react-native'
 import FilterSortBanner from '@/app/components/FilterSortBanner'
-import routes from '@/app/navigation/routes'
+import routes, { TABNAMES } from '@/app/navigation/routes'
 import TsProps from '@/TsProps'
 import ProductCard from '@/app/components/cards/ProductCard'
 import { ScreenWidth } from '@/app/config/constants'
@@ -62,11 +62,14 @@ export default function Whishlist({ navigation }: TsProps) {
   }
 
   const onAvatarPress = () => {
-    navigation.navigate(routes.PROFILE)
+    navigation.navigate(TABNAMES.PROFILETAB)
   }
 
   const goToSearch = () => {
-    navigation.navigate(routes.SEARCH, { searchTerm })
+    navigation.navigate(TABNAMES.SEARCHTAB, {
+      screen: routes.SEARCH,
+      params: { fromTab: TABNAMES.WISHLISTTAB, searchTerm },
+    })
   }
 
   return (
